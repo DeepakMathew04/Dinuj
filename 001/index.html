@@ -130,6 +130,38 @@
   @media (max-width:820px){ .ui .hint{display:none;} }
   .ui .hint{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#6A7089;background:rgba(21,26,46,.88);padding:11px 12px;border-radius:20px;}
 
+  /* ---------- FULLSCREEN PRESENTATION MODE (HIDE UI CHROME) ---------- */
+  :fullscreen, :-webkit-full-screen, :-moz-full-screen, .is-fullscreen {
+    background: var(--paper) !important;
+    overflow: hidden !important;
+  }
+  :fullscreen .slide, :-webkit-full-screen .slide, :-moz-full-screen .slide, .is-fullscreen .slide {
+    border-bottom: none !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    padding-bottom: clamp(20px, 4vh, 32px) !important;
+  }
+  :fullscreen .ui, :-webkit-full-screen .ui, :-moz-full-screen .ui, .is-fullscreen .ui {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease;
+  }
+  :fullscreen .ui:hover, :-webkit-full-screen .ui:hover, :-moz-full-screen .ui:hover, .is-fullscreen .ui:hover,
+  :fullscreen .ui:focus-within, :-webkit-full-screen .ui:focus-within, :-moz-full-screen .ui:focus-within, .is-fullscreen .ui:focus-within {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  :fullscreen .progress, :-webkit-full-screen .progress, :-moz-full-screen .progress, .is-fullscreen .progress {
+    opacity: 0 !important;
+    transition: opacity 0.3s ease;
+  }
+  :fullscreen ::-webkit-scrollbar, :-webkit-full-screen ::-webkit-scrollbar, .is-fullscreen ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
   .overview{position:fixed;inset:0;z-index:80;background:rgba(14,17,32,.97);display:none;overflow:auto;padding:clamp(20px,4vw,48px);}
   .overview.open{display:block;}
   .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:1240px;margin:0 auto;padding-block:16px 40px;}
@@ -171,7 +203,7 @@
         <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:280px;">
           <div class="blob" style="width:min(330px,70vw);aspect-ratio:1;"></div>
           <div class="dotgrid" style="width:110px;height:84px;right:4%;bottom:6%;"></div>
-          <img src="Aset/01_statue_bust.png" alt="Statue bust symbolising enduring ideas" style="position:relative;z-index:2;max-height:min(400px,42vh);width:auto;align-self:center;filter:drop-shadow(0 16px 32px rgba(0,0,0,.18));">
+          <img src="img/01_thinker.jpg" alt="Rodin's The Thinker — a sculpture of enduring ideas" style="position:relative;z-index:2;max-height:min(420px,46vh);width:auto;align-self:center;border-radius:14px;box-shadow:0 16px 32px rgba(0,0,0,.18);">
           <div style="position:absolute;left:0;bottom:4%;z-index:3;display:flex;flex-direction:column;gap:5px;align-items:flex-start;">
             <span style="background:var(--ink);color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 18px;transform:rotate(-1.5deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">IDEAS</span>
             <span style="background:#2A3350;color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 16px;transform:rotate(.6deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">CREATIVITY</span>
@@ -234,7 +266,7 @@
         </div>
         <div class="rv" style="--d:.1s;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
           <div class="blob" style="width:min(300px,64vw);aspect-ratio:1;"></div>
-          <img src="Aset/05_woman_with_laptop.png" alt="Creator working on a laptop" style="position:relative;z-index:2;max-height:min(280px,30vh);width:auto;filter:drop-shadow(0 14px 28px rgba(0,0,0,.14));">
+          <img src="img/02_hand_smartphone.jpg" alt="Hand holding a smartphone — digital creation" style="position:relative;z-index:2;max-height:min(300px,32vh);width:auto;border-radius:14px;box-shadow:0 14px 28px rgba(0,0,0,.14);">
           <div class="note" style="max-width:360px;"><div class="quote" style="font-size:clamp(.9rem,1.7vw,1rem);">"The digital age expands what we can create, but also what we must protect."</div></div>
         </div>
       </div>
@@ -264,7 +296,7 @@
           <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">Copyright Act</h3>
           <div class="uc" style="margin:3px 0 6px;">Statutory Protection</div>
           <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Establishes statutory protection for written journalism, books, and artistic media.</p>
-          <img src="Aset/01_newspaper_news.png" alt="Newspaper illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+          <img src="img/03_cafe_reader.jpg" alt="Man reading a newspaper at a café" loading="lazy" style="width:min(150px,30vw);margin-top:12px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.12);">
         </div>
         <div class="rv" style="--d:.08s;">
           <div class="tl-year">1983</div>
@@ -272,7 +304,7 @@
           <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">GNU Free Software</h3>
           <div class="uc" style="margin:3px 0 6px;">Code Freedoms</div>
           <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Stallman launches the GNU Project to guarantee user code freedoms.</p>
-          <img src="Aset/02_gnu_terminal.png" alt="GNU terminal illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));">
+          <img src="img/04_stallman.jpg" alt="Richard Stallman" loading="lazy" style="width:min(96px,20vw);margin-top:12px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.15);">
         </div>
         <div class="rv" style="--d:.16s;">
           <div class="tl-year">1991</div>
@@ -280,7 +312,7 @@
           <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">Linux Kernel</h3>
           <div class="uc" style="margin:3px 0 6px;">Open Operating Systems</div>
           <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Torvalds releases the Linux kernel, powering complete GNU/Linux OS systems.</p>
-          <img src="Aset/03_linux_tux.png" alt="Linux Tux illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));">
+          <img src="img/05_tux.jpg" alt="Tux, the Linux penguin" loading="lazy" style="width:min(150px,30vw);margin-top:12px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.15);">
         </div>
         <div class="rv" style="--d:.24s;">
           <div class="tl-year">2001</div>
@@ -289,8 +321,8 @@
           <div class="uc" style="margin:3px 0 6px;">Flexible Sharing</div>
           <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Lessig introduces CC licences for flexible digital content sharing.</p>
           <div style="display:flex;gap:10px;margin-top:12px;">
-            <img src="Aset/04_creative_commons.png" alt="Creative Commons logo" loading="lazy" style="width:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
-            <img src="Aset/06_camera.png" alt="Camera illustration" loading="lazy" style="width:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+            <img src="img/06_cc_heart.png" alt="Creative Commons heart logo" loading="lazy" style="width:56px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+            <img src="img/07_vintage_camera.jpg" alt="Vintage camera" loading="lazy" style="width:72px;border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.12);">
           </div>
         </div>
       </div>
@@ -399,7 +431,7 @@
           <div class="flow" style="margin-top:16px;">IDEAS <span class="arr">→</span> BRANDS <span class="arr">→</span> INNOVATION <span class="arr">→</span> VALUE</div>
         </div>
         <div class="rv" style="--d:.1s;display:flex;justify-content:center;">
-          <img src="Aset/06_news_media_collage.png" alt="News media collage" loading="lazy" style="max-height:min(280px,32vh);filter:drop-shadow(0 12px 28px rgba(0,0,0,.14));">
+          <img src="img/08_newsstand.jpg" alt="Newsstand piled with newspapers" loading="lazy" style="max-height:min(300px,34vh);width:auto;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.14);">
         </div>
       </div>
       <div class="grid4">
@@ -438,7 +470,7 @@
           </div>
         </div>
         <div class="rv" style="--d:.14s;display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <img src="Aset/06_news_media_collage.png" alt="News media collage" loading="lazy" style="max-height:min(220px,26vh);filter:drop-shadow(0 12px 28px rgba(0,0,0,.14));">
+          <img src="img/09_pressroom.jpg" alt="The New York Times pressroom, 1908" loading="lazy" style="max-height:min(220px,26vh);width:auto;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.14);">
           <div class="note" style="max-width:380px;"><div class="quote" style="font-size:clamp(.9rem,1.6vw,1rem);">"Using someone else's work without permission or a valid legal basis can create legal and ethical problems."</div></div>
         </div>
       </div>
@@ -458,7 +490,7 @@
           <div class="sec-tag">08. Law of India</div>
           <h1 class="display">The Indian IP<br><span class="acc">statute book</span></h1>
           <p class="lede" style="margin-top:14px;">India protects intellectual property through dedicated statutes, each covering a distinct category of creation.</p>
-          <img src="Aset/03_balance_scale.png" alt="Scales of justice" loading="lazy" style="width:min(200px,40vw);margin-top:20px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.12));">
+          <img src="img/10_lady_justice.jpg" alt="Lady Justice holding the scales" loading="lazy" style="width:min(260px,48vw);margin-top:20px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.12);">
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div class="card rv" style="display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">1957</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Copyright Act, 1957</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">The main law dealing with copyright in India.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4"/></svg></div></div>
@@ -489,7 +521,7 @@
         </div>
         <div class="rv" style="--d:.1s;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
           <div class="blob" style="width:min(300px,64vw);aspect-ratio:1;"></div>
-          <img src="Aset/04_creative_commons.png" alt="Creative Commons logo" loading="lazy" style="position:relative;z-index:2;width:min(150px,32vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.14));">
+          <img src="img/06_cc_heart.png" alt="Creative Commons heart logo" loading="lazy" style="position:relative;z-index:2;width:min(170px,36vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.14));">
           <div class="uc" style="position:relative;z-index:2;color:var(--acc);font-size:11px;">SOME RIGHTS RESERVED</div>
         </div>
       </div>
@@ -597,7 +629,7 @@
           </div>
         </div>
         <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:16px;">
-          <img src="Aset/06_camera.png" alt="Camera illustration" loading="lazy" style="width:min(190px,38vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.15));">
+          <img src="img/07_vintage_camera.jpg" alt="Vintage camera on a wooden table" loading="lazy" style="width:min(220px,42vw);border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.15);">
           <div class="card dark" style="max-width:400px;"><div class="uc" style="color:#C4B5FD;margin-bottom:6px;">Editorial Rule of Thumb</div><p style="font-size:clamp(11.5px,1.6vw,13px);line-height:1.55;">A Creative Commons work should <b>never</b> automatically be treated as free to use without conditions.</p></div>
         </div>
       </div>
@@ -625,7 +657,7 @@
           <div class="card rv" style="--d:.18s;display:flex;align-items:center;gap:16px;"><span class="num-badge" style="font-size:14px;">04</span><b style="font-size:clamp(12.5px,1.8vw,15px);flex:1;">Share modified versions</b><span style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);">distribute your changes</span></div>
         </div>
         <div class="rv" style="--d:.12s;display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <img src="Aset/02_gnu_terminal.png" alt="GNU terminal illustration" loading="lazy" style="width:min(200px,40vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.18));">
+          <img src="img/04_stallman.jpg" alt="Richard Stallman, founder of the free software movement" loading="lazy" style="height:min(290px,36vh);width:auto;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.18);">
           <div class="note"><div class="quote" style="font-size:clamp(.9rem,1.6vw,.98rem);">"Free software is about people, not code."</div><div class="uc" style="margin-top:4px;">— Richard Stallman</div></div>
         </div>
       </div>
@@ -719,7 +751,7 @@
           <div class="sec-tag">18. Free Software in Journalism</div>
           <h1 class="display">A full newsroom,<br><span class="acc">zero licence fees</span></h1>
           <p class="lede" style="margin-top:12px;">FOSS supports every stage of media production — useful for students, independent creators and media organisations.</p>
-          <img src="Aset/05_laptop.png" alt="Laptop illustration" loading="lazy" style="width:min(230px,44vw);margin-top:18px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.15));">
+          <img src="img/02_hand_smartphone.jpg" alt="Working with digital tools" loading="lazy" style="width:min(280px,52vw);margin-top:18px;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.15);">
         </div>
         <div class="rv" style="--d:.1s;">
           <div class="table-scroll">
@@ -941,11 +973,12 @@
             <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">08</b>Stallman, R. <i>Free Software, Free Society.</i></li>
             <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">09</b>Lessig, L. <i>Free Culture.</i></li>
           </ol>
+          <p class="uc" style="margin-top:14px;">Photographs — Wikimedia Commons · CC BY / CC BY-SA / Public Domain</p>
         </div>
         <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;">
           <div style="font-family:var(--serif);font-weight:800;font-size:clamp(2.2rem,6vw,3.4rem);">Thank <span class="acc" style="font-style:italic;">you</span></div>
           <div class="uc" style="font-size:11px;">Questions &amp; Discussion</div>
-          <img src="Aset/01_statue_bust.png" alt="Statue bust" loading="lazy" style="width:min(180px,36vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.14));">
+          <img src="img/01_thinker.jpg" alt="The Thinker" loading="lazy" style="width:min(170px,34vw);border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.14);">
         </div>
       </div>
     </div>
@@ -1023,6 +1056,9 @@
     if(document.fullscreenElement) document.exitFullscreen();
     else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
   }
+  document.addEventListener('fullscreenchange', () => {
+    document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+  });
   function toggleOverview(force){
     ovOpen=(force!==undefined)?force:!ovOpen;
     overview.classList.toggle('open',ovOpen);
