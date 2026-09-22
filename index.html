@@ -4,488 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>HCJ Keynotes — Presentation Series</title>
-  <meta name="description" content="A three-part keynote presentation series covering Intellectual Property, Newspaper Layout Design, and Citizen Reporting.">
+  <meta name="description" content="Three keynote decks: IP & Creative Commons, Newspaper Front Page Design, Citizen Reporting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --paper: #F3F1EB;
-      --paper-card: #FFFFFF;
-      --ink: #151A2E;
-      --ink-soft: #3C4258;
-      --muted: #7B8093;
-      --line: #DAD5C9;
-      --line-light: #E8E4DA;
-      
-      /* Topic Accents matching the 3 presentations */
-      --acc-purple: #6D28D9;
-      --acc-purple-bg: #E7DDF8;
-      --acc-red: #B3261E;
-      --acc-red-bg: #F0DEDA;
-      --acc-teal: #0E7A67;
-      --acc-teal-bg: #D9EFE7;
-
-      --serif: 'Playfair Display', Georgia, serif;
-      --sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --mono: 'JetBrains Mono', monospace;
-      --r: 12px;
+    :root{
+      --paper:#F3F1EB; --ink:#151A2E; --ink-soft:#3C4258; --muted:#7B8093;
+      --line:#DAD5C9; --card:#FFFFFF;
+      --purple:#6D28D9; --red:#B3261E; --teal:#0E7A67;
+      --serif:'Playfair Display',Georgia,serif;
+      --sans:'Inter',system-ui,sans-serif;
+      --mono:'JetBrains Mono',monospace;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
-    }
-
-    /* ---------- HEADER (OPTIMIZED MARGINS) ---------- */
-    header {
-      border-bottom: 1px solid var(--line);
-      background: rgba(243, 241, 235, 0.95);
-      backdrop-filter: blur(8px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 12px clamp(12px, 2.5vw, 24px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--ink);
-    }
-
-    .brand-tag {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 3px 7px;
-      border-radius: 4px;
-    }
-
-    .brand-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--ink);
-      text-transform: uppercase;
-    }
-
-    .repo-link {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.2s;
-    }
-
-    .repo-link:hover {
-      color: var(--ink);
-    }
-
-    /* ---------- MAIN CONTAINER (HALVED MARGINS & EXPANDED WIDTH) ---------- */
-    main {
-      flex: 1;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      padding: clamp(18px, 3vh, 32px) clamp(12px, 2.5vw, 24px);
-    }
-
-    /* ---------- HERO SECTION ---------- */
-    .hero {
-      margin-bottom: clamp(18px, 3vh, 26px);
-      border-bottom: 1px solid var(--line);
-      padding-bottom: clamp(14px, 2vh, 20px);
-    }
-
-    .kicker {
-      font-family: var(--mono);
-      font-size: clamp(10px, 1.2vw, 11px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .kicker .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ink);
-      display: inline-block;
-    }
-
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
-      font-weight: 800;
-      color: var(--ink);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-
-    .hero p.lede {
-      font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-      color: var(--ink-soft);
-      max-width: 72ch;
-      line-height: 1.55;
-    }
-
-    /* ---------- HORIZONTAL 3-COLUMN LAYOUT (STACKS VERTICALLY ON MOBILE) ---------- */
-    .decks-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    @media (max-width: 840px) {
-      .decks-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-
-    /* ---------- CARD COMPONENT ---------- */
-    .deck-card {
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      box-shadow: 0 3px 14px rgba(21, 26, 46, 0.04);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .deck-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 26px rgba(21, 26, 46, 0.08);
-      border-color: rgba(21, 26, 46, 0.3);
-    }
-
-    /* Simple Image Container */
-    .img-container {
-      width: 100%;
-      height: 170px;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #EAE6DC;
-      border: 1px solid var(--line-light);
-      position: relative;
-      flex: none;
-    }
-
-    @media (max-width: 840px) {
-      .img-container {
-        height: 200px;
-      }
-    }
-
-    .img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .deck-card:hover .img-container img {
-      transform: scale(1.05);
-    }
-
-    .img-overlay-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      backdrop-filter: blur(4px);
-    }
-
-    /* Deck Content */
-    .deck-content {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding-top: 14px;
-    }
-
-    .topic-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .topic-number {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .deck-card.t-purple .topic-number,
-    .deck-card.t-purple .img-overlay-badge {
-      color: var(--acc-purple);
-      background: var(--acc-purple-bg);
-    }
-
-    .deck-card.t-red .topic-number,
-    .deck-card.t-red .img-overlay-badge {
-      color: var(--acc-red);
-      background: var(--acc-red-bg);
-    }
-
-    .deck-card.t-teal .topic-number,
-    .deck-card.t-teal .img-overlay-badge {
-      color: var(--acc-teal);
-      background: var(--acc-teal-bg);
-    }
-
-    .deck-title {
-      font-family: var(--serif);
-      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.28;
-      margin-bottom: 8px;
-    }
-
-    .deck-desc {
-      font-size: 0.88rem;
-      color: var(--ink-soft);
-      line-height: 1.5;
-      margin-bottom: 14px;
-      flex: 1;
-    }
-
-    .deck-footer {
-      margin-top: auto;
-      border-top: 1px solid var(--line-light);
-      padding-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .tag {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: #F3F1EB;
-      color: var(--ink-soft);
-      border: 1px solid var(--line);
-    }
-
-    .action-link {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s ease;
-      align-self: flex-start;
-    }
-
-    .deck-card.t-purple .action-link { color: var(--acc-purple); }
-    .deck-card.t-red .action-link { color: var(--acc-red); }
-    .deck-card.t-teal .action-link { color: var(--acc-teal); }
-
-    .deck-card:hover .action-link {
-      gap: 9px;
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 20px clamp(12px, 2.5vw, 24px);
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      background: var(--paper);
-    }
-
-    footer a {
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+    .spine{height:3px;background:linear-gradient(90deg,var(--purple) 0 33.3%,var(--red) 33.3% 66.6%,var(--teal) 66.6% 100%);}
+    header{display:flex;align-items:center;justify-content:space-between;max-width:1100px;width:100%;margin:0 auto;padding:14px clamp(14px,3vw,28px);}
+    .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);}
+    .brand-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;background:var(--ink);color:var(--paper);padding:3px 7px;border-radius:4px;}
+    .brand-title{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+    main{flex:1;width:100%;max-width:1100px;margin:0 auto;padding:0 clamp(14px,3vw,28px) clamp(20px,4vh,36px);}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);}
+    @media (max-width:840px){.gallery{grid-template-columns:1fr;}}
+    .tile{position:relative;display:block;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--line);text-decoration:none;color:inherit;
+      box-shadow:0 3px 14px rgba(21,26,46,.05);transition:transform .25s ease,box-shadow .25s ease;}
+    .tile:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(21,26,46,.12);}
+    .tile:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+    .tile img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .45s ease;}
+    .tile:hover img{transform:scale(1.04);}
+    .tile .veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(21,26,46,.55));opacity:.85;transition:opacity .25s;}
+    .tile .bar{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;color:#fff;}
+    .tile .bar .no{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.16em;opacity:.85;}
+    .tile .bar h2{font-family:var(--serif);font-size:clamp(1.02rem,1.5vw,1.2rem);font-weight:700;line-height:1.25;margin-top:3px;}
+    .tile .bar .meta{display:flex;justify-content:space-between;align-items:center;margin-top:7px;}
+    .tile .bar .meta .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;opacity:.8;}
+    .tile .bar .meta .go{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;transition:transform .2s;}
+    .tile:hover .go{transform:translateX(4px);}
+    .tile.t-purple{border-top:3px solid var(--purple);} .tile.t-red{border-top:3px solid var(--red);} .tile.t-teal{border-top:3px solid var(--teal);}
+    footer{border-top:1px solid var(--line);padding:14px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);}
+    footer a{color:var(--ink-soft);text-decoration:none;}
+    @media (prefers-reduced-motion:reduce){.tile,.tile img,.go{transition:none;}}
   </style>
 </head>
 <body>
+  <div class="spine" aria-hidden="true"></div>
 
-  <!-- HEADER -->
   <header>
-    <div class="header-inner">
-      <a href="./" class="brand">
-        <span class="brand-tag">HCJ</span>
-        <span class="brand-title">Keynote Series</span>
-      </a>
-      <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer" class="repo-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub Repo
-      </a>
-    </div>
+    <a href="./" class="brand">
+      <span class="brand-tag">HCJ</span>
+      <span class="brand-title">Keynote Series</span>
+    </a>
+    <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:10px;color:var(--muted);text-decoration:none;">GITHUB ↗</a>
   </header>
 
-  <!-- MAIN CONTAINER (HALVED MARGINS) -->
   <main>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="kicker">
-        <span class="dot"></span>
-        Digital Journalism &amp; Media Frameworks
-      </div>
-      <h1>Three Keynotes Across Three Core Media Domains</h1>
-      <p class="lede">A curated presentation hub exploring legal frameworks &amp; open culture, editorial front-page design aesthetics, and field investigative journalism techniques.</p>
-    </section>
-
-    <!-- HORIZONTAL LAYOUT FOR DESKTOP / VERTICAL FOR MOBILE -->
-    <div class="decks-container">
-
-      <!-- TOPIC 01: LEGAL FRAMEWORKS -->
-      <a href="./001/index.html" class="deck-card t-purple">
-        <div class="img-container">
-          <img src="./001/img/10_lady_justice.jpg" alt="Intellectual Property and Legal Frameworks" loading="lazy">
-          <span class="img-overlay-badge">Legal Domain</span>
-        </div>
-        <div class="deck-content">
-          <div class="topic-meta">
-            <span class="topic-number">Topic 01 • Legal &amp; Open Culture</span>
-          </div>
-          <h2 class="deck-title">Intellectual Property, Creative Commons &amp; Free Software</h2>
-          <p class="deck-desc">Examining copyright fundamentals, IP ownership, copyleft mechanisms, Creative Commons licensing suites, and FOSS ethics.</p>
-          <div class="deck-footer">
-            <div class="tags">
-              <span class="tag">IP Law</span>
-              <span class="tag">Creative Commons</span>
-              <span class="tag">FOSS</span>
-              <span class="tag">Copyright</span>
-            </div>
-            <span class="action-link">
-              Launch Presentation &rarr;
-            </span>
-          </div>
+    <div class="gallery">
+      <a href="./001/index.html" class="tile t-purple">
+        <img src="./001/img/10_lady_justice.jpg" alt="Lady Justice — Intellectual Property, Creative Commons & Free Software" loading="lazy" decoding="async">
+        <div class="veil" aria-hidden="true"></div>
+        <div class="bar">
+          <div class="no">01 · LEGAL &amp; OPEN CULTURE</div>
+          <h2>IP, Creative Commons &amp; Free Software</h2>
+          <div class="meta"><span class="n">26 SLIDES</span><span class="go">OPEN →</span></div>
         </div>
       </a>
-
-      <!-- TOPIC 02: PRINT & VISUAL LAYOUT DESIGN -->
-      <a href="./002/index.html" class="deck-card t-red">
-        <div class="img-container">
-          <img src="./001/img/08_newsstand.jpg" alt="Newspaper Layout Design and Front Page Aesthetics" loading="lazy">
-          <span class="img-overlay-badge">Design Domain</span>
-        </div>
-        <div class="deck-content">
-          <div class="topic-meta">
-            <span class="topic-number">Topic 02 • Editorial &amp; Visual Design</span>
-          </div>
-          <h2 class="deck-title">Newspaper Front Page Designing &amp; Layout Trends</h2>
-          <p class="deck-desc">Exploring editorial layout hierarchy, multi-column grid architecture, typography pairing, and front-page visual trends.</p>
-          <div class="deck-footer">
-            <div class="tags">
-              <span class="tag">Grid Layout</span>
-              <span class="tag">Typography</span>
-              <span class="tag">Front Page</span>
-              <span class="tag">Print Aesthetics</span>
-            </div>
-            <span class="action-link">
-              Launch Presentation &rarr;
-            </span>
-          </div>
+      <a href="./002/index.html" class="tile t-red">
+        <img src="./002/img/pressroom.jpg" alt="Pressroom — Newspaper Front Page Designing & Layout Trends" loading="lazy" decoding="async">
+        <div class="veil" aria-hidden="true"></div>
+        <div class="bar">
+          <div class="no">02 · EDITORIAL DESIGN</div>
+          <h2>Newspaper Front Page &amp; Layout Trends</h2>
+          <div class="meta"><span class="n">17 SLIDES</span><span class="go">OPEN →</span></div>
         </div>
       </a>
-
-      <!-- TOPIC 03: FIELD REPORTING & INTERVIEWS -->
-      <a href="./003/index.html" class="deck-card t-teal">
-        <div class="img-container">
-          <img src="./001/img/02_hand_smartphone.jpg" alt="Citizen Journalism and Field Interviewing" loading="lazy">
-          <span class="img-overlay-badge">Field Domain</span>
-        </div>
-        <div class="deck-content">
-          <div class="topic-meta">
-            <span class="topic-number">Topic 03 • Fieldwork &amp; Journalism</span>
-          </div>
-          <h2 class="deck-title">Citizen Reporting &amp; Interview Techniques</h2>
-          <p class="deck-desc">Field techniques for ground reporting: source discovery, interview strategies, fact verification, and mobile journalism toolkits.</p>
-          <div class="deck-footer">
-            <div class="tags">
-              <span class="tag">Citizen Journalism</span>
-              <span class="tag">Interviewing</span>
-              <span class="tag">Verification</span>
-              <span class="tag">Ethics</span>
-            </div>
-            <span class="action-link">
-              Launch Presentation &rarr;
-            </span>
-          </div>
+      <a href="./003/index.html" class="tile t-teal">
+        <img src="./003/img/hand_smartphone.jpg" alt="Hand with smartphone — Citizen Reporting & Interview Techniques" loading="lazy" decoding="async">
+        <div class="veil" aria-hidden="true"></div>
+        <div class="bar">
+          <div class="no">03 · FIELD JOURNALISM</div>
+          <h2>Citizen Reporting &amp; Interviews</h2>
+          <div class="meta"><span class="n">24 SLIDES</span><span class="go">OPEN →</span></div>
         </div>
       </a>
-
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <p>HCJ Keynote Series • Hosted via <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer">DeepakMathew04/Dinuj</a> on GitHub Pages</p>
+    HCJ Keynote Series · <a href="https://github.com/DeepakMathew04/Dinuj">DeepakMathew04/Dinuj</a> · Photos — <a href="./IMAGES.md">Wikimedia Commons (free licences)</a>
   </footer>
-
 </body>
 </html>

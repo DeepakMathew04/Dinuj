@@ -86,7 +86,7 @@
   .say .m{font-family:var(--mono);font-size:clamp(7.5px,1.2vw,9px);letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:6px;opacity:.75;}
 
   /* ---------- PHONE MOCKUP (pure CSS) ---------- */
-  .phone{width:min(232px,62vw);border:2px solid var(--ink);border-radius:30px;background:#fff;
+  .phone{width:min(196px,54vw);border:2px solid var(--ink);border-radius:30px;background:#fff;
     box-shadow:0 18px 44px rgba(18,33,28,.16);overflow:hidden;display:flex;flex-direction:column;margin:0 auto;position:relative;z-index:2;}
   .phone .notch{height:20px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;flex:none;}
   .phone .notch::before{content:"";width:72px;height:4px;border-radius:999px;background:var(--ink);opacity:.8;}
@@ -134,37 +134,19 @@
   .ui .hint{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#6D7F76;background:rgba(18,33,28,.88);padding:11px 12px;border-radius:20px;}
   @media (max-width:820px){ .ui .hint{display:none;} }
 
-  /* ---------- FULLSCREEN PRESENTATION MODE (HIDE UI CHROME) ---------- */
-  :fullscreen, :-webkit-full-screen, :-moz-full-screen, .is-fullscreen {
-    background: var(--paper) !important;
-    overflow: hidden !important;
-  }
-  :fullscreen .slide, :-webkit-full-screen .slide, :-moz-full-screen .slide, .is-fullscreen .slide {
-    border-bottom: none !important;
-    height: 100vh !important;
-    min-height: 100vh !important;
-    max-height: 100vh !important;
-    padding-bottom: clamp(20px, 4vh, 32px) !important;
-  }
-  :fullscreen .ui, :-webkit-full-screen .ui, :-moz-full-screen .ui, .is-fullscreen .ui {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transition: opacity 0.3s ease;
-  }
-  :fullscreen .ui:hover, :-webkit-full-screen .ui:hover, :-moz-full-screen .ui:hover, .is-fullscreen .ui:hover,
-  :fullscreen .ui:focus-within, :-webkit-full-screen .ui:focus-within, :-moz-full-screen .ui:focus-within, .is-fullscreen .ui:focus-within {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-  :fullscreen .progress, :-webkit-full-screen .progress, :-moz-full-screen .progress, .is-fullscreen .progress {
-    opacity: 0 !important;
-    transition: opacity 0.3s ease;
-  }
-  :fullscreen ::-webkit-scrollbar, :-webkit-full-screen ::-webkit-scrollbar, .is-fullscreen ::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-  }
+  /* ---------- FULLSCREEN PRESENTATION MODE (HIDE UI CHROME & FOOTER) ----------
+     Class-based rules are engine-proof (JS toggles .is-fullscreen on body);
+     :fullscreen variants are the native-path fallback. Selectors are NOT
+     mixed across engines — an unknown pseudo-class kills the whole rule. */
+  .is-fullscreen{background:var(--paper) !important;overflow:hidden !important;}
+  .is-fullscreen .slide{border-bottom:none !important;height:100vh !important;min-height:100vh !important;max-height:100vh !important;padding-bottom:clamp(16px,3vh,28px) !important;}
+  .is-fullscreen .ui,.is-fullscreen .s-foot,.is-fullscreen .progress,.is-fullscreen .ghost{display:none !important;opacity:0 !important;visibility:hidden !important;pointer-events:none !important;}
+  .is-fullscreen ::-webkit-scrollbar{display:none !important;width:0 !important;height:0 !important;}
+
+  :fullscreen{background:var(--paper) !important;overflow:hidden !important;}
+  :fullscreen .slide{border-bottom:none !important;height:100vh !important;min-height:100vh !important;max-height:100vh !important;padding-bottom:clamp(16px,3vh,28px) !important;}
+  :fullscreen .ui,:fullscreen .s-foot,:fullscreen .progress,:fullscreen .ghost{display:none !important;opacity:0 !important;visibility:hidden !important;pointer-events:none !important;}
+  :fullscreen ::-webkit-scrollbar{display:none !important;width:0 !important;height:0 !important;}
 
   .overview{position:fixed;inset:0;z-index:80;background:rgba(8,18,14,.97);display:none;overflow:auto;padding:clamp(20px,4vw,48px);}
   .overview.open{display:block;}
@@ -185,6 +167,25 @@
   @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;} }
 
   /* ---------- PRINT ---------- */
+  /* ---------- FIT & DENSITY ---------- */
+  .stage{gap:clamp(14px,2.4vh,26px);}
+  .tight{gap:clamp(10px,1.6vh,16px) !important;}
+  .tight > .card{padding:clamp(11px,1.4vw,15px);}
+  .tight > .card p{margin-top:3px !important;}
+  .tight > .card b{margin-top:6px !important;}
+  @media (max-height:840px){
+    .slide{padding-bottom:clamp(46px,6vh,56px);}
+    .stage{padding-block:clamp(10px,1.6vh,18px);gap:clamp(12px,2vh,20px);}
+    .display{font-size:clamp(1.85rem,.95rem + 3.1vw,3.05rem);}
+    .lede{line-height:1.5;}
+    .card{padding:clamp(12px,1.6vw,16px);}
+    .chip{width:clamp(36px,4.4vw,46px);}
+    .grid2{gap:clamp(16px,2.6vw,34px);}
+    .grid3{gap:clamp(11px,1.6vw,17px);}
+    .grid4{gap:clamp(11px,1.5vw,15px);}
+    .grid5{gap:clamp(10px,1.3vw,13px);}
+  }
+
   @media print{
     html{scroll-snap-type:none;}
     body{background:#fff;}
@@ -204,7 +205,7 @@
     <div class="s-head"><span class="pill" style="background:none;color:var(--ink-soft);padding:0;">◆ DIGITAL JOURNALISM PRACTICE</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>01</b> / 24</span></div>
     <div class="stage">
       <div class="grid2">
-        <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:280px;">
+        <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:0;">
           <div class="blob" style="width:min(320px,68vw);aspect-ratio:1;"></div>
           <div class="dotgrid" style="width:110px;height:84px;right:4%;bottom:6%;"></div>
           <div class="phone">
@@ -227,18 +228,19 @@
           <span class="pill">ACADEMIC LECTURE DECK</span>
           <h1 class="display" style="margin-top:18px;">Citizen Reporting <span class="acc">&amp;</span><br>Interview Techniques</h1>
           <p class="lede" style="margin-top:16px;">How ordinary people now break news with a smartphone — and how professionals gather, verify and question. Eyewitness media, interview craft, and the ethics that hold it all together.</p>
-          <div style="display:flex;gap:clamp(14px,2.5vw,28px);align-items:center;margin-top:24px;flex-wrap:wrap;">
+          <div style="display:flex;gap:clamp(10px,1.6vw,18px);align-items:center;margin-top:24px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div><span class="uc">Report from<br>anywhere</span></div>
             <div style="width:1px;height:38px;background:var(--line);"></div>
             <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><span class="uc">Ask with<br>purpose</span></div>
             <div style="width:1px;height:38px;background:var(--line);"></div>
             <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8.5 11l2 2 4-4.5"/></svg></div><span class="uc">Verify<br>everything</span></div>
-          </div>            <div class="hairline" style="margin-top:22px;"></div>
-          <div class="rowline" style="border-top:none;padding-top:14px;">
+          </div>
+          <div class="hairline" style="margin-top:14px;"></div>
+          <div class="rowline" style="border-top:none;padding-top:10px;">
             <div><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"The audience is no longer only a consumer of news."</div><div class="uc" style="margin-top:6px;">— The citizen journalism shift</div></div>
             <div class="uc" style="text-align:right;">Department of<br>Journalism &amp; Mass Communication</div>
           </div>
-          <img src="img/hand_smartphone.jpg" alt="Hand holding a smartphone — the citizen reporter's tool" loading="lazy" style="margin-top:18px;width:100%;max-width:440px;max-height:min(200px,24vh);object-fit:cover;border-radius:14px;box-shadow:0 12px 28px rgba(18,33,28,.14);">
+          <img src="img/hand_smartphone.jpg" alt="Hand holding a smartphone — the citizen reporter's tool" loading="lazy" style="margin-top:10px;width:100%;max-width:400px;height:min(126px,16vh);object-fit:cover;border-radius:14px;box-shadow:0 12px 28px rgba(18,33,28,.14);">
         </div>
       </div>
     </div>
@@ -288,7 +290,7 @@
         <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Share</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Publish via social platforms, blogs, websites, messaging.</p></div>
       </div>
       <div class="rowline rv" style="--d:.22s;">
-        <img src="img/woman_phone_show.jpg" alt="Witness recording an event with her phone" loading="lazy" style="height:min(170px,22vh);width:auto;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
+        <img src="img/woman_phone_show.jpg" alt="Witness recording an event with her phone" loading="lazy" style="height:min(140px,18vh);width:auto;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
         <div class="note" style="flex:1;min-width:220px;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;">A witness to a <b>road accident</b> may record video and share it online; citizens likewise document <b>floods, protests, public meetings and environmental problems</b> for the wider public.</p></div>
         <span class="uc" style="color:var(--acc);">Tool: the smartphone</span>
       </div>
@@ -309,7 +311,7 @@
           <h1 class="display">From eyewitness<br>accounts to <span class="acc">mass participation</span></h1>
           <p class="lede" style="margin-top:16px;">Citizen reporting existed <b>before the internet</b> — people have long offered information, photographs and eyewitness accounts to newspapers and broadcasters. Digital technology turned that trickle into a flood.</p>
           <div class="note" style="margin-top:18px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">The audience is no longer only a consumer of news — it can become a contributor to the news process.</div></div>
-          <img src="img/old_man_paper.jpg" alt="Morning paper reading — news before the digital flood" loading="lazy" style="margin-top:18px;width:min(200px,40vw);border-radius:14px;box-shadow:0 10px 24px rgba(18,33,33,.13);box-shadow:0 10px 24px rgba(18,33,28,.13);">
+          <img src="img/old_man_paper.jpg" alt="Morning paper reading — news before the digital flood" loading="lazy" style="margin-top:12px;width:min(150px,30vw);border-radius:14px;box-shadow:0 10px 24px rgba(18,33,28,.13);">
         </div>
         <div class="rv" style="--d:.1s;">
           <div class="uc" style="margin-bottom:12px;">What made it explode</div>
@@ -449,10 +451,8 @@
         <div class="note" style="flex:1;min-width:220px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"If you would not publish it with your name attached — after checking it — do not post it."</div></div>
         <span class="uc" style="color:var(--acc);">Rule of thumb</span>
       </div>
-      <div class="rv" style="--d:.35s;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;">
-        <img src="img/press_mics.jpg" alt="Press microphones at a media conference" loading="lazy" style="width:100%;height:min(170px,22vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
-        <img src="img/photojournalist.jpg" alt="News camera operator" loading="lazy" style="width:100%;height:min(170px,22vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
-        <img src="img/protest.jpg" alt="Protest march — citizens documenting public events" loading="lazy" style="width:100%;height:min(170px,22vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
+      <div class="rv" style="--d:.35s;display:flex;justify-content:center;">
+        <img src="img/press_mics.jpg" alt="Press microphones at a media conference" loading="lazy" decoding="async" style="width:100%;max-width:420px;height:min(120px,15vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
       </div>
     <div class="s-foot"><span class="lbl">Ethics of Citizen Reporting</span><span class="lbl fill"></span><span class="lbl">Check / Respect / Disclose</span></div>
   </div>
@@ -533,7 +533,9 @@
         <div class="card rv" style="--d:.32s;"><span class="num-badge">10.9</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Television</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Answers plus visuals — camera, lighting, sound, body language.</p></div>
         <div class="card rv" style="--d:.36s;"><span class="num-badge">10.10</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Radio &amp; podcast</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Audio quality, clarity and questioning carry everything.</p></div>
       </div>
-      <img src="img/press_mics.jpg" alt="Microphones at a press conference" loading="lazy" style="width:100%;height:min(180px,24vh);object-fit:cover;border-radius:14px;margin-top:18px;box-shadow:0 10px 24px rgba(18,33,28,.13);">
+      <div class="rv" style="--d:.4s;display:flex;justify-content:center;">
+        <img src="img/press_mics.jpg" alt="Microphones at a press conference" loading="lazy" style="width:100%;max-width:520px;height:min(140px,18vh);object-fit:cover;border-radius:14px;box-shadow:0 10px 24px rgba(18,33,28,.13);">
+      </div>
     </div>
     <div class="s-foot"><span class="lbl">Types of Interviews</span><span class="lbl fill"></span><span class="lbl">Structure / Purpose / Medium</span></div>
   </div>
@@ -704,7 +706,7 @@
           </div>
           <div class="note" style="margin-top:20px;border-left-color:#B3403A;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>The catch:</b> the speed of social media also increases the risk of misinformation — journalists and audiences must verify before accepting anything as fact.</p></div>
         </div>
-        <div class="rv" style="--d:.1s;position:relative;display:flex;justify-content:center;min-height:300px;align-items:center;">
+        <div class="rv" style="--d:.1s;position:relative;display:flex;justify-content:center;min-height:0;align-items:center;">
           <div class="blob" style="width:min(280px,60vw);aspect-ratio:1;"></div>
           <div class="dotgrid" style="width:100px;height:76px;left:6%;top:8%;"></div>
           <div class="phone">
@@ -740,9 +742,8 @@
         <h1 class="display">Not rivals —<br>a <span class="acc">news ecosystem</span></h1>
         <p class="lede" style="margin-top:12px;">Citizen reporting does not replace professional journalism. The two interact — each supplying what the other lacks.</p>
       </div>
-      <div class="rv" style="--d:.2s;display:flex;gap:14px;flex-wrap:wrap;">
-        <img src="img/woman_phone_show.jpg" alt="A witness records the event" loading="lazy" style="flex:1;min-width:200px;height:min(150px,20vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
-        <img src="img/photojournalist.jpg" alt="A professional news camera operator" loading="lazy" style="flex:1;min-width:200px;height:min(150px,20vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
+      <div class="rv" style="--d:.2s;display:flex;justify-content:center;">
+        <img src="img/woman_phone_show.jpg" alt="A witness records the event" loading="lazy" decoding="async" style="width:100%;max-width:440px;height:min(104px,13vh);object-fit:cover;border-radius:12px;box-shadow:0 8px 20px rgba(18,33,28,.13);">
       </div>
       <div class="grid2">
         <div class="card rv" style="--d:.06s;border-top:3px solid var(--acc);">
@@ -892,17 +893,15 @@
         <div class="bar" style="height:82%;"><span>VERIFY</span></div>
         <div class="bar" style="height:100%;background:var(--acc);"><span style="color:#fff;">PUBLISH RESPONSIBLY</span></div>
       </div>
-      <div class="rv" style="--d:.16s;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-        <img src="img/phones_concert.jpg" alt="An audience raising their phones — everyone a witness" loading="lazy" style="flex:1;min-width:220px;max-width:420px;height:min(200px,26vh);object-fit:cover;border-radius:14px;box-shadow:0 12px 28px rgba(18,33,28,.15);">
-        <img src="img/press_mics.jpg" alt="Press microphones — the professional interview" loading="lazy" style="flex:1;min-width:220px;max-width:420px;height:min(200px,26vh);object-fit:cover;border-radius:14px;box-shadow:0 12px 28px rgba(18,33,28,.15);">
+      <div class="rv" style="--d:.16s;display:flex;justify-content:center;">
+        <img src="img/phones_concert.jpg" alt="An audience raising their phones — everyone a witness" loading="lazy" decoding="async" style="width:100%;max-width:400px;height:min(140px,18vh);object-fit:cover;border-radius:14px;box-shadow:0 12px 28px rgba(18,33,28,.15);">
       </div>
       <div class="rowline rv" style="--d:.2s;border-top:none;">
         <span class="uc">Deck 003 · Citizen Reporting &amp; Interview Techniques</span>
         <span class="uc" style="color:var(--acc);">Questions &amp; Discussion</span>
       </div>
-      <p class="uc" style="text-align:center;--d:.24s;">Photographs — Wikimedia Commons · CC BY / CC BY-SA / Public Domain</p>
     </div>
-    <div class="s-foot"><span class="lbl">End of Deck</span><span class="lbl fill"></span><span class="lbl">HCJ Keynote Series</span></div>
+    <div class="s-foot"><span class="lbl">End of Deck</span><span class="lbl fill"></span><span class="lbl">Photos · Wikimedia Commons</span></div>
   </div>
 </section>
 
