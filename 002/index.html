@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Newspaper Front Page Designing &amp; Layout Trends — HCJ Keynote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --paper:#F4F1E9; --ink:#1A1712; --ink-soft:#4A453B; --muted:#8B8574;
+    --acc:#B3261E; --acc-deep:#8C1D17; --tint:#F0DEDA; --tint-2:#E7C8C2; --line:#D9D3C4;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --pad-x:clamp(18px,4.5vw,56px);
+    --r:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;height:auto;display:block;}
+  b,strong{font-weight:600;color:var(--ink);}
+  @media (min-width:900px) and (min-height:640px){ html{scroll-snap-type:y proximity;} .slide{scroll-snap-align:start;} }
+
+  /* ---------- SLIDE SHELL (shared responsive engine) ---------- */
+  .slide{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;position:relative;
+    padding:clamp(14px,2.6vh,28px) var(--pad-x) clamp(58px,8.5vh,76px);border-bottom:1px solid var(--line);overflow:hidden;}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;position:relative;z-index:1;}
+  .s-head{display:flex;align-items:center;gap:14px;flex:none;}
+  .s-head .rule{height:1px;background:var(--ink);opacity:.35;flex:0 1 44px;}
+  .s-foot{display:flex;align-items:center;gap:16px;flex:none;}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3.2vh,34px);padding-block:clamp(16px,3vh,34px);}
+  .stage > *{min-width:0;}
+
+  .kicker{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pageno{margin-left:auto;font-family:var(--mono);font-size:clamp(10px,1.5vw,12px);letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+  .pageno b{color:var(--acc);}
+  .lbl{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .lbl.fill{flex:1;height:1px;background:var(--ink);opacity:.3;letter-spacing:0;}
+  @media (max-width:560px){ .s-foot .lbl:last-child,.s-foot .lbl:nth-child(2){display:none;} }
+  .ghost{position:absolute;top:clamp(30px,6vh,58px);right:clamp(8px,2.5vw,34px);font-family:var(--serif);font-weight:800;
+    font-size:clamp(88px,16vw,190px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(26,23,18,.09);pointer-events:none;user-select:none;z-index:0;}
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .sec-tag{font-family:var(--mono);font-size:clamp(10px,1.5vw,11.5px);font-weight:700;letter-spacing:.24em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;}
+  .display{font-family:var(--serif);font-weight:800;color:var(--ink);line-height:1.05;letter-spacing:-.01em;
+    font-size:clamp(2rem,1.05rem + 3.4vw,3.55rem);}
+  .display .acc{color:var(--acc);font-style:italic;font-weight:700;}
+  .lede{font-size:clamp(.92rem,.85rem + .35vw,1.06rem);line-height:1.6;color:var(--ink-soft);max-width:62ch;}
+  .quote{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--ink);line-height:1.45;font-size:clamp(1rem,.9rem + .5vw,1.2rem);}
+  .note{border-left:3px solid var(--acc);padding-left:clamp(12px,2vw,18px);}
+
+  /* ---------- COMPONENTS ---------- */
+  .card{background:#fff;border:1px solid rgba(26,23,18,.08);border-radius:var(--r);padding:clamp(15px,2vw,22px);
+    box-shadow:0 6px 20px rgba(26,23,18,.05);min-width:0;}
+  .card.dark{background:var(--ink);border:none;color:#EDE9DF;}
+  .card.dark b{color:#fff;}
+  .chip{width:clamp(42px,5vw,54px);aspect-ratio:1;border-radius:50%;background:var(--tint);display:flex;align-items:center;justify-content:center;flex:none;}
+  .chip svg{width:48%;height:48%;stroke:var(--acc);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--tint);color:var(--acc-deep);font-family:var(--mono);
+    font-size:clamp(9px,1.4vw,10.5px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:4px;}
+  .uc{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1.5;}
+  .num-badge{font-family:var(--mono);font-size:clamp(11px,1.5vw,12.5px);font-weight:700;color:var(--acc);letter-spacing:.1em;}
+  .hairline{height:1px;background:var(--line);}
+  .blob{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--tint-2),var(--tint));z-index:0;pointer-events:none;}
+  .dotgrid{position:absolute;background-image:radial-gradient(rgba(26,23,18,.25) 1.2px,transparent 1.2px);background-size:14px 14px;opacity:.5;pointer-events:none;}
+
+  /* ---------- GRIDS ---------- */
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(18px,3vw,44px);align-items:center;}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(14px,2vw,22px);}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:clamp(14px,2vw,20px);}
+  .grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,178px),1fr));gap:clamp(12px,1.6vw,18px);}
+  .rowline{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:clamp(12px,2vh,18px);flex-wrap:wrap;}
+  .flow{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;color:var(--ink-soft);}
+  .flow .arr{color:var(--acc);}
+
+  /* ---------- TABLES ---------- */
+  .table-scroll{overflow-x:auto;border-radius:12px;box-shadow:0 8px 24px rgba(26,23,18,.06);}
+  table.grid{width:100%;min-width:520px;border-collapse:collapse;background:#fff;}
+  table.grid th{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;text-transform:uppercase;text-align:left;
+    color:#fff;background:var(--ink);padding:13px 18px;font-weight:600;}
+  table.grid td{padding:12px 18px;font-size:clamp(11px,1.5vw,13.5px);color:var(--ink-soft);border-top:1px solid #ECE7DA;line-height:1.5;}
+  table.grid td.k{font-family:var(--serif);font-weight:700;font-size:clamp(12px,1.7vw,15px);color:var(--ink);white-space:nowrap;}
+
+  /* ---------- NEWSPAPER MOCKUP (pure CSS) ---------- */
+  .news{background:#FBF9F3;border:1px solid rgba(26,23,18,.15);border-radius:6px;box-shadow:0 16px 40px rgba(26,23,18,.14);
+    overflow:hidden;color:var(--ink);width:100%;max-width:430px;margin:0 auto;}
+  .news .mast{font-family:var(--serif);font-weight:900;text-align:center;font-size:clamp(1.3rem,4vw,1.9rem);letter-spacing:.02em;
+    border-bottom:3px double var(--ink);padding:10px 14px 8px;}
+  .news .meta{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:clamp(6px,1.1vw,7.5px);
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--ink);padding:4px 14px;}
+  .news .npad{padding:12px 14px 16px;}
+  .news .hl{font-family:var(--serif);font-weight:900;font-size:clamp(1.15rem,3.4vw,1.6rem);line-height:1.08;text-align:center;}
+  .news .sub{font-family:var(--serif);font-style:italic;text-align:center;font-size:clamp(.7rem,1.8vw,.85rem);color:var(--ink-soft);margin-top:4px;}
+  .news .by{font-family:var(--mono);font-size:clamp(6px,1.1vw,7.5px);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:6px;}
+  .news .ph{background:linear-gradient(135deg,#DCD4C2,#C9BFa8);border-radius:3px;position:relative;overflow:hidden;}
+  .news .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.5) 50%,transparent 58%);}
+  .news .ph.ph-land{aspect-ratio:16/9;}
+  .news .ph.ph-sq{aspect-ratio:1;}
+  .news .cap{font-family:var(--mono);font-size:clamp(5.5px,1vw,7px);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:5px;}
+  .news .cols{column-count:2;column-gap:14px;column-rule:1px solid var(--line);margin-top:10px;}
+  .news p.tx{font-size:clamp(7px,1.3vw,8.5px);line-height:1.55;color:var(--ink-soft);text-align:justify;margin-bottom:6px;break-inside:avoid;}
+  .news .ad{background:repeating-linear-gradient(45deg,var(--tint),var(--tint) 6px,#FBF9F3 6px,#FBF9F3 12px);border:1px dashed var(--acc);
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:clamp(6px,1.1vw,7.5px);letter-spacing:.18em;color:var(--acc-deep);text-transform:uppercase;}
+  .news .ad.tall{aspect-ratio:3/8;}
+  .news .ad.wide{aspect-ratio:9/1.6;}
+  .news .fold{border-top:1px dashed rgba(26,23,18,.25);}
+  .news *{min-width:0;}
+
+  /* ---------- UI ---------- */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:70;transition:width .3s ease;}
+  .ui{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;
+    gap:10px;z-index:60;user-select:none;opacity:.45;transition:opacity .25s;pointer-events:none;}
+  .ui:hover,.ui:focus-within{opacity:1;}
+  .ui > *{pointer-events:auto;}
+  .ui .btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(26,23,18,.88);color:#fff;
+    font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--mono);transition:background .2s;}
+  .ui .btn:hover{background:var(--acc);}
+  .ui .counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#CFCabc;background:rgba(26,23,18,.88);padding:10px 12px;border-radius:20px;}
+  .ui .counter b{color:#E7C8C2;}
+  .ui .hint{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#8B8574;background:rgba(26,23,18,.88);padding:11px 12px;border-radius:20px;}
+  @media (max-width:820px){ .ui .hint{display:none;} }
+
+  .overview{position:fixed;inset:0;z-index:80;background:rgba(20,17,12,.97);display:none;overflow:auto;padding:clamp(20px,4vw,48px);}
+  .overview.open{display:block;}
+  .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:1240px;margin:0 auto;padding-block:16px 40px;}
+  .ov-title{color:#fff;font-family:var(--serif);font-weight:800;font-size:clamp(1.2rem,3vw,1.7rem);max-width:1240px;margin:0 auto;}
+  .ov-cap{color:#8B8574;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin:6px auto 0;max-width:1240px;}
+  .thumb{position:relative;text-align:left;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;padding:16px 16px 14px;color:#EDE9DF;transition:background .2s,outline-color .2s;outline:2px solid transparent;}
+  .thumb:hover{background:rgba(255,255,255,.11);}
+  .thumb.cur{outline-color:var(--acc);}
+  .thumb .tn{font-family:var(--mono);font-size:10px;color:#E7C8C2;letter-spacing:.16em;}
+  .thumb .tt{font-family:var(--serif);font-weight:700;font-size:14.5px;margin-top:6px;line-height:1.35;}
+  .thumb .ts{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:#8B8574;margin-top:8px;text-transform:uppercase;}
+
+  /* ---------- REVEAL ---------- */
+  .js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease var(--d,0s),transform .55s ease var(--d,0s);}
+  .js .slide.vis .rv{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;} }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    html{scroll-snap-type:none;}
+    body{background:#fff;}
+    .slide{min-height:auto;border-bottom:none;padding:36px 40px;page-break-after:always;break-after:page;}
+    .ui,.progress,.overview,.ghost{display:none !important;}
+    .js .rv{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- ============ 01 · TITLE ============ -->
+<section class="slide" data-title="Title — Newspaper Front Page Designing &amp; Layout Trends">
+  <div class="ghost">01</div>
+  <div class="wrap">
+    <div class="s-head"><span class="pill" style="background:none;color:var(--ink-soft);padding:0;">◆ JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>01</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:300px;">
+          <div class="blob" style="width:min(320px,68vw);aspect-ratio:1;"></div>
+          <div class="dotgrid" style="width:110px;height:84px;left:2%;top:8%;"></div>
+          <div class="news" style="position:relative;z-index:2;transform:rotate(-1.2deg);">
+            <div class="mast">THE DAILY CHRONICLE</div>
+            <div class="meta"><span>VOL. CXXIV · NO. 42</span><span>CITY EDITION</span><span>₹5.00</span></div>
+            <div class="npad">
+              <div class="hl">FRONT PAGE DESIGN IS NEWS ARCHITECTURE</div>
+              <div class="sub">How layout decides what a city reads first</div>
+              <div class="by">By The Design Desk · Chronicle Staff Writer</div>
+              <div class="ph ph-land" style="margin-top:10px;"></div>
+              <div class="cap">A broadsheet front page, composed for the morning edition</div>
+              <div class="cols"><p class="tx">The front page is a visual argument: size, position and type all declare what matters today, guiding the reader from the masthead to the inside pages.</p><p class="tx">Modern pages favour modular blocks, dominant photographs and generous white space — while the old disciplines of balance and hierarchy still hold.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.12s;">
+          <span class="pill">ACADEMIC LECTURE DECK</span>
+          <h1 class="display" style="margin-top:18px;">Newspaper Front Page<br><span class="acc">Designing</span> &amp;<br>Layout Trends</h1>
+          <p class="lede" style="margin-top:16px;">From the masthead to the fold — the elements, principles, process and contemporary trends of effective front-page design.</p>
+          <div style="display:flex;gap:clamp(14px,2.5vw,28px);align-items:center;margin-top:24px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></div><span class="uc">Front Page<br>Elements</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><span class="uc">Layout<br>Principles</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 19V9l5 3 5-6 6 5v8z"/><path d="M4 21h16"/></svg></div><span class="uc">Modern<br>Trends</span></div>
+          </div>
+          <div class="hairline" style="margin-top:22px;"></div>
+          <div class="rowline" style="border-top:none;padding-top:14px;">
+            <div><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Design is part of the communication process."</div><div class="uc" style="margin-top:6px;">— After Harold Evans, Newspaper Design</div></div>
+            <div class="uc" style="text-align:right;">Department of<br>Journalism &amp; Mass Communication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">University Keynote Series</span><span class="lbl fill"></span><span class="lbl">News / Design / Readers</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 · OVERVIEW ============ -->
+<section class="slide" data-title="Overview — Why the Front Page Matters">
+  <div class="ghost">02</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>02</b> / 17</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">01. Overview</div>
+        <h1 class="display">The page that makes the <span class="acc">first impression</span></h1>
+        <p class="lede" style="margin-top:10px;">A newspaper is not only a collection of stories — it is a <b>visual communication medium</b>. The front page presents the day's most important news and guides readers to the rest of the edition.</p>
+      </div>
+      <div class="grid2">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card rv" style="display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">01</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Attracting Readers</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Effective headlines, photographs and layout draw the eye and invite reading.</p></div>
+          </div>
+          <div class="card rv" style="--d:.08s;display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">02</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V6l8-3z"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Establishing News Priority</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Arrangement signals which stories the editors consider most important.</p></div>
+          </div>
+          <div class="card rv" style="--d:.16s;display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">03</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Building Identity &amp; Guiding the Reader</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Consistent typography builds identity; hierarchy creates a visual path through the news.</p></div>
+          </div>
+          <div class="flow rv" style="--d:.22s;padding-top:10px;border-top:1px solid var(--line);">MASTHEAD <span class="arr">→</span> HEADLINE <span class="arr">→</span> PHOTO <span class="arr">→</span> STORIES <span class="arr">→</span> <span style="color:var(--acc);">INSIDE PAGES</span></div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <div class="news" style="max-width:340px;">
+            <div class="mast">THE DAILY CHRONICLE</div>
+            <div class="meta"><span>MONDAY</span><span>WEATHER · 28°C</span><span>₹5.00</span></div>
+            <div class="npad">
+              <div class="hl">COUNCIL APPROVES NEW METRO LINE</div>
+              <div class="ph ph-land" style="margin-top:10px;"></div>
+              <div class="cap">Work begins on the city's north–south corridor</div>
+              <div class="cols"><p class="tx">The decision follows a decade of studies and public hearings. Officials say construction will begin after the monsoon.</p></div>
+            </div>
+            <div class="fold"></div>
+            <div class="npad"><div class="ad wide">ADVERTISEMENT</div></div>
+          </div>
+          <div class="note" style="max-width:360px;"><div class="quote" style="font-size:clamp(.9rem,1.7vw,1rem);">"The front page is both a news page and a gateway to the wider newspaper."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Executive Summary</span><span class="lbl fill"></span><span class="lbl">Attract / Prioritise / Guide</span></div>
+  </div>
+</section>
+
+<!-- ============ 03 · MEANING & ELEMENTS ============ -->
+<section class="slide" data-title="Meaning of the Front Page &amp; Its Elements">
+  <div class="ghost">03</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="pageno"><b>03</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">02. Meaning of the Front Page</div>
+          <h1 class="display">What sits on the<br><span class="acc">front page?</span></h1>
+          <p class="lede" style="margin-top:10px;">The front page contains a selection of the day's most important stories. It acts as the <b>visual and editorial introduction</b> to the whole newspaper.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Its selection and arrangement determine how readers notice, understand and consume information."</div></div>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Masthead</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">The newspaper's name, displayed prominently at the top — its strongest identity element.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Headline &amp; Subheadline</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Clear, accurate, concise, relevant — summarising and explaining the story.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Lead Story</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">The most prominent report; its position, size and treatment show its importance.</p></div>
+        <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.4"/><path d="M8 6l1.5-2.5h5L16 6"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Photos &amp; Captions</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Visual information with context; properly captioned and ethically published.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Body Text</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Readable, properly columned reporting with byline and dateline.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h9a3 3 0 0 1 3 3v11a2.5 2.5 0 0 0-2.5-2.5H4zM20 5h-4a3 3 0 0 0-3 3v11a2.5 2.5 0 0 1 2.5-2.5H20z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Briefs &amp; Index</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">News summaries and page references guiding readers inside.</p></div>
+        <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Advertisements</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Where editorial and commercial policy allows, they occupy part of the page.</p></div>
+        <div class="card rv" style="--d:.24s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Date &amp; Edition</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Date, edition and price identify the exact issue of record.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Front Page Elements</span><span class="lbl fill"></span><span class="lbl">Masthead to Advertisements</span></div>
+  </div>
+</section>
+
+<!-- ============ 04 · IMPORTANCE ============ -->
+<section class="slide" data-title="Importance of Front-Page Design">
+  <div class="ghost">04</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">IMPORTANCE</span><span class="pageno"><b>04</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">03. Importance of Front-Page Design</div>
+          <h1 class="display">Editorial and visual<br>functions in <span class="acc">one page</span></h1>
+          <p class="lede" style="margin-top:10px;">Front-page design performs <b>editorial</b> and <b>visual communication</b> functions at once — it attracts attention, declares priority, and creates the path readers follow.</p>
+        </div>
+        <div class="card dark">
+          <div class="uc" style="color:#E7C8C2;margin-bottom:10px;">Typical Reading Hierarchy</div>
+          <div class="flow" style="color:#EDE9DF;">MASTHEAD <span class="arr" style="color:#E7C8C2;">→</span> MAIN HEADLINE <span class="arr" style="color:#E7C8C2;">→</span> MAIN PHOTO <span class="arr" style="color:#E7C8C2;">→</span> SECONDARY HEADS <span class="arr" style="color:#E7C8C2;">→</span> STORIES <span class="arr" style="color:#E7C8C2;">→</span> SMALLER ELEMENTS</div>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><span class="num-badge">01</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Attract</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">Attention through headlines, photographs and layout.</p></div>
+        <div class="card rv" style="--d:.06s;"><span class="num-badge">02</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Prioritise</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">Arrangement communicates editorial news judgment.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">03</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Create Hierarchy</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">Sizes, photographs and positions order the reader's attention.</p></div>
+        <div class="card rv" style="--d:.06s;"><span class="num-badge">04</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Improve Readability</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">A well-designed page makes information easy to locate and understand.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">05</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Build Identity</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">Consistent type, colour and style establish the newspaper's character.</p></div>
+        <div class="card rv" style="--d:.18s;"><span class="num-badge">06</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.25rem);margin-top:6px;">Guide the Reader</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">The layout leads from the main story to secondary stories and sections.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Why Design Matters</span><span class="lbl fill"></span><span class="lbl">Editorial + Visual</span></div>
+  </div>
+</section>
+
+<!-- ============ 05 · LAYOUT PRINCIPLES ============ -->
+<section class="slide" data-title="Principles of Newspaper Layout">
+  <div class="ghost">05</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">PRINCIPLES</span><span class="pageno"><b>05</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">04. Principles of Newspaper Layout</div>
+          <h1 class="display">Balance, proportion,<br>contrast &amp; <span class="acc">hierarchy</span></h1>
+          <p class="lede" style="margin-top:10px;">A newspaper layout should combine <b>editorial priorities</b> with <b>visual clarity</b> — principles that apply as much to digital pages as to print.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"White space is not empty — it gives the news room to breathe and makes elements more prominent."</div><div class="uc" style="margin-top:6px;">— Layout Principle</div></div>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3v18M4 7l4-4 4 4M12 21l4-4 4 4" transform="rotate(90 12 12)"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Balance</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Distribute visual weight evenly through placement of headlines, photos, text and space.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="10" width="8" height="8"/><rect x="13" y="4" width="8" height="14"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Proportion</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Size follows importance — the main story earns the larger headline.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="4" fill="var(--ink)" stroke="none"/><circle cx="16" cy="12" r="4"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Contrast</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Size, weight, images, colour and white space make key elements stand out.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Alignment</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">A consistent alignment system creates order and improves readability.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Unity</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">All elements should belong to one visual composition.</p></div>
+        <div class="card rv" style="--d:.15s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M4 9h16"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">White Space &amp; Hierarchy</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Space prevents overcrowding; hierarchy orders what readers notice first.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Layout Principles</span><span class="lbl fill"></span><span class="lbl">Balance / Contrast / Hierarchy</span></div>
+  </div>
+</section>
+
+<!-- ============ 06 · LAYOUT TYPES ============ -->
+<section class="slide" data-title="Types of Newspaper Layout">
+  <div class="ghost">06</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">LAYOUT TYPES</span><span class="pageno"><b>06</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">05. Types of Newspaper Layout</div>
+          <h1 class="display">Seven ways to<br>compose a <span class="acc">page</span></h1>
+          <p class="lede" style="margin-top:10px;">Different newspapers adopt different approaches — each with its own character, strengths and risks.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Modular design is the workhorse of the modern page — easy to organise, easy to scan."</div></div>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><div style="display:flex;gap:6px;align-items:stretch;height:44px;"><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Symmetrical</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Even distribution around a central structure — formal and orderly.</p></div>
+        <div class="card rv" style="--d:.05s;"><div style="display:flex;gap:6px;height:44px;"><div style="flex:2;background:var(--tint);border-radius:3px;"></div><div style="flex:1;display:flex;flex-direction:column;gap:6px;"><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:2;background:var(--tint-2);border-radius:3px;"></div></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Asymmetrical</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Unequal elements, overall balance — dynamic and contemporary.</p></div>
+        <div class="card rv" style="--d:.1s;"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;height:44px;"><div style="background:var(--tint);border-radius:3px;"></div><div style="background:var(--tint);border-radius:3px;grid-row:span 2;"></div><div style="background:var(--tint);border-radius:3px;"></div><div style="background:var(--tint);border-radius:3px;"></div><div style="background:var(--tint);border-radius:3px;"></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Modular</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Rectangular blocks — easy to organise; modern design's standard.</p></div>
+        <div class="card rv" style="--d:.15s;"><div style="display:flex;flex-direction:column;gap:5px;height:44px;"><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Horizontal</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Elements flow across the width — strong visual movement.</p></div>
+        <div class="card rv" style="--d:.05s;"><div style="display:flex;gap:5px;height:44px;"><div style="flex:1;display:flex;flex-direction:column;gap:5px;"><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div></div><div style="flex:1;display:flex;flex-direction:column;gap:5px;"><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div><div style="flex:1;background:var(--tint);border-radius:3px;"></div></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Vertical</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Top-to-bottom arrangement — clear sequence for many stories.</p></div>
+        <div class="card rv" style="--d:.1s;"><div style="display:flex;gap:5px;height:44px;"><div style="flex:2;background:var(--tint);transform:rotate(-2deg);border-radius:3px;"></div><div style="flex:1;background:var(--tint-2);transform:rotate(2deg);border-radius:3px;"></div><div style="flex:1.4;background:var(--tint);transform:rotate(-1deg);border-radius:3px;"></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Circus</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Many elements and sizes — energetic, but excess reduces clarity.</p></div>
+        <div class="card rv" style="--d:.15s;"><div style="display:flex;gap:6px;align-items:flex-end;height:44px;"><div style="flex:1;height:100%;background:var(--tint);border-radius:3px;"></div><div style="flex:1;height:40%;background:var(--tint-2);border-radius:3px;"></div><div style="flex:1;height:70%;background:var(--tint);border-radius:3px;"></div></div><b style="display:block;margin-top:10px;font-size:clamp(11.5px,1.6vw,13.5px);">Contrast</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Big differences in size and type create deliberate emphasis.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Layout Types</span><span class="lbl fill"></span><span class="lbl">Formal → Dynamic</span></div>
+  </div>
+</section>
+
+<!-- ============ 07 · PROCESS ============ -->
+<section class="slide" data-title="The Front-Page Layout Process">
+  <div class="ghost">07</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">PROCESS</span><span class="pageno"><b>07</b> / 17</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">06. The Front-Page Layout Process</div>
+        <h1 class="display">From news selection to<br><span class="acc">final production</span></h1>
+        <p class="lede" style="margin-top:10px;">Designing the front page is a structured editorial workflow, not decoration after the fact.</p>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><span class="num-badge">STEP 1</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Select the News</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Judge by news value, interest, timeliness, proximity, impact, prominence, conflict, human interest.</p></div>
+        <div class="card rv" style="--d:.05s;"><span class="num-badge">STEP 2</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Set Priority</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Decide which story receives the greatest prominence.</p></div>
+        <div class="card rv" style="--d:.1s;"><span class="num-badge">STEP 3</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Write Headlines</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Prepare them to the available space and importance of each story.</p></div>
+        <div class="card rv" style="--d:.15s;"><span class="num-badge">STEP 4</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Choose Photographs</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Relevant, high-quality images where appropriate.</p></div>
+        <div class="card rv" style="--d:.05s;"><span class="num-badge">STEP 5</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Plan the Page</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Sketch placement of headlines, stories, photos and elements.</p></div>
+        <div class="card rv" style="--d:.1s;"><span class="num-badge">STEP 6</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Select Typography</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Fonts and sizes from the newspaper's design system.</p></div>
+        <div class="card rv" style="--d:.15s;"><span class="num-badge">STEP 7</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Place Content</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Arrange stories, images and elements to the plan.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">STEP 8–9</span><h3 style="font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.2rem);margin-top:6px;">Proof &amp; Produce</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Check spelling, facts, captions, alignment; prepare for print or digital publication.</p></div>
+      </div>
+      <div class="flow rv" style="--d:.25s;border-top:1px solid var(--line);padding-top:14px;">SELECT <span class="arr">→</span> PRIORITISE <span class="arr">→</span> HEADLINE <span class="arr">→</span> PHOTOGRAPH <span class="arr">→</span> PLAN <span class="arr">→</span> SET TYPE <span class="arr">→</span> PLACE <span class="arr">→</span> PROOF <span class="arr">→</span> <span style="color:var(--acc);">PRODUCE</span></div>
+    </div>
+    <div class="s-foot"><span class="lbl">Layout Process</span><span class="lbl fill"></span><span class="lbl">Nine Editorial Stages</span></div>
+  </div>
+</section>
+
+<!-- ============ 08 · TYPOGRAPHY ============ -->
+<section class="slide" data-title="Typography in Newspaper Design">
+  <div class="ghost">08</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">TYPOGRAPHY</span><span class="pageno"><b>08</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">07. Typography in Newspaper Design</div>
+          <h1 class="display">Type is the<br><span class="acc">voice of the page</span></h1>
+          <p class="lede" style="margin-top:14px;">Typography covers typefaces, sizes, weights, spacing and line lengths. <b>Headlines</b> are larger and heavier; <b>body text</b> must stay comfortable across long reads; <b>subheadings</b> divide long stories into sections.</p>
+          <p style="font-size:clamp(12px,1.6vw,14px);color:var(--ink-soft);line-height:1.6;margin-top:12px;">For Indian-language newspapers, typography is especially important — the design must support <b>the specific characteristics of each script</b> while keeping readability.</p>
+          <div class="note" style="margin-top:18px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Different type sizes and weights tell readers what to read first."</div></div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <div class="news" style="max-width:360px;">
+            <div class="mast">THE DAILY CHRONICLE</div>
+            <div class="meta"><span>TYPE SPECIMEN</span><span>PAGE ONE</span><span>₹5.00</span></div>
+            <div class="npad">
+              <div class="hl" style="font-size:clamp(1.5rem,5vw,2.2rem);">HEADLINE — LARGEST &amp; HEAVIEST</div>
+              <div class="sub">Subheading — italic serif, smaller, explains the headline</div>
+              <div class="hairline" style="margin-top:10px;"></div>
+              <div class="cols"><p class="tx" style="font-size:clamp(7.5px,1.4vw,9px);">Body text is set smaller again, in narrow justified columns that stay comfortable to read. Subheadings divide the story into sections, and captions explain the photographs.</p><p class="tx" style="font-size:clamp(7.5px,1.4vw,9px);">The hierarchy of sizes — masthead, headline, subhead, body, caption — creates the order in which readers notice information.</p></div>
+            </div>
+          </div>
+          <div class="uc">Masthead → Headline → Subhead → Body → Caption</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Typography</span><span class="lbl fill"></span><span class="lbl">Hierarchy of Type</span></div>
+  </div>
+</section>
+
+<!-- ============ 09 · PHOTOGRAPHY & INFOGRAPHICS ============ -->
+<section class="slide" data-title="Photography, Infographics &amp; Colour">
+  <div class="ghost">09</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">VISUALS</span><span class="pageno"><b>09</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">08–10. Photography · Infographics · Colour</div>
+          <h1 class="display">The visual<br><span class="acc">journalism toolkit</span></h1>
+          <p class="lede" style="margin-top:10px;">A strong news photograph communicates instantly; infographics explain complexity; colour — once rare — now supports branding, section identity and highlight boxes.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Colour should support communication rather than simply decorate the page."</div></div>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.4"/><path d="M8 6l1.5-2.5h5L16 6"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Photography</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Relevant, accurate, captioned, technically suitable, ethically published. Size and position signal the story's importance.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Infographics</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Charts, maps, diagrams, timelines and data graphics for elections, budgets, sports, science and health — accurate and clearly sourced.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="var(--ink)" stroke="none"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Colour</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Used for branding, headlines, section identification and highlight boxes — but excess colour makes a page cluttered.</p></div>
+      </div>
+      <div class="grid2 rv" style="--d:.15s;align-items:stretch;">
+        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="uc">Mini Infographic — Where readers look first</div>
+          <div style="display:flex;align-items:flex-end;gap:10px;height:110px;">
+            <div style="flex:1;background:var(--acc);border-radius:6px 6px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;"><span class="uc" style="color:#fff;">Headline 92%</span></div>
+            <div style="flex:1;background:var(--tint-2);border-radius:6px 6px 0 0;height:72%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;"><span class="uc">Photo 81%</span></div>
+            <div style="flex:1;background:var(--tint);border-radius:6px 6px 0 0;height:48%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;"><span class="uc">Lead story</span></div>
+            <div style="flex:1;background:var(--tint);border-radius:6px 6px 0 0;height:30%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;"><span class="uc">Briefs</span></div>
+          </div>
+          <div class="uc" style="font-size:8px;">Illustrative hierarchy chart — percentages indicate typical first-fixation order</div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="uc">Photograph size = story weight</div>
+          <div style="display:flex;gap:10px;align-items:flex-end;height:110px;">
+            <div class="ph" style="flex:2.2;height:100%;border-radius:6px;"></div>
+            <div class="ph" style="flex:1.2;height:62%;border-radius:6px;"></div>
+            <div class="ph" style="flex:1;height:38%;border-radius:6px;"></div>
+          </div>
+          <div class="uc" style="font-size:8px;">Large photos anchor major stories; smaller ones accompany supporting reports</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Visual Elements</span><span class="lbl fill"></span><span class="lbl">Photo / Graphics / Colour</span></div>
+  </div>
+</section>
+
+<!-- ============ 10 · CONTEMPORARY TRENDS ============ -->
+<section class="slide" data-title="Contemporary Layout Trends">
+  <div class="ghost">10</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">TRENDS</span><span class="pageno"><b>10</b> / 17</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">11. Contemporary Newspaper Layout Trends</div>
+        <h1 class="display">Cleaner, bigger,<br><span class="acc">modular</span></h1>
+        <p class="lede" style="margin-top:10px;">Competition from television, websites and social media has reshaped the printed page — without abandoning the old disciplines.</p>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><span class="num-badge">11.1</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Cleaner Layouts</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">More white space, fewer decorations — less visual clutter.</p></div>
+        <div class="card rv" style="--d:.04s;"><span class="num-badge">11.2</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Larger Headlines</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Strong hierarchy that attracts attention at a distance.</p></div>
+        <div class="card rv" style="--d:.08s;"><span class="num-badge">11.3</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Dominant Photography</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Large photographs as major front-page elements.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">11.4</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Modular Design</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Clearly defined blocks, easier to scan, flexible to build.</p></div>
+        <div class="card rv" style="--d:.16s;"><span class="num-badge">11.5</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Infographics</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Explanatory graphics for complex stories.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">11.6</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Visual Storytelling</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Photos, graphics, headlines and summaries combined.</p></div>
+        <div class="card rv" style="--d:.04s;"><span class="num-badge">11.7</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Shorter Text Blocks</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Summaries, bullets and subheads for scanning readers.</p></div>
+        <div class="card rv" style="--d:.08s;"><span class="num-badge">11.8</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Strong Hierarchy</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Clear difference between major and minor stories.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">11.9</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Consistent Branding</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">One visual identity across print, web, apps and social.</p></div>
+        <div class="card rv" style="--d:.16s;"><span class="num-badge">11.10</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Digital Integration</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">QR codes, website references and multimedia links in print.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">11.11</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Data Journalism</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Charts, maps and visualisations for data-driven reporting.</p></div>
+        <div class="card rv" style="--d:.24s;"><span class="num-badge">11.12</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Responsive Design</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Planning how stories appear across phones, tablets, computers and print.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Contemporary Trends</span><span class="lbl fill"></span><span class="lbl">Print Meets Digital</span></div>
+  </div>
+</section>
+
+<!-- ============ 11 · FRONT PAGE & DIGITAL ============ -->
+<section class="slide" data-title="The Front Page &amp; Digital Journalism">
+  <div class="ghost">11</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">DIGITAL</span><span class="pageno"><b>11</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">12. The Front Page &amp; Digital Journalism</div>
+          <h1 class="display">A gateway to the<br>wider <span class="acc">newspaper</span></h1>
+          <p class="lede" style="margin-top:14px;">Digital platforms offer unlimited scrolling, hyperlinks, video and live updates; print has finite space. So the front page must <b>select and prioritise</b> — and act as a bridge to digital content.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+            <div style="display:flex;gap:12px;align-items:center;"><span class="num-badge">01</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Highlight the day's major stories</p></div>
+            <div style="display:flex;gap:12px;align-items:center;"><span class="num-badge">02</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Create visual interest on newsprint</p></div>
+            <div style="display:flex;gap:12px;align-items:center;"><span class="num-badge">03</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Direct readers to inside pages</p></div>
+            <div style="display:flex;gap:12px;align-items:center;"><span class="num-badge">04</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Promote investigative and special reports</p></div>
+            <div style="display:flex;gap:12px;align-items:center;"><span class="num-badge">05</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Connect readers with digital content — QR codes, websites, social media</p></div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <div class="news" style="max-width:360px;">
+            <div class="mast">THE DAILY CHRONICLE</div>
+            <div class="meta"><span>FINAL EDITION</span><span>SCAN FOR UPDATES</span><span>₹5.00</span></div>
+            <div class="npad">
+              <div class="hl">ELECTION RESULTS: FULL ANALYSIS PAGES 4–7</div>
+              <div class="ph ph-land" style="margin-top:10px;"></div>
+              <div style="display:flex;gap:10px;margin-top:10px;align-items:stretch;">
+                <div style="width:52px;flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;padding:4px;border:1px solid var(--ink);border-radius:3px;">
+                  <i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:transparent;aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i>
+                  <i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:transparent;aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i>
+                  <i style="background:transparent;aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:transparent;aspect-ratio:1;"></i>
+                  <i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:transparent;aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i><i style="background:var(--ink);aspect-ratio:1;"></i>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:5px;">
+                  <div class="uc" style="color:var(--acc);font-size:8px;">CONTINUED ONLINE</div>
+                  <div style="height:1px;background:var(--line);"></div>
+                  <div class="uc" style="font-size:8px;">LIVE MAPS · VIDEO · DATA</div>
+                </div>
+              </div>
+              <div class="cols" style="margin-top:10px;"><p class="tx">Print pages now routinely carry QR codes and web references, connecting the physical page to live results, interactive maps and video explainers online.</p></div>
+            </div>
+          </div>
+          <div class="note" style="max-width:360px;"><div class="quote" style="font-size:clamp(.9rem,1.7vw,1rem);">"Print selects and prioritises; digital extends the story."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Print &amp; Digital</span><span class="lbl fill"></span><span class="lbl">Gateway Function</span></div>
+  </div>
+</section>
+
+<!-- ============ 12 · HIERARCHY & DESIGNER ============ -->
+<section class="slide" data-title="Visual Hierarchy &amp; the Designer's Role">
+  <div class="ghost">12</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">PEOPLE &amp; HIERARCHY</span><span class="pageno"><b>12</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">13–14. Visual Hierarchy · The Designer's Role</div>
+          <h1 class="display">Attention is<br><span class="acc">designed</span></h1>
+          <p class="lede" style="margin-top:10px;">Readers never give equal attention to every element. Designers direct the eye using <b>size, position, typography, colour, images and white space</b>.</p>
+          <p style="font-size:clamp(12px,1.6vw,14px);color:var(--ink-soft);line-height:1.6;margin-top:12px;">The designer works <b>between editorial content and visual presentation</b> — understanding news priorities, maintaining balance and identity, ensuring readability, and checking the final page. Design is part of the communication process, not decoration.</p>
+        </div>
+        <div class="card dark" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="uc" style="color:#E7C8C2;">The Designer's Checklist</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;align-items:center;"><span class="num-badge" style="color:#E7C8C2;">01</span><span style="font-size:clamp(11px,1.5vw,12.5px);">Understand the news priorities</span></div>
+            <div style="display:flex;gap:10px;align-items:center;"><span class="num-badge" style="color:#E7C8C2;">02</span><span style="font-size:clamp(11px,1.5vw,12.5px);">Arrange content effectively</span></div>
+            <div style="display:flex;gap:10px;align-items:center;"><span class="num-badge" style="color:#E7C8C2;">03</span><span style="font-size:clamp(11px,1.5vw,12.5px);">Maintain visual balance &amp; identity</span></div>
+            <div style="display:flex;gap:10px;align-items:center;"><span class="num-badge" style="color:#E7C8C2;">04</span><span style="font-size:clamp(11px,1.5vw,12.5px);">Apply typography consistently</span></div>
+            <div style="display:flex;gap:10px;align-items:center;"><span class="num-badge" style="color:#E7C8C2;">05</span><span style="font-size:clamp(11px,1.5vw,12.5px);">Ensure readability to the last proof</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><b style="font-size:clamp(12px,1.7vw,14px);">Size</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Larger elements receive greater visual attention.</p></div>
+        <div class="card rv" style="--d:.05s;"><b style="font-size:clamp(12px,1.7vw,14px);">Position</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Prominent areas attract the eye first.</p></div>
+        <div class="card rv" style="--d:.1s;"><b style="font-size:clamp(12px,1.7vw,14px);">Type &amp; Colour</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Bold headlines and colour distinguish elements.</p></div>
+        <div class="card rv" style="--d:.05s;"><b style="font-size:clamp(12px,1.7vw,14px);">Images</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Striking photographs become focal points.</p></div>
+        <div class="card rv" style="--d:.1s;"><b style="font-size:clamp(12px,1.7vw,14px);">White Space</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Space around an element makes it more prominent.</p></div>
+        <div class="card rv" style="--d:.15s;"><b style="font-size:clamp(12px,1.7vw,14px);">Order</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Hierarchy defines the sequence of reading.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Hierarchy &amp; Role</span><span class="lbl fill"></span><span class="lbl">Size / Position / Type</span></div>
+  </div>
+</section>
+
+<!-- ============ 13 · PROBLEMS ============ -->
+<section class="slide" data-title="Common Problems in Newspaper Layout">
+  <div class="ghost">13</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">PITFALLS</span><span class="pageno"><b>13</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">15. Common Problems in Newspaper Layout</div>
+          <h1 class="display">What good design<br><span class="acc">avoids</span></h1>
+          <p class="lede" style="margin-top:10px;">Poor design undermines even strong journalism — clutter, weak hierarchy and bad type cost readers and credibility.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"If every headline looks equally important, readers may not know where to begin."</div></div>
+      </div>
+      <div class="grid4">
+        <div class="card rv" style="border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Overcrowding</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Too much information makes a page difficult to read.</p></div>
+        <div class="card rv" style="--d:.05s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Poor Hierarchy</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Equal-looking headlines leave readers lost.</p></div>
+        <div class="card rv" style="--d:.1s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Excessive Decoration</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Unnecessary elements distract from the news.</p></div>
+        <div class="card rv" style="--d:.15s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Poor Typography</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Small or inappropriate fonts reduce readability.</p></div>
+        <div class="card rv" style="--d:.05s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Weak Images</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Irrelevant or low-quality photographs weaken stories.</p></div>
+        <div class="card rv" style="--d:.1s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Inconsistent Alignment</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Misalignment makes the page appear disorganised.</p></div>
+        <div class="card rv" style="--d:.15s;border-top:4px solid var(--acc);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">Excessive Colour</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Too many colours create visual confusion.</p></div>
+        <div class="card rv" style="--d:.2s;border-top:4px solid var(--ink);"><b style="display:block;font-size:clamp(12px,1.7vw,14px);">The Fix</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Clarity, hierarchy, restraint, consistent type and honest imagery.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Common Problems</span><span class="lbl fill"></span><span class="lbl">Avoid / Correct</span></div>
+  </div>
+</section>
+
+<!-- ============ 14 · EFFECTIVE DESIGN PRINCIPLES ============ -->
+<section class="slide" data-title="Principles of Effective Front-Page Design">
+  <div class="ghost">14</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">THE TEN RULES</span><span class="pageno"><b>14</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">16. Principles of Effective Front-Page Design</div>
+          <h1 class="display">The <span class="acc">ten</span> tests of a<br>good front page</h1>
+          <p class="lede" style="margin-top:10px;">An effective front page should be measured against all ten — design succeeds only when every one of them holds.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Effective design organises information so readers understand what matters."</div></div>
+      </div>
+      <div class="grid5">
+        <div class="card rv"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">01</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Clear</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Structure understood at a glance.</p></div>
+        <div class="card rv" style="--d:.04s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">02</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Readable</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Comfortable text, sensible columns.</p></div>
+        <div class="card rv" style="--d:.08s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">03</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Attractive</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Invites engagement with content.</p></div>
+        <div class="card rv" style="--d:.12s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">04</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Balanced</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Visual weight properly distributed.</p></div>
+        <div class="card rv" style="--d:.16s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">05</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Accurate</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Headlines, photos and captions tell the truth.</p></div>
+        <div class="card rv" style="--d:.04s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">06</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Consistent</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Reflects the newspaper's identity.</p></div>
+        <div class="card rv" style="--d:.08s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">07</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Informative</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Design supports the communication of news.</p></div>
+        <div class="card rv" style="--d:.12s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">08</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Simple</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Unnecessary elements avoided.</p></div>
+        <div class="card rv" style="--d:.16s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">09</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Hierarchical</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Important stories get prominence.</p></div>
+        <div class="card rv" style="--d:.2s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);color:var(--acc);">10</div><b style="display:block;margin-top:6px;font-size:clamp(11.5px,1.6vw,13.5px);">Ethical</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Presentation never misleads or sensationalises.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Ten Principles</span><span class="lbl fill"></span><span class="lbl">Clear → Ethical</span></div>
+  </div>
+</section>
+
+<!-- ============ 15 · TECHNOLOGY & FUTURE ============ -->
+<section class="slide" data-title="Technology &amp; Future Trends">
+  <div class="ghost">15</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">TECHNOLOGY</span><span class="pageno"><b>15</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">17–18. Technology &amp; Future Trends</div>
+          <h1 class="display">From paste-up to<br><span class="acc">pixel and AI</span></h1>
+          <p class="lede" style="margin-top:10px;">Manual typesetting and paste-up gave way to digital publishing systems. Today designers edit text instantly, resize photographs, build pages, produce graphics and preview editions electronically.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Accuracy, clarity, readability and hierarchy will outlast every technology cycle."</div><div class="uc" style="margin-top:6px;">— Future Trends</div></div>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><span class="num-badge">NOW</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Digital Production</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Layout software, digital photography and electronic page transfer.</p></div>
+        <div class="card rv" style="--d:.06s;"><span class="num-badge">NEXT</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Data &amp; AI</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Data visualisation, automated graphics and AI-assisted production.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">NEXT</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Interactive &amp; Multimedia</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Interactive journalism, multimedia storytelling, immersive and AR media.</p></div>
+        <div class="card rv" style="--d:.18s;"><span class="num-badge">ALWAYS</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Mobile-First &amp; Cross-Platform</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:4px;">Personalised news, QR integration and cross-platform design.</p></div>
+      </div>
+      <div class="flow rv" style="--d:.22s;border-top:1px solid var(--line);padding-top:14px;">MOVEABLE TYPE <span class="arr">→</span> LINOTYPE <span class="arr">→</span> PHOTO-COMPOSITION <span class="arr">→</span> DESKTOP PUBLISHING <span class="arr">→</span> DIGITAL NEWSROOMS <span class="arr">→</span> <span style="color:var(--acc);">AI-ASSISTED DESIGN</span></div>
+    </div>
+    <div class="s-foot"><span class="lbl">Technology &amp; Future</span><span class="lbl fill"></span><span class="lbl">Print → Digital → AI</span></div>
+  </div>
+</section>
+
+<!-- ============ 16 · CONCLUSION ============ -->
+<section class="slide" data-title="Conclusion — Design as Communication">
+  <div class="ghost">16</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">CONCLUSION</span><span class="pageno"><b>16</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2" style="align-items:center;">
+        <div class="rv">
+          <div class="sec-tag">Conclusion</div>
+          <h1 class="display">Design that helps readers<br><span class="acc">understand what matters</span></h1>
+          <p class="lede" style="margin-top:14px;">A successful front page combines editorial judgment with balance, proportion, contrast, alignment, white space and hierarchy. Contemporary design moves toward cleaner layouts, larger photographs, modular structures and digital integration — but <b>design must never replace journalism's purpose</b>: communicating important information clearly, accurately and responsibly.</p>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:var(--ink);"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Elements</b> — masthead, headlines, lead story, photographs, captions, bylines and supporting stories.</p></div>
+          <div style="display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:var(--acc);"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Principles</b> — balance, proportion, contrast, alignment, unity, white space and hierarchy.</p></div>
+          <div style="display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:var(--acc-deep);"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Trends</b> — modular design, infographics, data visualisation and integration with digital platforms.</p></div>
+          <div class="card dark"><div style="font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.4vw,1.3rem);color:#E7C8C2;line-height:1.5;">"Design well so the news is understood — not merely noticed."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Conclusion</span><span class="lbl fill"></span><span class="lbl">Communication First</span></div>
+  </div>
+</section>
+
+<!-- ============ 17 · REFERENCES ============ -->
+<section class="slide" data-title="References &amp; Thank You">
+  <div class="ghost">17</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">JOURNALISM &amp; VISUAL COMMUNICATION</span><span class="rule"></span><span class="kicker">REFERENCES</span><span class="pageno"><b>17</b> / 17</span></div>
+    <div class="stage">
+      <div class="grid2" style="align-items:center;">
+        <div class="rv">
+          <div class="sec-tag">References</div>
+          <h1 class="display">Sources &amp;<br><span class="acc">further reading</span></h1>
+          <ol style="list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:16px;">
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">01</b>Evans, Harold. <i>Newspaper Design.</i> Heinemann.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">02</b>Harrower, Tim. <i>The Newspaper Designer's Handbook.</i> McGraw-Hill.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">03</b>Garcia, Mario R. <i>Contemporary Newspaper Design.</i> Prentice Hall.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">04</b>Frost, Chris. <i>Designing for Newspapers and Magazines.</i> Routledge.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">05</b>White, Jan V. <i>Editing by Design.</i> Allworth Press.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">06</b>Kovach, Bill &amp; Rosenstiel, Tom. <i>The Elements of Journalism.</i> Crown.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">07</b>Mencher, Melvin. <i>News Reporting and Writing.</i> McGraw-Hill.</li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">08</b>Rich, Carole. <i>Writing and Reporting News: A Coaching Method.</i> Cengage.</li>
+          </ol>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+          <div style="font-family:var(--serif);font-weight:800;font-size:clamp(2.2rem,6vw,3.4rem);">Thank <span class="acc" style="font-style:italic;">you</span></div>
+          <div class="uc" style="font-size:11px;">Questions &amp; Discussion</div>
+          <div class="news" style="max-width:280px;transform:rotate(1deg);">
+            <div class="mast">THE DAILY CHRONICLE</div>
+            <div class="meta"><span>END OF DECK</span><span>Q&amp;A EDITION</span><span>FREE</span></div>
+            <div class="npad"><div class="hl" style="font-size:clamp(1rem,3vw,1.3rem);">THANKS FOR READING</div><div class="cols"><p class="tx">The front page will keep changing with technology — but clarity, accuracy and hierarchy will always decide whether a page is truly read.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">References · End of Deck</span><span class="lbl fill"></span><span class="lbl">HCJ Keynote</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="ui" id="hud">
+  <button class="btn" id="prevBtn" title="Previous (←)">←</button>
+  <span class="counter" id="counter"><b>01</b> / 17</span>
+  <button class="btn" id="nextBtn" title="Next (→)">→</button>
+  <button class="btn" id="ovBtn" title="Grid overview (O)">▦</button>
+  <button class="btn" id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="hint">← → NAVIGATE · O OVERVIEW · F FULLSCREEN</span>
+</div>
+<div class="overview" id="overview">
+  <div class="ov-title">Deck Overview</div>
+  <div class="ov-cap">17 slides · click a card to jump</div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const N=slides.length;
+  const counter=document.getElementById('counter');
+  const prog=document.getElementById('progress');
+  const overview=document.getElementById('overview');
+  const ovGrid=document.getElementById('ovGrid');
+  let cur=0, ovOpen=false, programmatic=false;
+
+  const pad=n=>String(n).padStart(2,'0');
+
+  slides.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.className='thumb'; b.type='button';
+    b.innerHTML='<div class="tn">'+pad(i+1)+' / '+N+'</div><div class="tt">'+(s.dataset.title||'Slide '+(i+1))+'</div><div class="ts">Slide '+pad(i+1)+'</div>';
+    b.addEventListener('click',()=>{ show(i); toggleOverview(false); });
+    ovGrid.appendChild(b);
+  });
+
+  function show(i,instant){
+    cur=Math.max(0,Math.min(N-1,i));
+    programmatic=true;
+    slides[cur].scrollIntoView({behavior:instant?'auto':'smooth',block:'start'});
+    setTimeout(()=>{programmatic=false;},700);
+    sync();
+  }
+  function sync(){
+    counter.innerHTML='<b>'+pad(cur+1)+'</b> / '+N;
+    prog.style.width=((cur+1)/N*100)+'%';
+    if(history.replaceState) history.replaceState(null,'','#'+(cur+1));
+    [...ovGrid.children].forEach((t,idx)=>t.classList.toggle('cur',idx===cur));
+    slides.forEach((s,idx)=>s.classList.toggle('vis',Math.abs(idx-cur)<=1));
+  }
+  const next=()=>show(cur+1), prev=()=>show(cur-1);
+
+  const io=new IntersectionObserver(entries=>{
+    if(programmatic||ovOpen) return;
+    entries.forEach(en=>{
+      if(en.isIntersecting && en.intersectionRatio>=.55){
+        const i=slides.indexOf(en.target);
+        if(i!==-1 && i!==cur){ cur=i; sync(); }
+      }
+    });
+  },{threshold:[.55]});
+  slides.forEach(s=>io.observe(s));
+
+  function toggleFS(){
+    if(document.fullscreenElement) document.exitFullscreen();
+    else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  }
+  function toggleOverview(force){
+    ovOpen=(force!==undefined)?force:!ovOpen;
+    overview.classList.toggle('open',ovOpen);
+    document.body.style.overflow=ovOpen?'hidden':'';
+    if(ovOpen){ const t=ovGrid.children[cur]; t&&t.scrollIntoView({block:'center'}); }
+  }
+
+  document.getElementById('prevBtn').onclick=prev;
+  document.getElementById('nextBtn').onclick=next;
+  document.getElementById('ovBtn').onclick=()=>toggleOverview();
+  document.getElementById('fsBtn').onclick=toggleFS;
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ if(ovOpen) toggleOverview(false); return; }
+    if(ovOpen){
+      if(['ArrowRight','ArrowDown'].includes(e.key)){ e.preventDefault(); show(cur+1); }
+      else if(['ArrowLeft','ArrowUp'].includes(e.key)){ e.preventDefault(); show(cur-1); }
+      else if(['Enter',' ','o','O'].includes(e.key)){ e.preventDefault(); toggleOverview(false); }
+      return;
+    }
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace':
+        e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(N-1); break;
+      case 'f': case 'F': toggleFS(); break;
+      case 'o': case 'O': toggleOverview(); break;
+    }
+  });
+
+  const h=parseInt(location.hash.slice(1),10);
+  const start=isNaN(h)?0:Math.max(0,Math.min(N-1,h-1));
+  show(start,true);
+
+  window.addEventListener('hashchange',()=>{
+    const n=parseInt(location.hash.slice(1),10);
+    if(!isNaN(n)&&n>=1&&n<=N&&n-1!==cur) show(n-1);
+  });
+})();
+</script>
+</body>
+</html>

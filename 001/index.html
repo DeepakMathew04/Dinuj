@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Intellectual Property, Creative Commons &amp; Free Software — HCJ Keynote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --paper:#F3F1EB; --ink:#151A2E; --ink-soft:#3C4258; --muted:#7B8093;
+    --acc:#6D28D9; --acc-deep:#4C1D95; --lav:#E7DDF8; --lav-2:#D4C1F5; --line:#DAD5C9;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --pad-x:clamp(18px,4.5vw,56px);
+    --r:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;height:auto;display:block;}
+  b,strong{font-weight:600;color:var(--ink);}
+  @media (min-width:900px) and (min-height:640px){ html{scroll-snap-type:y proximity;} .slide{scroll-snap-align:start;} }
+
+  /* ---------- SLIDE SHELL ---------- */
+  .slide{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;position:relative;
+    padding:clamp(14px,2.6vh,28px) var(--pad-x) clamp(58px,8.5vh,76px);border-bottom:1px solid var(--line);overflow:hidden;}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;}
+  .s-head{display:flex;align-items:center;gap:14px;flex:none;}
+  .s-head .rule{height:1px;background:var(--ink);opacity:.35;flex:0 1 44px;}
+  .s-foot{display:flex;align-items:center;gap:16px;flex:none;}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3.2vh,34px);padding-block:clamp(16px,3vh,34px);}
+  .stage > *{min-width:0;}
+
+  .kicker{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pageno{margin-left:auto;font-family:var(--mono);font-size:clamp(10px,1.5vw,12px);letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+  .pageno b{color:var(--acc);}
+  .lbl{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .lbl.fill{flex:1;height:1px;background:var(--ink);opacity:.3;letter-spacing:0;}
+  @media (max-width:560px){ .s-foot .lbl:last-child,.s-foot .lbl:nth-child(2){display:none;} }
+  .ghost{position:absolute;top:clamp(30px,6vh,58px);right:clamp(8px,2.5vw,34px);font-family:var(--serif);font-weight:800;
+    font-size:clamp(88px,16vw,190px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(21,26,46,.09);pointer-events:none;user-select:none;z-index:0;}
+  .wrap{position:relative;z-index:1;}
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .sec-tag{font-family:var(--mono);font-size:clamp(10px,1.5vw,11.5px);font-weight:700;letter-spacing:.24em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;}
+  .display{font-family:var(--serif);font-weight:800;color:var(--ink);line-height:1.05;letter-spacing:-.01em;
+    font-size:clamp(2rem,1.05rem + 3.4vw,3.55rem);}
+  .display .acc{color:var(--acc);font-style:italic;font-weight:700;}
+  .lede{font-size:clamp(.92rem,.85rem + .35vw,1.06rem);line-height:1.6;color:var(--ink-soft);max-width:62ch;}
+  .quote{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--ink);line-height:1.45;font-size:clamp(1rem,.9rem + .5vw,1.2rem);}
+  .note{border-left:3px solid var(--acc);padding-left:clamp(12px,2vw,18px);}
+
+  /* ---------- COMPONENTS ---------- */
+  .card{background:#fff;border:1px solid rgba(21,26,46,.08);border-radius:var(--r);padding:clamp(15px,2vw,22px);
+    box-shadow:0 6px 20px rgba(21,26,46,.05);min-width:0;}
+  .card.dark{background:var(--ink);border:none;color:#E6E4F5;}
+  .card.dark b{color:#fff;}
+  .chip{width:clamp(42px,5vw,54px);aspect-ratio:1;border-radius:50%;background:var(--lav);display:flex;align-items:center;justify-content:center;flex:none;}
+  .chip svg{width:48%;height:48%;stroke:var(--acc);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--acc-deep);font-family:var(--mono);
+    font-size:clamp(9px,1.4vw,10.5px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:4px;}
+  .uc{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1.5;}
+  .num-badge{font-family:var(--mono);font-size:clamp(11px,1.5vw,12.5px);font-weight:700;color:var(--acc);letter-spacing:.1em;}
+  .cc-badge{display:inline-flex;align-items:center;justify-content:center;width:clamp(38px,4.5vw,46px);aspect-ratio:1;border-radius:50%;
+    border:2px solid var(--ink);font-family:var(--serif);font-weight:800;font-size:clamp(12px,1.8vw,15px);flex:none;}
+  .hairline{height:1px;background:var(--line);}
+  .blob{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--lav-2),var(--lav));z-index:0;pointer-events:none;}
+  .dotgrid{position:absolute;background-image:radial-gradient(rgba(21,26,46,.25) 1.2px,transparent 1.2px);background-size:14px 14px;opacity:.5;pointer-events:none;}
+
+  /* ---------- GRIDS (auto-responsive) ---------- */
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(18px,3vw,44px);align-items:center;}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(14px,2vw,22px);}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:clamp(14px,2vw,20px);}
+  .grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,178px),1fr));gap:clamp(12px,1.6vw,18px);}
+  .rowline{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:clamp(12px,2vh,18px);flex-wrap:wrap;}
+  .flow{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;color:var(--ink-soft);}
+  .flow .arr{color:var(--acc);}
+
+  /* ---------- LIST ROWS ---------- */
+  .license-row{display:flex;align-items:center;gap:clamp(10px,2vw,16px);background:#fff;border:1px solid rgba(21,26,46,.08);
+    border-radius:10px;padding:11px 16px;box-shadow:0 4px 14px rgba(21,26,46,.04);}
+  .license-row .code{font-family:var(--mono);font-weight:700;font-size:clamp(11px,1.5vw,13px);color:var(--acc);min-width:104px;letter-spacing:.04em;}
+  .license-row p{font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.45;}
+
+  /* ---------- VENN ---------- */
+  .venn{position:relative;width:min(330px,86vw);aspect-ratio:1;margin:0 auto;flex:none;}
+  .venn .c{position:absolute;width:59.5%;aspect-ratio:1;border-radius:50%;mix-blend-mode:multiply;opacity:.85;
+    display:flex;justify-content:center;padding-top:15%;}
+  .venn .c span{font-family:var(--mono);font-size:clamp(8px,1.4vw,10px);font-weight:700;letter-spacing:.12em;color:var(--ink);text-align:center;line-height:1.6;}
+  .venn .c1{background:#DCCEF9;left:20%;top:0;}
+  .venn .c2{background:#CDB5F4;left:0;top:31%;}
+  .venn .c3{background:#E6DDF6;right:0;top:31%;}
+
+  /* ---------- TABLES ---------- */
+  .table-scroll{overflow-x:auto;border-radius:12px;box-shadow:0 8px 24px rgba(21,26,46,.06);}
+  table.grid{width:100%;min-width:520px;border-collapse:collapse;background:#fff;}
+  table.grid th{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;text-transform:uppercase;text-align:left;
+    color:#fff;background:var(--ink);padding:13px 18px;font-weight:600;}
+  table.grid td{padding:12px 18px;font-size:clamp(11px,1.5vw,13.5px);color:var(--ink-soft);border-top:1px solid #ECE9E0;line-height:1.5;}
+  table.grid td.k{font-family:var(--serif);font-weight:700;font-size:clamp(12px,1.7vw,15px);color:var(--ink);white-space:nowrap;}
+
+  /* ---------- TIMELINE ---------- */
+  .tl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:clamp(16px,2.4vw,26px);
+    border-top:2px solid var(--ink);padding-top:clamp(18px,3vh,30px);}
+  .tl-year{font-family:var(--serif);font-weight:800;font-size:clamp(2.2rem,4.5vw,3.2rem);color:var(--lav-2);line-height:1;}
+  .tl-node{width:38px;height:38px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;margin:10px 0 2px;}
+  .tl-node.p{background:var(--acc);}
+  .tl-node svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ---------- TAKEAWAY STAIR ---------- */
+  .stair{display:flex;align-items:flex-end;gap:clamp(6px,1.4vw,10px);height:clamp(130px,20vh,190px);width:100%;max-width:340px;margin:0 auto;}
+  .stair .bar{flex:1;border-radius:6px 6px 0 0;background:#454D6B;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
+  .stair .bar span{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;color:#C4B5FD;writing-mode:horizontal-tb;text-align:center;}
+
+  /* ---------- UI ---------- */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:70;transition:width .3s ease;}
+  .ui{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;
+    gap:10px;z-index:60;user-select:none;opacity:.45;transition:opacity .25s;pointer-events:none;}
+  .ui:hover,.ui:focus-within{opacity:1;}
+  .ui > *{pointer-events:auto;}
+  .ui .btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(21,26,46,.88);color:#fff;
+    font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--mono);transition:background .2s;}
+  .ui .btn:hover{background:var(--acc);}
+  .ui .counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#9DA2B8;background:rgba(21,26,46,.88);padding:10px 12px;border-radius:20px;}
+  .ui .counter b{color:#C4B5FD;}
+  @media (max-width:820px){ .ui .hint{display:none;} }
+  .ui .hint{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#6A7089;background:rgba(21,26,46,.88);padding:11px 12px;border-radius:20px;}
+
+  .overview{position:fixed;inset:0;z-index:80;background:rgba(14,17,32,.97);display:none;overflow:auto;padding:clamp(20px,4vw,48px);}
+  .overview.open{display:block;}
+  .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:1240px;margin:0 auto;padding-block:16px 40px;}
+  .ov-title{color:#fff;font-family:var(--serif);font-weight:800;font-size:clamp(1.2rem,3vw,1.7rem);max-width:1240px;margin:0 auto;}
+  .ov-cap{color:#8F8BA8;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin:6px auto 0;max-width:1240px;}
+  .thumb{position:relative;text-align:left;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;padding:16px 16px 14px;color:#E6E4F5;transition:background .2s,outline-color .2s;outline:2px solid transparent;}
+  .thumb:hover{background:rgba(255,255,255,.11);}
+  .thumb.cur{outline-color:var(--acc);}
+  .thumb .tn{font-family:var(--mono);font-size:10px;color:#C4B5FD;letter-spacing:.16em;}
+  .thumb .tt{font-family:var(--serif);font-weight:700;font-size:14.5px;margin-top:6px;line-height:1.35;}
+  .thumb .ts{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:#8F8BA8;margin-top:8px;text-transform:uppercase;}
+
+  /* ---------- REVEAL (JS-gated so no-JS still shows everything) ---------- */
+  .js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease var(--d,0s),transform .55s ease var(--d,0s);}
+  .js .slide.vis .rv{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;} }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    html{scroll-snap-type:none;}
+    body{background:#fff;}
+    .slide{min-height:auto;border-bottom:none;padding:36px 40px;page-break-after:always;break-after:page;}
+    .ui,.progress,.overview,.ghost{display:none !important;}
+    .js .rv{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- ============ 01 · TITLE ============ -->
+<section class="slide" data-title="Title — Intellectual Property, Creative Commons &amp; Free Software">
+  <div class="ghost">01</div>
+  <div class="wrap">
+    <div class="s-head"><span class="pill" style="background:none;color:var(--ink-soft);padding:0;">◆ MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>01</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:280px;">
+          <div class="blob" style="width:min(330px,70vw);aspect-ratio:1;"></div>
+          <div class="dotgrid" style="width:110px;height:84px;right:4%;bottom:6%;"></div>
+          <img src="Aset/01_statue_bust.png" alt="Statue bust symbolising enduring ideas" style="position:relative;z-index:2;max-height:min(400px,42vh);width:auto;align-self:center;filter:drop-shadow(0 16px 32px rgba(0,0,0,.18));">
+          <div style="position:absolute;left:0;bottom:4%;z-index:3;display:flex;flex-direction:column;gap:5px;align-items:flex-start;">
+            <span style="background:var(--ink);color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 18px;transform:rotate(-1.5deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">IDEAS</span>
+            <span style="background:#2A3350;color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 16px;transform:rotate(.6deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">CREATIVITY</span>
+            <span style="background:#454D6B;color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 14px;transform:rotate(-.4deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">INNOVATION</span>
+            <span style="background:#8A8FA3;color:#fff;font-family:var(--serif);font-size:clamp(10px,1.6vw,14px);padding:8px 18px;transform:rotate(1deg);box-shadow:0 6px 14px rgba(21,26,46,.25);">FAIR USE</span>
+          </div>
+        </div>
+        <div class="rv" style="--d:.12s;">
+          <span class="pill">ACADEMIC LECTURE DECK</span>
+          <h1 class="display" style="margin-top:18px;">Intellectual Property,<br><span class="acc">Creative Commons</span> &amp;<br>Free Software</h1>
+          <p class="lede" style="margin-top:16px;">Navigating statutory legal protection, flexible licensing frameworks, and code freedom in mass communication.</p>
+          <div style="display:flex;gap:clamp(14px,2.5vw,28px);align-items:center;margin-top:24px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.7 1.3 1.5 1.5 2.5h5c.2-1 .7-1.8 1.5-2.5A6 6 0 0 0 12 3z"/></svg></div><span class="uc">Protect<br>Ideas</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M4 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M14.5 18.5c.4-2.2 1.8-3.4 3.7-3.4 1.2 0 2.2.5 2.8 1.4"/></svg></div><span class="uc">Empower<br>Creators</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div><span class="uc">Open<br>Society</span></div>
+          </div>
+          <div class="hairline" style="margin-top:22px;"></div>
+          <div class="rowline" style="border-top:none;padding-top:14px;">
+            <div><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Knowledge grows when it is shared."</div><div class="uc" style="margin-top:6px;">— Open Knowledge Movement</div></div>
+            <div class="uc" style="text-align:right;">Department of<br>Journalism &amp; Mass Communication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">University Keynote Series</span><span class="lbl fill"></span><span class="lbl">Ideas / People / Technology</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 · OVERVIEW ============ -->
+<section class="slide" data-title="Overview — The Digital Content Revolution">
+  <div class="ghost">02</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>02</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">01. Overview</div>
+        <h1 class="display">The Digital Content <span class="acc">Revolution</span></h1>
+        <p class="lede" style="margin-top:10px;">Digital technology enables instant copying and distribution — creating essential <b>legal and ethical duties</b> for media creators.</p>
+      </div>
+      <div class="grid2">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card rv" style="display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">01</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V6l8-3z"/><path d="M8.8 12l2.2 2.2 4.4-4.4"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Intellectual Property</h3><div class="uc" style="margin:2px 0 4px;">Legal Protection</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;">Grants creators rights over original creations of the mind — from articles to inventions.</p></div>
+          </div>
+          <div class="card rv" style="--d:.08s;display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">02</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 7.5v-3M12 19.5v-3M7.5 12h-3M19.5 12h-3"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Creative Commons</h3><div class="uc" style="margin:2px 0 4px;">Flexible Licensing</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;">Pre-authorized public sharing under clear, standardized conditions — some rights reserved.</p></div>
+          </div>
+          <div class="card rv" style="--d:.16s;display:flex;gap:16px;align-items:flex-start;">
+            <span class="num-badge">03</span>
+            <div class="chip"><svg viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M13.5 4l-3 16"/></svg></div>
+            <div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.35rem);">Free Software</h3><div class="uc" style="margin:2px 0 4px;">User Sovereignty</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.5;">Guarantees four essential freedoms to run, study, modify, and share software.</p></div>
+          </div>
+          <div class="flow rv" style="--d:.22s;padding-top:10px;border-top:1px solid var(--line);">PEOPLE <span class="arr">→</span> PLATFORMS <span class="arr">→</span> IDEAS <span class="arr">→</span> LAW <span class="arr">→</span> <span style="color:var(--acc);">A MORE OPEN WORLD</span></div>
+        </div>
+        <div class="rv" style="--d:.1s;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div class="blob" style="width:min(300px,64vw);aspect-ratio:1;"></div>
+          <img src="Aset/05_woman_with_laptop.png" alt="Creator working on a laptop" style="position:relative;z-index:2;max-height:min(280px,30vh);width:auto;filter:drop-shadow(0 14px 28px rgba(0,0,0,.14));">
+          <div class="note" style="max-width:360px;"><div class="quote" style="font-size:clamp(.9rem,1.7vw,1rem);">"The digital age expands what we can create, but also what we must protect."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Executive Summary</span><span class="lbl fill"></span><span class="lbl">Ideas / Rights / Responsibility</span></div>
+  </div>
+</section>
+
+<!-- ============ 03 · TIMELINE ============ -->
+<section class="slide" data-title="Historical Context — Media &amp; Content Evolution">
+  <div class="ghost">03</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="pageno"><b>03</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <div class="sec-tag">02. Historical Context</div>
+          <h1 class="display">Media &amp; Content <span class="acc">Evolution</span></h1>
+          <p class="lede" style="margin-top:10px;">From statutory print protection to open-source digital networks — expanding media reach and legal scope.</p>
+        </div>
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Each technological shift redefined who can create, share, and control content."</div><div class="uc" style="margin-top:6px;">— Media History</div></div>
+      </div>
+      <div class="tl-grid">
+        <div class="rv">
+          <div class="tl-year">1957</div>
+          <div class="tl-node"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></div>
+          <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">Copyright Act</h3>
+          <div class="uc" style="margin:3px 0 6px;">Statutory Protection</div>
+          <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Establishes statutory protection for written journalism, books, and artistic media.</p>
+          <img src="Aset/01_newspaper_news.png" alt="Newspaper illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+        </div>
+        <div class="rv" style="--d:.08s;">
+          <div class="tl-year">1983</div>
+          <div class="tl-node p"><svg viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg></div>
+          <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">GNU Free Software</h3>
+          <div class="uc" style="margin:3px 0 6px;">Code Freedoms</div>
+          <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Stallman launches the GNU Project to guarantee user code freedoms.</p>
+          <img src="Aset/02_gnu_terminal.png" alt="GNU terminal illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));">
+        </div>
+        <div class="rv" style="--d:.16s;">
+          <div class="tl-year">1991</div>
+          <div class="tl-node p"><svg viewBox="0 0 24 24"><path d="M6 9c0 5-2 6-2 8h16c0-2-2-3-2-8a6 6 0 1 0-12 0z"/></svg></div>
+          <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">Linux Kernel</h3>
+          <div class="uc" style="margin:3px 0 6px;">Open Operating Systems</div>
+          <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Torvalds releases the Linux kernel, powering complete GNU/Linux OS systems.</p>
+          <img src="Aset/03_linux_tux.png" alt="Linux Tux illustration" loading="lazy" style="width:min(120px,26vw);margin-top:12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));">
+        </div>
+        <div class="rv" style="--d:.24s;">
+          <div class="tl-year">2001</div>
+          <div class="tl-node" style="font-family:var(--serif);color:#fff;font-weight:800;font-size:13px;">cc</div>
+          <h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.4rem);margin-top:8px;">Creative Commons</h3>
+          <div class="uc" style="margin:3px 0 6px;">Flexible Sharing</div>
+          <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;">Lessig introduces CC licences for flexible digital content sharing.</p>
+          <div style="display:flex;gap:10px;margin-top:12px;">
+            <img src="Aset/04_creative_commons.png" alt="Creative Commons logo" loading="lazy" style="width:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+            <img src="Aset/06_camera.png" alt="Camera illustration" loading="lazy" style="width:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.12));">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Historical Evolution</span><span class="lbl fill"></span><span class="lbl">1957 → 2001</span></div>
+  </div>
+</section>
+
+<!-- ============ 04 · WHAT IS IP ============ -->
+<section class="slide" data-title="What is Intellectual Property?">
+  <div class="ghost">04</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">03. KEY CONCEPTS</span><span class="pageno"><b>04</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <h1 class="display">What is<br><span class="acc">Intellectual Property?</span></h1>
+          <p class="lede" style="margin-top:16px;">Legal rights that protect <b>creations of the mind</b>, enabling innovation, recognition and economic value.</p>
+          <p style="font-size:clamp(12px,1.6vw,14px);color:var(--ink-soft);line-height:1.6;margin-top:12px;">Examples span journalism and media work: <b>articles, books, photographs, films, music, logos, inventions, designs</b> and computer software.</p>
+        </div>
+        <div class="rv" style="--d:.1s;">
+          <div class="venn">
+            <div class="c c1"><span>CREATE<br>(IDEAS)</span></div>
+            <div class="c c2"><span style="padding-top:60%;">PROTECT<br>(RIGHTS)</span></div>
+            <div class="c c3"><span style="padding-top:60%;padding-left:34%;">BENEFIT<br>(SOCIETY)</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rowline rv" style="--d:.15s;">
+        <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.7 1.3 1.5 1.5 2.5h5c.2-1 .7-1.8 1.5-2.5A6 6 0 0 0 12 3z"/></svg></div><span class="uc">Encourages<br>Innovation</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M4 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5"/></svg></div><span class="uc">Rewards<br>Creators</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 19V9l5 3 5-6 6 5v8z"/><path d="M4 21h16"/></svg></div><span class="uc">Drives Economic<br>Growth</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h9a3 3 0 0 1 3 3v11a2.5 2.5 0 0 0-2.5-2.5H4zM20 5h-4a3 3 0 0 0-3 3v11a2.5 2.5 0 0 1 2.5-2.5H20z"/></svg></div><span class="uc">Supports Culture<br>&amp; Education</span></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Key Concepts</span><span class="lbl fill"></span><span class="lbl">Ideas / Rights / Value</span></div>
+  </div>
+</section>
+
+<!-- ============ 05 · FIVE PILLARS ============ -->
+<section class="slide" data-title="The Five Pillars of IP Protection">
+  <div class="ghost">05</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">04. TYPES OF IP</span><span class="pageno"><b>05</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2 rv">
+        <div>
+          <h1 class="display">The Five Pillars<br>of <span class="acc">IP Protection</span></h1>
+          <p class="lede" style="margin-top:12px;">Distinct statutory frameworks tailored for creative, commercial, and technical innovations.</p>
+        </div>
+        <div class="note"><div class="quote">"Different ideas, different protections — a stronger creative economy."</div></div>
+      </div>
+      <div class="grid5">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:12px;">Copyright</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;margin-top:6px;">Original creative, literary, artistic &amp; software works.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:12px;">Patent</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;margin-top:6px;">Novel technological &amp; scientific inventions.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 15.5v-7h3a2 2 0 0 1 0 4h-3M12.5 12.5h-3"/></svg></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:12px;">Trademark</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;margin-top:6px;">Brand names, logos, symbols &amp; identifiers.</p></div>
+        <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2l8 4.5v9L12 22l-8-4.5v-9L12 2zM12 11.5L4 6.7M12 11.5l8-4.8M12 11.5V22"/></svg></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:12px;">Industrial Design</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;margin-top:6px;">Visual appearance or aesthetic shape of a product.</p></div>
+        <div class="card rv" style="--d:.24s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:12px;">Geographical Indication</h3><p style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;margin-top:6px;">Regional products tied to a specific geographic origin.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Types of Intellectual Property</span><span class="lbl fill"></span><span class="lbl">Creativity / Law / Society</span></div>
+  </div>
+</section>
+
+<!-- ============ 06 · COPYRIGHT ============ -->
+<section class="slide" data-title="Copyright — Protecting Original Works">
+  <div class="ghost">06</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">05. COPYRIGHT IN DEPTH</span><span class="pageno"><b>06</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <span class="pill">✦ CREATIVE WORKS</span>
+          <h1 class="display" style="margin-top:14px;">Copyright:<br>protecting <span class="acc">original works</span></h1>
+          <p class="lede" style="margin-top:16px;">Copyright protects original creative works — automatically giving creators rights over their use and distribution.</p>
+          <div class="note" style="margin-top:18px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"A journalist who writes an original article normally has copyright in that work, subject to the law."</div></div>
+        </div>
+        <div class="rv" style="--d:.1s;">
+          <div class="uc" style="margin-bottom:12px;">Protected works in media practice</div>
+          <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));">
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><path d="M7 3h8l4 4v14H7zM15 3v4h4"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">Articles &amp; Books</span></div>
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.4"/><path d="M8 6l1.5-2.5h5L16 6"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">Photographs</span></div>
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="M16 10l6-3.5v11L16 14"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">Films &amp; Videos</span></div>
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">Music</span></div>
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">Software</span></div>
+            <div class="card" style="display:flex;gap:12px;align-items:center;padding:14px 16px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.8a3.2 3.2 0 1 0 0 4.4"/></svg><span style="font-size:clamp(11px,1.5vw,13.5px);font-weight:600;">…and more</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Copyright</span><span class="lbl fill"></span><span class="lbl">Original Works / Rights</span></div>
+  </div>
+</section>
+
+<!-- ============ 07 · COMMERCIAL IP ============ -->
+<section class="slide" data-title="Patents, Trademarks &amp; Designs">
+  <div class="ghost">07</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">06. COMMERCIAL IP</span><span class="pageno"><b>07</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <span class="pill">✦ COMMERCIAL IP</span>
+          <h1 class="display" style="margin-top:14px;">Patents, Trademarks<br>&amp; <span class="acc">Designs</span></h1>
+          <p class="lede" style="margin-top:14px;">Safeguarding technological inventions, brand identity, and industrial aesthetics — plus regional origin.</p>
+          <div class="flow" style="margin-top:16px;">IDEAS <span class="arr">→</span> BRANDS <span class="arr">→</span> INNOVATION <span class="arr">→</span> VALUE</div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;justify-content:center;">
+          <img src="Aset/06_news_media_collage.png" alt="News media collage" loading="lazy" style="max-height:min(280px,32vh);filter:drop-shadow(0 12px 28px rgba(0,0,0,.14));">
+        </div>
+      </div>
+      <div class="grid4">
+        <div class="rv"><div style="display:flex;gap:12px;align-items:center;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.7 1.3 1.5 1.5 2.5h5c.2-1 .7-1.8 1.5-2.5A6 6 0 0 0 12 3z"/></svg></div><span class="num-badge">01</span></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:10px;">Patent</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Grants <b>exclusive commercial monopoly</b> over technical inventions satisfying statutory criteria.</p></div>
+        <div class="rv" style="--d:.06s;"><div style="display:flex;gap:12px;align-items:center;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 15.5v-7h3a2 2 0 0 1 0 4h-3M12.5 12.5h-3"/></svg></div><span class="num-badge">02</span></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:10px;">Trademark</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Distinguishes <b>brand identity</b>, mastheads, logos and slogans in the media marketplace.</p></div>
+        <div class="rv" style="--d:.12s;"><div style="display:flex;gap:12px;align-items:center;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2l8 4.5v9L12 22l-8-4.5v-9L12 2zM12 11.5L4 6.7M12 11.5l8-4.8M12 11.5V22"/></svg></div><span class="num-badge">03</span></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:10px;">Industrial Design</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Protects visual <b>ornamental shape</b> and product aesthetics under statutory registration.</p></div>
+        <div class="rv" style="--d:.18s;"><div style="display:flex;gap:12px;align-items:center;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div><span class="num-badge">04</span></div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:10px;">Geographical Indication</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.5;margin-top:5px;">Identifies products associated with a <b>particular geographical region</b> and its reputation.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Commercial IP</span><span class="lbl fill"></span><span class="lbl">Creativity / Law / Society</span></div>
+  </div>
+</section>
+
+<!-- ============ 08 · IP IN THE NEWSROOM ============ -->
+<section class="slide" data-title="IP in the Newsroom">
+  <div class="ghost">08</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">07. IP IN THE NEWSROOM</span><span class="pageno"><b>08</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">07. IP &amp; Journalism</div>
+        <h1 class="display">Every story is<br><span class="acc">intellectual property</span></h1>
+        <p class="lede" style="margin-top:12px;">Journalists both <b>create</b> and <b>use</b> creative content — so understanding copyright, permissions, licences and attribution is a professional duty.</p>
+      </div>
+      <div class="grid2">
+        <div class="rv" style="--d:.08s;">
+          <div class="uc" style="margin-bottom:10px;">Journalists create</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="pill">News Articles</span><span class="pill">Photographs</span><span class="pill">Videos</span><span class="pill">Audio Recordings</span><span class="pill">Infographics</span>
+          </div>
+          <div class="uc" style="margin:18px 0 10px;">Journalists reuse — responsibly</div>
+          <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));">
+            <div class="card" style="padding:14px 16px;"><div style="font-family:var(--serif);font-weight:700;font-size:15px;">Permission</div><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Secure rights before using others' work.</p></div>
+            <div class="card" style="padding:14px 16px;"><div style="font-family:var(--serif);font-weight:700;font-size:15px;">Licence</div><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Check the exact terms that apply.</p></div>
+            <div class="card" style="padding:14px 16px;"><div style="font-family:var(--serif);font-weight:700;font-size:15px;">Attribution</div><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Credit creators clearly and accurately.</p></div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.14s;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <img src="Aset/06_news_media_collage.png" alt="News media collage" loading="lazy" style="max-height:min(220px,26vh);filter:drop-shadow(0 12px 28px rgba(0,0,0,.14));">
+          <div class="note" style="max-width:380px;"><div class="quote" style="font-size:clamp(.9rem,1.6vw,1rem);">"Using someone else's work without permission or a valid legal basis can create legal and ethical problems."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">IP &amp; Journalism</span><span class="lbl fill"></span><span class="lbl">Rights / Duties / Ethics</span></div>
+  </div>
+</section>
+
+<!-- ============ 09 · INDIAN IP LAWS ============ -->
+<section class="slide" data-title="The Indian IP Statute Book">
+  <div class="ghost">09</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">08. STATUTORY FRAMEWORK</span><span class="pageno"><b>09</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">08. Law of India</div>
+          <h1 class="display">The Indian IP<br><span class="acc">statute book</span></h1>
+          <p class="lede" style="margin-top:14px;">India protects intellectual property through dedicated statutes, each covering a distinct category of creation.</p>
+          <img src="Aset/03_balance_scale.png" alt="Scales of justice" loading="lazy" style="width:min(200px,40vw);margin-top:20px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.12));">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card rv" style="display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">1957</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Copyright Act, 1957</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">The main law dealing with copyright in India.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4"/></svg></div></div>
+          <div class="card rv" style="--d:.05s;display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">1970</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Patents Act, 1970</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">Deals with patents and inventions.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></div></div>
+          <div class="card rv" style="--d:.1s;display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">1999</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Trade Marks Act, 1999</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">Deals with trademarks.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 15.5v-7h3a2 2 0 0 1 0 4h-3M12.5 12.5h-3"/></svg></div></div>
+          <div class="card rv" style="--d:.15s;display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">1999</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Geographical Indications of Goods Act, 1999</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">Protection for geographical indications.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div></div>
+          <div class="card rv" style="--d:.2s;display:flex;gap:16px;align-items:center;"><span class="num-badge" style="font-size:13px;">2000</span><div style="flex:1;min-width:0;"><b style="font-size:clamp(12px,1.7vw,15px);">Designs Act, 2000</b><p style="font-size:clamp(10px,1.5vw,12px);color:var(--ink-soft);margin-top:2px;">Protection for registered industrial designs.</p></div><div class="chip" style="width:40px;"><svg viewBox="0 0 24 24"><path d="M12 2l8 4.5v9L12 22l-8-4.5v-9L12 2z"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">IP Laws in India</span><span class="lbl fill"></span><span class="lbl">Statutes / Protection</span></div>
+  </div>
+</section>
+
+<!-- ============ 10 · WHAT IS CC ============ -->
+<section class="slide" data-title="Creative Commons — Some Rights Reserved">
+  <div class="ghost">10</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">09. CREATIVE COMMONS</span><span class="pageno"><b>10</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">09. Creative Commons</div>
+          <h1 class="display">Sharing with<br><span class="acc">some rights reserved</span></h1>
+          <p class="lede" style="margin-top:16px;">Creative Commons (CC) is a system that lets creators share work under <b>specific conditions</b> — it does not remove copyright.</p>
+          <p style="font-size:clamp(12px,1.6vw,14px);color:var(--ink-soft);line-height:1.6;margin-top:12px;">The creator chooses a licence that tells others what they <b>can and cannot do</b> with the work.</p>
+          <div class="note" style="margin-top:18px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"A photographer may allow others to use a photograph if they give proper credit."</div><div class="uc" style="margin-top:8px;">— Attribution in practice</div></div>
+        </div>
+        <div class="rv" style="--d:.1s;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div class="blob" style="width:min(300px,64vw);aspect-ratio:1;"></div>
+          <img src="Aset/04_creative_commons.png" alt="Creative Commons logo" loading="lazy" style="position:relative;z-index:2;width:min(150px,32vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.14));">
+          <div class="uc" style="position:relative;z-index:2;color:var(--acc);font-size:11px;">SOME RIGHTS RESERVED</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Creative Commons</span><span class="lbl fill"></span><span class="lbl">Share / Reuse / Credit</span></div>
+  </div>
+</section>
+
+<!-- ============ 11 · WHY CC ============ -->
+<section class="slide" data-title="Why Creative Commons is Important">
+  <div class="ghost">11</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">10. WHY IT MATTERS</span><span class="pageno"><b>11</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">10. Why Creative Commons is Important</div>
+        <h1 class="display">A permission layer<br>for <span class="acc">open culture</span></h1>
+        <p class="lede" style="margin-top:12px;">CC makes it easier to <b>legally share and reuse</b> creative works — encouraging openness while creators keep certain rights.</p>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h9a3 3 0 0 1 3 3v11a2.5 2.5 0 0 0-2.5-2.5H4zM20 5h-4a3 3 0 0 0-3 3v11a2.5 2.5 0 0 1 2.5-2.5H20z"/></svg></div><b style="font-size:clamp(12px,1.7vw,14px);display:block;margin-top:10px;">Education &amp; Research</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Classroom materials, papers and datasets.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div><b style="font-size:clamp(12px,1.7vw,14px);display:block;margin-top:10px;">Journalism</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Photos and graphics for reporting.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.4"/></svg></div><b style="font-size:clamp(12px,1.7vw,14px);display:block;margin-top:10px;">Photography &amp; Media</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Images, audio, video and websites.</p></div>
+        <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div><b style="font-size:clamp(12px,1.7vw,14px);display:block;margin-top:10px;">Creative Projects</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Remix, adaptation and collaboration.</p></div>
+      </div>
+      <div class="rowline rv" style="--d:.22s;">
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Some rights reserved — a more open knowledge society."</div></div>
+        <span class="uc" style="color:var(--acc);">∞ Works Shared Forward</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Why Creative Commons</span><span class="lbl fill"></span><span class="lbl">Sharing / Reuse</span></div>
+  </div>
+</section>
+
+<!-- ============ 12 · CC CONDITIONS ============ -->
+<section class="slide" data-title="CC Licence Conditions — BY / SA / NC / ND">
+  <div class="ghost">12</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">11. LICENCE CONDITIONS</span><span class="pageno"><b>12</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">11. CC Licence Conditions</div>
+        <h1 class="display">Four building blocks of<br>every <span class="acc">CC licence</span></h1>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><div class="cc-badge" style="font-size:17px;">BY</div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);margin-top:12px;">Attribution</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">The user <b>must give credit</b> to the creator.</p><div style="width:28px;height:2px;background:var(--acc);margin-top:14px;"></div></div>
+        <div class="card rv" style="--d:.06s;"><div class="cc-badge" style="font-size:17px;">SA</div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);margin-top:12px;">ShareAlike</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">Modified work is generally shared under the <b>same or compatible licence</b>.</p><div style="width:28px;height:2px;background:var(--acc);margin-top:14px;"></div></div>
+        <div class="card rv" style="--d:.12s;"><div class="cc-badge" style="font-size:17px;">NC</div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);margin-top:12px;">NonCommercial</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">The work <b>cannot be used commercially</b> under the licence.</p><div style="width:28px;height:2px;background:var(--acc);margin-top:14px;"></div></div>
+        <div class="card rv" style="--d:.18s;"><div class="cc-badge" style="font-size:17px;">ND</div><h3 style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);margin-top:12px;">NoDerivatives</h3><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;">The work can be shared, but <b>modified versions cannot be distributed</b>.</p><div style="width:28px;height:2px;background:var(--acc);margin-top:14px;"></div></div>
+      </div>
+      <div class="card dark rv" style="--d:.22s;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div class="cc-badge" style="border-color:#C4B5FD;color:#C4B5FD;">cc</div>
+        <p style="font-size:clamp(11.5px,1.6vw,13.5px);line-height:1.5;flex:1;min-width:220px;">Licences combine these elements — e.g. <b style="color:#C4B5FD;">CC BY-NC</b> means attribution + non-commercial use only.</p>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">CC Conditions</span><span class="lbl fill"></span><span class="lbl">BY / SA / NC / ND</span></div>
+  </div>
+</section>
+
+<!-- ============ 13 · CC LICENCES ============ -->
+<section class="slide" data-title="The Six Main CC Licences">
+  <div class="ghost">13</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">12. THE LICENCE FAMILY</span><span class="pageno"><b>13</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">12. Main Creative Commons Licences</div>
+        <h1 class="display">Six licences — from open<br>to <span class="acc">reserved</span></h1>
+      </div>
+      <div class="grid2" style="align-items:start;">
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div class="license-row rv"><span class="code">CC BY</span><p>Allows reuse and modification <b>with attribution</b>.</p></div>
+          <div class="license-row rv" style="--d:.05s;"><span class="code">CC BY-SA</span><p>Reuse and modification with attribution and <b>ShareAlike</b> conditions.</p></div>
+          <div class="license-row rv" style="--d:.1s;"><span class="code">CC BY-NC</span><p>Reuse for <b>non-commercial</b> purposes with attribution.</p></div>
+          <div class="license-row rv" style="--d:.15s;"><span class="code">CC BY-ND</span><p>Sharing with attribution, but <b>no distribution of modified versions</b>.</p></div>
+          <div class="license-row rv" style="--d:.2s;"><span class="code">CC BY-NC-SA</span><p>Non-commercial adaptation with attribution and <b>ShareAlike</b>.</p></div>
+          <div class="license-row rv" style="--d:.25s;"><span class="code">CC BY-NC-ND</span><p>Non-commercial sharing with attribution; <b>no modified versions</b>.</p></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="card dark rv" style="--d:.15s;"><div style="font-family:var(--mono);font-weight:700;font-size:17px;color:#C4B5FD;letter-spacing:.06em;">CC0</div><p style="font-size:clamp(11.5px,1.6vw,13px);line-height:1.6;margin-top:8px;">A tool for <b>waiving copyright and related rights</b> to the extent legally possible — placing work as close to the public domain as law allows.</p></div>
+          <div class="note rv" style="--d:.2s;"><div class="quote" style="font-size:clamp(.9rem,1.7vw,1rem);">"Always check the exact licence before using a Creative Commons work."</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">CC Licences</span><span class="lbl fill"></span><span class="lbl">Openness Spectrum</span></div>
+  </div>
+</section>
+
+<!-- ============ 14 · CC IN JOURNALISM ============ -->
+<section class="slide" data-title="CC in Journalism — Not &quot;Free to Use&quot;">
+  <div class="ghost">14</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">13. NEWSROOM PRACTICE</span><span class="pageno"><b>14</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">13. Creative Commons in Journalism</div>
+          <h1 class="display">"CC" is not<br><span class="acc">"free to use"</span></h1>
+          <p class="lede" style="margin-top:14px;">Before using CC material, journalists should run a quick licence check.</p>
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:14px;align-items:center;"><div class="cc-badge" style="font-size:12px;">1</div><span style="font-size:clamp(12px,1.7vw,14px);color:var(--ink-soft);">Is <b>attribution</b> required?</span></div>
+            <div style="display:flex;gap:14px;align-items:center;"><div class="cc-badge" style="font-size:12px;">2</div><span style="font-size:clamp(12px,1.7vw,14px);color:var(--ink-soft);">Is <b>commercial use</b> allowed?</span></div>
+            <div style="display:flex;gap:14px;align-items:center;"><div class="cc-badge" style="font-size:12px;">3</div><span style="font-size:clamp(12px,1.7vw,14px);color:var(--ink-soft);">Can the work be <b>modified</b>?</span></div>
+            <div style="display:flex;gap:14px;align-items:center;"><div class="cc-badge" style="font-size:12px;">4</div><span style="font-size:clamp(12px,1.7vw,14px);color:var(--ink-soft);">Are there <b>other rights</b> that may apply?</span></div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <img src="Aset/06_camera.png" alt="Camera illustration" loading="lazy" style="width:min(190px,38vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.15));">
+          <div class="card dark" style="max-width:400px;"><div class="uc" style="color:#C4B5FD;margin-bottom:6px;">Editorial Rule of Thumb</div><p style="font-size:clamp(11.5px,1.6vw,13px);line-height:1.55;">A Creative Commons work should <b>never</b> automatically be treated as free to use without conditions.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">CC in Journalism</span><span class="lbl fill"></span><span class="lbl">Licence Check</span></div>
+  </div>
+</section>
+
+<!-- ============ 15 · FOUR FREEDOMS ============ -->
+<section class="slide" data-title="Free Software — Four Freedoms">
+  <div class="ghost">15</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">14. FREE SOFTWARE</span><span class="pageno"><b>15</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">14. Free Software</div>
+        <h1 class="display">Freedom <span class="acc">to use, study,</span><br>modify &amp; share</h1>
+        <p class="lede" style="margin-top:12px;">Free software gives users essential freedoms. "Free" means <b>freedom, not necessarily free of cost</b> — and access to source code is necessary for studying and modifying it.</p>
+      </div>
+      <div class="grid2" style="align-items:start;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card rv" style="display:flex;align-items:center;gap:16px;"><span class="num-badge" style="font-size:14px;">01</span><b style="font-size:clamp(12.5px,1.8vw,15px);flex:1;">Use</b><span style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);">run the software for any purpose</span></div>
+          <div class="card rv" style="--d:.06s;display:flex;align-items:center;gap:16px;"><span class="num-badge" style="font-size:14px;">02</span><b style="font-size:clamp(12.5px,1.8vw,15px);flex:1;">Study</b><span style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);">and modify, how it works</span></div>
+          <div class="card rv" style="--d:.12s;display:flex;align-items:center;gap:16px;"><span class="num-badge" style="font-size:14px;">03</span><b style="font-size:clamp(12.5px,1.8vw,15px);flex:1;">Share</b><span style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);">copies with others</span></div>
+          <div class="card rv" style="--d:.18s;display:flex;align-items:center;gap:16px;"><span class="num-badge" style="font-size:14px;">04</span><b style="font-size:clamp(12.5px,1.8vw,15px);flex:1;">Share modified versions</b><span style="font-size:clamp(10.5px,1.5vw,12.5px);color:var(--ink-soft);">distribute your changes</span></div>
+        </div>
+        <div class="rv" style="--d:.12s;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <img src="Aset/02_gnu_terminal.png" alt="GNU terminal illustration" loading="lazy" style="width:min(200px,40vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.18));">
+          <div class="note"><div class="quote" style="font-size:clamp(.9rem,1.6vw,.98rem);">"Free software is about people, not code."</div><div class="uc" style="margin-top:4px;">— Richard Stallman</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Free Software · FSF Four Freedoms</span><span class="lbl fill"></span><span class="lbl">Use / Study / Modify / Share</span></div>
+  </div>
+</section>
+
+<!-- ============ 16 · FS HISTORY ============ -->
+<section class="slide" data-title="History — From GNU to a Global OS">
+  <div class="ghost">16</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">15. A MOVEMENT IS BORN</span><span class="pageno"><b>16</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">15. History of Free Software</div>
+        <h1 class="display">From <span class="acc">GNU</span> to a global<br>operating system</h1>
+        <p class="lede" style="margin-top:10px;">The modern free software movement developed mainly during the <b>1980s</b> and matured through the 1990s.</p>
+      </div>
+      <div class="grid4">
+        <div class="card rv" style="border-top:4px solid var(--acc);"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">1983</div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:8px;">GNU Project</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.55;margin-top:8px;"><b>Richard Stallman</b> announces GNU — a Unix-like operating system made entirely of free software.</p></div>
+        <div class="card rv" style="--d:.06s;border-top:4px solid var(--acc);"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">1985</div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:8px;">Free Software Foundation</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.55;margin-top:8px;">Stallman founds the <b>FSF</b>, which works to promote software freedom.</p></div>
+        <div class="card rv" style="--d:.12s;border-top:4px solid var(--acc);"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">1989+</div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:8px;">GNU GPL</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.55;margin-top:8px;">The <b>GNU General Public License</b> becomes a landmark free-software licence.</p></div>
+        <div class="card rv" style="--d:.18s;border-top:4px solid var(--acc);"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">1991</div><h3 style="font-family:var(--serif);font-size:clamp(1rem,2vw,1.2rem);margin-top:8px;">Linux Kernel</h3><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);line-height:1.55;margin-top:8px;"><b>Linus Torvalds</b> releases Linux; with GNU software it forms systems commonly called GNU/Linux.</p></div>
+      </div>
+      <div class="flow rv" style="--d:.22s;border-top:1px solid var(--line);padding-top:14px;">ANNOUNCE <span class="arr">→</span> INSTITUTIONALIZE <span class="arr">→</span> LICENSE <span class="arr">→</span> COMPLETE THE SYSTEM</div>
+    </div>
+    <div class="s-foot"><span class="lbl">Free Software History</span><span class="lbl fill"></span><span class="lbl">1983 → 1991</span></div>
+  </div>
+</section>
+
+<!-- ============ 17 · FOSS ============ -->
+<section class="slide" data-title="Free Software &amp; Open Source">
+  <div class="ghost">17</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">16. TWO MOVEMENTS, ONE ECOSYSTEM</span><span class="pageno"><b>17</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">16. Free Software &amp; Open Source</div>
+        <h1 class="display">Same code,<br>different <span class="acc">emphasis</span></h1>
+      </div>
+      <div class="grid2">
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card rv" style="border-left:4px solid var(--ink);"><h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.3rem);">Free Software</h3><p style="font-size:clamp(11.5px,1.6vw,13px);color:var(--ink-soft);line-height:1.6;margin-top:8px;">Focuses on <b>user freedom and rights</b> — ethical stance centred on what users may do with software.</p></div>
+          <div class="card rv" style="--d:.08s;border-left:4px solid var(--acc);"><h3 style="font-family:var(--serif);font-size:clamp(1.1rem,2.4vw,1.3rem);">Open Source</h3><p style="font-size:clamp(11.5px,1.6vw,13px);color:var(--ink-soft);line-height:1.6;margin-top:8px;">Focuses on <b>collaborative development</b> and the practical advantages of source-code availability.</p></div>
+        </div>
+        <div class="rv" style="--d:.12s;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;">
+          <div class="quote" style="text-align:center;">"Many programs meet both descriptions — Free and Open Source Software."</div>
+          <div class="card dark" style="width:100%;text-align:center;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);line-height:1.5;">Different traditions, one shared ecosystem: <b style="color:#C4B5FD;">freedom for users, practicality for developers.</b></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Free &amp; Open Source Software</span><span class="lbl fill"></span><span class="lbl">Ethics / Practice</span></div>
+  </div>
+</section>
+
+<!-- ============ 18 · FOSS EXAMPLES ============ -->
+<section class="slide" data-title="FOSS Examples — Tools You Already Use">
+  <div class="ghost">18</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">17. THE FOSS TOOLBOX</span><span class="pageno"><b>18</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">17. Examples of Free &amp; Open-Source Software</div>
+        <h1 class="display">Tools you already use — <span class="acc">freely</span></h1>
+      </div>
+      <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));">
+        <div class="card rv" style="display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M6 9c0 5-2 6-2 8h16c0-2-2-3-2-8a6 6 0 1 0-12 0z"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">GNU/Linux</b><div class="uc" style="margin-top:2px;">Operating System</div></div></div>
+        <div class="card rv" style="--d:.04s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">Firefox</b><div class="uc" style="margin-top:2px;">Web Browser</div></div></div>
+        <div class="card rv" style="--d:.08s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M8 5v4"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">LibreOffice</b><div class="uc" style="margin-top:2px;">Office Software</div></div></div>
+        <div class="card rv" style="--d:.12s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><path d="M12 3v18M9 6l3-3 3 3"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">GIMP</b><div class="uc" style="margin-top:2px;">Image Editing</div></div></div>
+        <div class="card rv" style="--d:.16s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M4 12v4M9 8v8M14 5v14M19 10v6"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">Audacity</b><div class="uc" style="margin-top:2px;">Audio Editing</div></div></div>
+        <div class="card rv" style="--d:.2s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M12 2l8 4.5v9L12 22l-8-4.5v-9L12 2zM12 11.5L4 6.7M12 11.5l8-4.8"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">Blender</b><div class="uc" style="margin-top:2px;">3D Creation</div></div></div>
+        <div class="card rv" style="--d:.24s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM10 4v16"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">VLC</b><div class="uc" style="margin-top:2px;">Media Player</div></div></div>
+        <div class="card rv" style="--d:.28s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3zM12 10v4M12 17.5v.5"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">Inkscape</b><div class="uc" style="margin-top:2px;">Graphic Design</div></div></div>
+        <div class="card rv" style="--d:.32s;display:flex;gap:14px;align-items:center;"><div class="chip" style="border-radius:12px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><b style="font-size:clamp(12px,1.7vw,14.5px);">WordPress</b><div class="uc" style="margin-top:2px;">Content Management</div></div></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">FOSS Examples</span><span class="lbl fill"></span><span class="lbl">Free Tools for Creators</span></div>
+  </div>
+</section>
+
+<!-- ============ 19 · FOSS IN JOURNALISM ============ -->
+<section class="slide" data-title="FOSS in Journalism — A Full Newsroom, Zero Licence Fees">
+  <div class="ghost">19</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">18. MEDIA PRODUCTION</span><span class="pageno"><b>19</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">18. Free Software in Journalism</div>
+          <h1 class="display">A full newsroom,<br><span class="acc">zero licence fees</span></h1>
+          <p class="lede" style="margin-top:12px;">FOSS supports every stage of media production — useful for students, independent creators and media organisations.</p>
+          <img src="Aset/05_laptop.png" alt="Laptop illustration" loading="lazy" style="width:min(230px,44vw);margin-top:18px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.15));">
+        </div>
+        <div class="rv" style="--d:.1s;">
+          <div class="table-scroll">
+            <table class="grid">
+              <tr><th style="width:45%;">Work Stage</th><th>Recommended FOSS Tool</th></tr>
+              <tr><td class="k">Writing</td><td><b>LibreOffice Writer</b></td></tr>
+              <tr><td class="k">Image editing</td><td><b>GIMP</b></td></tr>
+              <tr><td class="k">Audio editing</td><td><b>Audacity</b></td></tr>
+              <tr><td class="k">Video editing</td><td><b>Kdenlive</b></td></tr>
+              <tr><td class="k">Graphic design</td><td><b>Inkscape</b></td></tr>
+              <tr><td class="k">3D creation</td><td><b>Blender</b></td></tr>
+              <tr><td class="k">Web publishing</td><td><b>WordPress</b></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">FOSS in Journalism</span><span class="lbl fill"></span><span class="lbl">Create / Publish</span></div>
+  </div>
+</section>
+
+<!-- ============ 20 · FS LICENCES ============ -->
+<section class="slide" data-title="Free Software Licences">
+  <div class="ghost">20</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">19. LICENCE LANDSCAPE</span><span class="pageno"><b>20</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">19. Free Software Licences</div>
+        <h1 class="display">Read the licence<br>before you <span class="acc">redistribute</span></h1>
+        <p class="lede" style="margin-top:10px;">Each licence carries its own conditions — users should check the terms before modifying or redistributing software.</p>
+      </div>
+      <div class="grid2" style="align-items:stretch;">
+        <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));align-content:center;">
+          <div class="card rv"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">GNU GPL</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Strong copyleft; landmark free-software licence.</p></div>
+          <div class="card rv" style="--d:.05s;"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">GNU LGPL</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Lesser GPL for software libraries.</p></div>
+          <div class="card rv" style="--d:.1s;"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">GNU AGPL</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Affero GPL covering network deployment.</p></div>
+          <div class="card rv" style="--d:.15s;"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">MIT License</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Short, permissive and widely adopted.</p></div>
+          <div class="card rv" style="--d:.2s;"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">BSD Licences</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Permissive family of academic licences.</p></div>
+          <div class="card rv" style="--d:.25s;"><div style="font-family:var(--mono);font-weight:700;font-size:13px;color:var(--acc);">Apache License</div><p style="font-size:clamp(10.5px,1.5vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Permissive with explicit patent protection.</p></div>
+        </div>
+        <div class="card dark rv" style="--d:.2s;align-self:center;"><div class="uc" style="color:#C4B5FD;margin-bottom:8px;">Rule of Thumb</div><p style="font-size:clamp(11.5px,1.6vw,13px);line-height:1.6;">Copyleft or permissive — every licence defines what you <b>must keep, share or state</b> when redistributing code.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Free Software Licences</span><span class="lbl fill"></span><span class="lbl">Copyleft / Permissive</span></div>
+  </div>
+</section>
+
+<!-- ============ 21 · COPYLEFT ============ -->
+<section class="slide" data-title="Copyleft — Rights Flowing Forward">
+  <div class="ghost">21</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">20. THE FLIPPED ©</span><span class="pageno"><b>21</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">20. Copyleft</div>
+          <h1 class="display">Using copyright to<br>keep code <span class="acc">free</span></h1>
+          <p class="lede" style="margin-top:14px;">Copyleft is a licensing method in some free-software licences. It uses copyright law itself to help <b>preserve certain freedoms</b> when software is redistributed.</p>
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:14px;align-items:center;"><span class="num-badge">01</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Software is redistributed under the relevant free conditions.</p></div>
+            <div style="display:flex;gap:14px;align-items:center;"><span class="num-badge">02</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">Users continue to receive the freedoms provided by the licence.</p></div>
+            <div style="display:flex;gap:14px;align-items:center;"><span class="num-badge">03</span><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);">The <b>GNU GPL</b> is the landmark copyleft licence.</p></div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+          <div style="width:min(170px,38vw);aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.5);">
+            <span style="font-family:var(--serif);font-weight:800;font-size:clamp(56px,12vw,76px);transform:rotate(180deg);display:inline-block;">©</span>
+          </div>
+          <div class="uc">Copyleft — rights flowing forward</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Copyleft</span><span class="lbl fill"></span><span class="lbl">GNU GPL / Freedoms Forward</span></div>
+  </div>
+</section>
+
+<!-- ============ 22 · COMPARISON ============ -->
+<section class="slide" data-title="Comparison — IP vs Creative Commons vs Free Software">
+  <div class="ghost">22</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">21. SIDE BY SIDE</span><span class="pageno"><b>22</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">21. Difference Between the Three Concepts</div>
+        <h1 class="display">Three ideas, <span class="acc">one ecosystem</span></h1>
+      </div>
+      <div class="rv" style="--d:.08s;">
+        <div class="table-scroll">
+          <table class="grid">
+            <tr><th style="width:22%;">Feature</th><th>Intellectual Property</th><th>Creative Commons</th><th>Free Software</th></tr>
+            <tr><td class="k">Core idea</td><td>Protects <b>creations and inventions</b></td><td>Helps creators <b>share works under conditions</b></td><td>Gives users freedoms to <b>use, study, modify and share</b> software</td></tr>
+            <tr><td class="k">Scope</td><td>Includes copyright, patents and trademarks</td><td>Works <b>within the copyright system</b></td><td>Mainly concerns <b>software code</b></td></tr>
+            <tr><td class="k">Focus</td><td>Legal creator rights</td><td>Controlled sharing and reuse</td><td>Software freedom</td></tr>
+            <tr><td class="k">Example</td><td>Copyright in a news photo</td><td>A <b>CC BY</b> photograph</td><td><b>GPL-licensed</b> software</td></tr>
+          </table>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="rv" >
+        <div style="flex:1;min-width:120px;background:var(--ink);color:#fff;border-radius:8px;padding:12px 18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-align:center;">PROTECT</div>
+        <div style="flex:1;min-width:120px;background:var(--acc);color:#fff;border-radius:8px;padding:12px 18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-align:center;">SHARE</div>
+        <div style="flex:1;min-width:120px;background:#39307A;color:#fff;border-radius:8px;padding:12px 18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-align:center;">FREE</div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Comparison</span><span class="lbl fill"></span><span class="lbl">IP / CC / FOSS</span></div>
+  </div>
+</section>
+
+<!-- ============ 23 · STUDENTS ============ -->
+<section class="slide" data-title="Importance for Journalism Students">
+  <div class="ghost">23</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">22. STUDENT PRACTICE</span><span class="pageno"><b>23</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">22. Importance for Journalism Students</div>
+        <h1 class="display">Digital literacy for<br><span class="acc">responsible media</span></h1>
+        <p class="lede" style="margin-top:10px;">Journalism students use many digital tools and materials — understanding these concepts is part of becoming a responsible professional.</p>
+      </div>
+      <div class="grid2" style="align-items:center;">
+        <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));">
+          <div class="card rv" style="display:flex;gap:12px;align-items:center;"><span class="num-badge">01</span><span style="font-size:clamp(11.5px,1.6vw,13px);">How <b>copyright</b> works</span></div>
+          <div class="card rv" style="--d:.05s;display:flex;gap:12px;align-items:center;"><span class="num-badge">02</span><span style="font-size:clamp(11.5px,1.6vw,13px);">How to avoid <b>plagiarism</b></span></div>
+          <div class="card rv" style="--d:.1s;display:flex;gap:12px;align-items:center;"><span class="num-badge">03</span><span style="font-size:clamp(11.5px,1.6vw,13px);">Using <b>CC</b> content</span></div>
+          <div class="card rv" style="--d:.15s;display:flex;gap:12px;align-items:center;"><span class="num-badge">04</span><span style="font-size:clamp(11.5px,1.6vw,13px);">Giving <b>proper attribution</b></span></div>
+          <div class="card rv" style="--d:.2s;display:flex;gap:12px;align-items:center;"><span class="num-badge">05</span><span style="font-size:clamp(11.5px,1.6vw,13px);">How <b>licences</b> work</span></div>
+          <div class="card rv" style="--d:.25s;display:flex;gap:12px;align-items:center;"><span class="num-badge">06</span><span style="font-size:clamp(11.5px,1.6vw,13px);">Digital <b>responsibility</b></span></div>
+        </div>
+        <div class="card dark rv" style="--d:.2s;"><div style="font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.4vw,1.3rem);color:#C4B5FD;line-height:1.5;">"Create. Share. Innovate.<br>Responsibly."</div><div class="uc" style="color:#8F8BA8;margin-top:12px;">— The Student Newsroom Ethic</div></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">For Journalism Students</span><span class="lbl fill"></span><span class="lbl">Ethics / Skills / Responsibility</span></div>
+  </div>
+</section>
+
+<!-- ============ 24 · CONCLUSION ============ -->
+<section class="slide" data-title="Conclusion — Protect. Share. Free.">
+  <div class="ghost">24</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">23. CONCLUSION</span><span class="pageno"><b>24</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">23. Conclusion</div>
+        <h1 class="display">Protect. Share.<br><span class="acc">Free.</span></h1>
+        <p class="lede" style="margin-top:12px;">These concepts matter in today's digital world — especially for journalism and mass communication.</p>
+      </div>
+      <div class="grid2" style="align-items:center;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="rv" style="display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:var(--ink);"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Intellectual Property</b> provides legal protection for creative works, inventions, brands and designs.</p></div>
+          <div class="rv" style="--d:.08s;display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:var(--acc);"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Creative Commons</b> allows creators to share their work under specific conditions.</p></div>
+          <div class="rv" style="--d:.16s;display:flex;gap:14px;align-items:flex-start;"><div style="width:3px;align-self:stretch;background:#39307A;"></div><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>Free Software</b> gives users important freedoms to use, study, modify and share software.</p></div>
+        </div>
+        <div class="rv" style="--d:.15s;display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <div style="display:flex;gap:14px;">
+            <div class="cc-badge">©</div>
+            <div class="cc-badge" style="border-color:var(--acc);color:var(--acc);">cc</div>
+            <div class="cc-badge" style="background:var(--ink);color:#fff;border-color:var(--ink);">&lt;/&gt;</div>
+          </div>
+          <div class="quote" style="text-align:center;font-size:clamp(.95rem,1.8vw,1.02rem);">"Knowledge of IP, Creative Commons and free software is part of digital literacy, media ethics and professional journalism."</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Conclusion</span><span class="lbl fill"></span><span class="lbl">Digital Literacy / Media Ethics</span></div>
+  </div>
+</section>
+
+<!-- ============ 25 · KEY TAKEAWAYS ============ -->
+<section class="slide" data-title="Key Takeaways">
+  <div class="ghost">25</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">24. KEY TAKEAWAYS</span><span class="pageno"><b>25</b> / 26</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">24. Key Takeaways</div>
+        <h1 class="display">Key <span class="acc">Takeaways</span></h1>
+      </div>
+      <div class="grid2" style="align-items:center;">
+        <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));">
+          <div class="card rv"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.4rem,3vw,1.7rem);color:var(--acc);">01</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;"><b>IP protects creativity</b> and drives innovation across society.</p></div>
+          <div class="card rv" style="--d:.06s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.4rem,3vw,1.7rem);color:var(--acc);">02</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;"><b>Different IP types</b> serve different purposes — copyright, patent, trademark, design, GI.</p></div>
+          <div class="card rv" style="--d:.12s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.4rem,3vw,1.7rem);color:var(--acc);">03</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;"><b>Creative Commons &amp; FOSS</b> enable new forms of open collaboration.</p></div>
+          <div class="card rv" style="--d:.18s;"><div style="font-family:var(--serif);font-weight:800;font-size:clamp(1.4rem,3vw,1.7rem);color:var(--acc);">04</div><p style="font-size:clamp(11px,1.5vw,13px);color:var(--ink-soft);line-height:1.55;margin-top:6px;"><b>Responsible use</b> is essential for a fairer, more open future.</p></div>
+        </div>
+        <div class="rv" style="--d:.15s;">
+          <div style="width:100%;max-width:340px;margin:0 auto;background:linear-gradient(160deg,#2A3350,#141A2E);border-radius:12px;padding:clamp(16px,3vw,26px);box-shadow:0 12px 28px rgba(0,0,0,.25);">
+            <div class="stair">
+              <div class="bar" style="height:25%;background:#3A415A;"></div>
+              <div class="bar" style="height:50%;"><span>RIGHTS</span></div>
+              <div class="bar" style="height:75%;background:#565C74;"><span>RESPONSIBILITY</span></div>
+              <div class="bar" style="height:100%;background:#6B7186;"><span style="color:#fff;">A FAIRER<br>TOMORROW</span></div>
+            </div>
+            <div style="height:1px;background:#8F8BA8;margin-top:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Key Takeaways</span><span class="lbl fill"></span><span class="lbl">Ideas / People / Technology / Society</span></div>
+  </div>
+</section>
+
+<!-- ============ 26 · REFERENCES ============ -->
+<section class="slide" data-title="References &amp; Thank You">
+  <div class="ghost">26</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">MASS COMMUNICATION &amp; DIGITAL LAW</span><span class="rule"></span><span class="kicker">25. REFERENCES</span><span class="pageno"><b>26</b> / 26</span></div>
+    <div class="stage">
+      <div class="grid2" style="align-items:center;">
+        <div class="rv">
+          <div class="sec-tag">25. References</div>
+          <h1 class="display">Sources &amp;<br><span class="acc">further reading</span></h1>
+          <ol style="list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:16px;">
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">01</b>WIPO. <i>What is Intellectual Property?</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">02</b>Govt of India. <i>The Copyright Act, 1957.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">03</b>Govt of India. <i>The Patents Act, 1970.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">04</b>Govt of India. <i>The Trade Marks Act, 1999.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">05</b>Creative Commons. <i>About CC Licences.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">06</b>Free Software Foundation. <i>What is Free Software?</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">07</b>GNU Project. <i>GNU General Public License.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">08</b>Stallman, R. <i>Free Software, Free Society.</i></li>
+            <li style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);"><b style="color:var(--acc);font-family:var(--mono);font-size:10.5px;margin-right:8px;">09</b>Lessig, L. <i>Free Culture.</i></li>
+          </ol>
+        </div>
+        <div class="rv" style="--d:.1s;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-weight:800;font-size:clamp(2.2rem,6vw,3.4rem);">Thank <span class="acc" style="font-style:italic;">you</span></div>
+          <div class="uc" style="font-size:11px;">Questions &amp; Discussion</div>
+          <img src="Aset/01_statue_bust.png" alt="Statue bust" loading="lazy" style="width:min(180px,36vw);filter:drop-shadow(0 10px 24px rgba(0,0,0,.14));">
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">References · End of Deck</span><span class="lbl fill"></span><span class="lbl">HCJ Keynote · 26 / 26</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="ui" id="hud">
+  <button class="btn" id="prevBtn" title="Previous (←)">←</button>
+  <span class="counter" id="counter"><b>01</b> / 26</span>
+  <button class="btn" id="nextBtn" title="Next (→)">→</button>
+  <button class="btn" id="ovBtn" title="Grid overview (O)">▦</button>
+  <button class="btn" id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="hint">← → NAVIGATE · O OVERVIEW · F FULLSCREEN</span>
+</div>
+<div class="overview" id="overview">
+  <div class="ov-title">Deck Overview</div>
+  <div class="ov-cap">26 slides · click a card to jump</div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const N=slides.length;
+  const counter=document.getElementById('counter');
+  const prog=document.getElementById('progress');
+  const overview=document.getElementById('overview');
+  const ovGrid=document.getElementById('ovGrid');
+  let cur=0, ovOpen=false, programmatic=false;
+
+  const pad=n=>String(n).padStart(2,'0');
+
+  /* Overview cards */
+  slides.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.className='thumb'; b.type='button';
+    b.innerHTML='<div class="tn">'+pad(i+1)+' / '+N+'</div><div class="tt">'+(s.dataset.title||'Slide '+(i+1))+'</div><div class="ts">Slide '+pad(i+1)+'</div>';
+    b.addEventListener('click',()=>{ show(i); toggleOverview(false); });
+    ovGrid.appendChild(b);
+  });
+
+  function show(i,instant){
+    cur=Math.max(0,Math.min(N-1,i));
+    programmatic=true;
+    slides[cur].scrollIntoView({behavior:instant?'auto':'smooth',block:'start'});
+    setTimeout(()=>{programmatic=false;},700);
+    sync();
+  }
+  function sync(){
+    counter.innerHTML='<b>'+pad(cur+1)+'</b> / '+N;
+    prog.style.width=((cur+1)/N*100)+'%';
+    if(history.replaceState) history.replaceState(null,'','#'+(cur+1));
+    [...ovGrid.children].forEach((t,idx)=>t.classList.toggle('cur',idx===cur));
+    slides.forEach((s,idx)=>s.classList.toggle('vis',Math.abs(idx-cur)<=1));
+  }
+  const next=()=>show(cur+1), prev=()=>show(cur-1);
+
+  /* Observe scroll position to track current slide */
+  const io=new IntersectionObserver(entries=>{
+    if(programmatic||ovOpen) return;
+    entries.forEach(en=>{
+      if(en.isIntersecting && en.intersectionRatio>=.55){
+        const i=slides.indexOf(en.target);
+        if(i!==-1 && i!==cur){ cur=i; sync(); }
+      }
+    });
+  },{threshold:[.55]});
+  slides.forEach(s=>io.observe(s));
+
+  function toggleFS(){
+    if(document.fullscreenElement) document.exitFullscreen();
+    else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  }
+  function toggleOverview(force){
+    ovOpen=(force!==undefined)?force:!ovOpen;
+    overview.classList.toggle('open',ovOpen);
+    document.body.style.overflow=ovOpen?'hidden':'';
+    if(ovOpen){ const t=ovGrid.children[cur]; t&&t.scrollIntoView({block:'center'}); }
+  }
+
+  document.getElementById('prevBtn').onclick=prev;
+  document.getElementById('nextBtn').onclick=next;
+  document.getElementById('ovBtn').onclick=()=>toggleOverview();
+  document.getElementById('fsBtn').onclick=toggleFS;
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ if(ovOpen) toggleOverview(false); return; }
+    if(ovOpen){
+      if(['ArrowRight','ArrowDown'].includes(e.key)){ e.preventDefault(); show(cur+1); }
+      else if(['ArrowLeft','ArrowUp'].includes(e.key)){ e.preventDefault(); show(cur-1); }
+      else if(['Enter',' ','o','O'].includes(e.key)){ e.preventDefault(); toggleOverview(false); }
+      return;
+    }
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace':
+        e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(N-1); break;
+      case 'f': case 'F': toggleFS(); break;
+      case 'o': case 'O': toggleOverview(); break;
+    }
+  });
+
+  const h=parseInt(location.hash.slice(1),10);
+  const start=isNaN(h)?0:Math.max(0,Math.min(N-1,h-1));
+  show(start,true);
+
+  window.addEventListener('hashchange',()=>{
+    const n=parseInt(location.hash.slice(1),10);
+    if(!isNaN(n)&&n>=1&&n<=N&&n-1!==cur) show(n-1);
+  });
+})();
+</script>
+</body>
+</html>

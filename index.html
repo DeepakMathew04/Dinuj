@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HCJ Keynote Series — Presentation Hub</title>
+  <meta name="description" content="Interactive keynote presentation series covering Intellectual Property, Newspaper Layout Design, and Citizen Reporting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F172A;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(139, 92, 246, 0.4);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --acc-purple: #8B5CF6;
+      --acc-red: #EF4444;
+      --acc-teal: #14B8A6;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(239, 68, 68, 0.1) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--acc-purple), #6366F1);
+      color: white;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    .repo-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .repo-link:hover {
+      color: var(--text-main);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .hero {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--acc-purple);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(to right, #FFFFFF, #CBD5E1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    .deck-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deck-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      transition: opacity 0.3s ease;
+      opacity: 0.7;
+    }
+
+    .deck-card.c-purple::before { background: linear-gradient(90deg, #8B5CF6, #C084FC); }
+    .deck-card.c-red::before { background: linear-gradient(90deg, #EF4444, #F87171); }
+    .deck-card.c-teal::before { background: linear-gradient(90deg, #14B8A6, #2DD4BF); }
+
+    .deck-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .deck-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .deck-card.c-purple .deck-num { color: #C084FC; }
+    .deck-card.c-red .deck-num { color: #F87171; }
+    .deck-card.c-teal .deck-num { color: #2DD4BF; }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-action {
+      margin-top: auto;
+    }
+
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: white;
+      transition: all 0.2s ease;
+      gap: 0.5rem;
+    }
+
+    .deck-card.c-purple .btn-launch { background: #7C3AED; }
+    .deck-card.c-purple .btn-launch:hover { background: #6D28D9; }
+
+    .deck-card.c-red .btn-launch { background: #DC2626; }
+    .deck-card.c-red .btn-launch:hover { background: #B91C1C; }
+
+    .deck-card.c-teal .btn-launch { background: #0D9488; }
+    .deck-card.c-teal .btn-launch:hover { background: #0F766E; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: var(--mono);
+    }
+
+    footer a {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="./" class="brand">
+        <span class="brand-badge">HCJ</span> KEYNOTE SERIES
+      </a>
+      <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer" class="repo-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repo
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-tag">Keynote Presentation Hub</div>
+      <h1>HCJ Digital Journalism &amp; Media Keynotes</h1>
+      <p>Explore the complete interactive presentation slide decks covering intellectual property law, front-page design aesthetics, and modern citizen journalism field techniques.</p>
+    </section>
+
+    <div class="deck-grid">
+      <!-- Deck 01 -->
+      <article class="deck-card c-purple">
+        <div class="card-header">
+          <span class="deck-num">Keynote 01</span>
+          <h2 class="card-title">Intellectual Property, Creative Commons &amp; Free Software</h2>
+          <p class="card-desc">Comprehensive guide to IP, copyright laws, copyleft mechanisms, Creative Commons license suites, and open source software principles.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">IP Law</span>
+          <span class="tag">Creative Commons</span>
+          <span class="tag">FOSS</span>
+          <span class="tag">Copyright</span>
+        </div>
+        <div class="card-action">
+          <a href="./001/index.html" class="btn-launch">
+            Launch Presentation 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Deck 02 -->
+      <article class="deck-card c-red">
+        <div class="card-header">
+          <span class="deck-num">Keynote 02</span>
+          <h2 class="card-title">Newspaper Front Page Designing &amp; Layout Trends</h2>
+          <p class="card-desc">Visual design principles, modular grid architectures, typography choices, visual hierarchy, and modern front-page layout trends.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Design Trends</span>
+          <span class="tag">Typography</span>
+          <span class="tag">Editorial Grid</span>
+          <span class="tag">Visual Hierarchy</span>
+        </div>
+        <div class="card-action">
+          <a href="./002/index.html" class="btn-launch">
+            Launch Presentation 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Deck 03 -->
+      <article class="deck-card c-teal">
+        <div class="card-header">
+          <span class="deck-num">Keynote 03</span>
+          <h2 class="card-title">Citizen Reporting &amp; Interview Techniques</h2>
+          <p class="card-desc">Essential skills for field reporters: story discovery, source verification, interview strategy, ethical guidelines, and mobile reporting toolkits.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Citizen Journalism</span>
+          <span class="tag">Interviewing</span>
+          <span class="tag">Verification</span>
+          <span class="tag">Ethics</span>
+        </div>
+        <div class="card-action">
+          <a href="./003/index.html" class="btn-launch">
+            Launch Presentation 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p>Hosted with GitHub Pages • Repository: <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer">DeepakMathew04/Dinuj</a></p>
+  </footer>
+
+</body>
+</html>

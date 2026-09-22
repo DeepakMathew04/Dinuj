@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Citizen Reporting &amp; Interview Techniques — HCJ Keynote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --paper:#F2F4EF; --ink:#12211C; --ink-soft:#3E4A44; --muted:#77847C;
+    --acc:#0E7A67; --acc-deep:#0A5D50; --tint:#D9EFE7; --tint-2:#B7E2D4; --line:#D8DAD0;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --pad-x:clamp(18px,4.5vw,56px);
+    --r:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;height:auto;display:block;}
+  b,strong{font-weight:600;color:var(--ink);}
+  @media (min-width:900px) and (min-height:640px){ html{scroll-snap-type:y proximity;} .slide{scroll-snap-align:start;} }
+
+  /* ---------- SLIDE SHELL (shared responsive engine) ---------- */
+  .slide{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;position:relative;
+    padding:clamp(14px,2.6vh,28px) var(--pad-x) clamp(58px,8.5vh,76px);border-bottom:1px solid var(--line);overflow:hidden;}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;position:relative;z-index:1;}
+  .s-head{display:flex;align-items:center;gap:14px;flex:none;}
+  .s-head .rule{height:1px;background:var(--ink);opacity:.35;flex:0 1 44px;}
+  .s-foot{display:flex;align-items:center;gap:16px;flex:none;}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3.2vh,34px);padding-block:clamp(16px,3vh,34px);}
+  .stage > *{min-width:0;}
+
+  .kicker{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pageno{margin-left:auto;font-family:var(--mono);font-size:clamp(10px,1.5vw,12px);letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+  .pageno b{color:var(--acc);}
+  .lbl{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .lbl.fill{flex:1;height:1px;background:var(--ink);opacity:.3;letter-spacing:0;}
+  @media (max-width:560px){ .s-foot .lbl:last-child,.s-foot .lbl:nth-child(2){display:none;} }
+  .ghost{position:absolute;top:clamp(30px,6vh,58px);right:clamp(8px,2.5vw,34px);font-family:var(--serif);font-weight:800;
+    font-size:clamp(88px,16vw,190px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(18,33,28,.09);pointer-events:none;user-select:none;z-index:0;}
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .sec-tag{font-family:var(--mono);font-size:clamp(10px,1.5vw,11.5px);font-weight:700;letter-spacing:.24em;color:var(--acc);text-transform:uppercase;margin-bottom:8px;}
+  .display{font-family:var(--serif);font-weight:800;color:var(--ink);line-height:1.05;letter-spacing:-.01em;
+    font-size:clamp(2rem,1.05rem + 3.4vw,3.55rem);}
+  .display .acc{color:var(--acc);font-style:italic;font-weight:700;}
+  .lede{font-size:clamp(.92rem,.85rem + .35vw,1.06rem);line-height:1.6;color:var(--ink-soft);max-width:62ch;}
+  .quote{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--ink);line-height:1.45;font-size:clamp(1rem,.9rem + .5vw,1.2rem);}
+  .note{border-left:3px solid var(--acc);padding-left:clamp(12px,2vw,18px);}
+
+  /* ---------- COMPONENTS ---------- */
+  .card{background:#fff;border:1px solid rgba(18,33,28,.08);border-radius:var(--r);padding:clamp(15px,2vw,22px);
+    box-shadow:0 6px 20px rgba(18,33,28,.05);min-width:0;}
+  .card.dark{background:var(--ink);border:none;color:#DFEBE4;}
+  .card.dark b{color:#fff;}
+  .chip{width:clamp(42px,5vw,54px);aspect-ratio:1;border-radius:50%;background:var(--tint);display:flex;align-items:center;justify-content:center;flex:none;}
+  .chip svg{width:48%;height:48%;stroke:var(--acc);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--tint);color:var(--acc-deep);font-family:var(--mono);
+    font-size:clamp(9px,1.4vw,10.5px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:4px;}
+  .uc{font-family:var(--mono);font-size:clamp(8px,1.3vw,10px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1.5;}
+  .num-badge{font-family:var(--mono);font-size:clamp(11px,1.5vw,12.5px);font-weight:700;color:var(--acc);letter-spacing:.1em;}
+  .hairline{height:1px;background:var(--line);}
+  .blob{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--tint-2),var(--tint));z-index:0;pointer-events:none;}
+  .dotgrid{position:absolute;background-image:radial-gradient(rgba(18,33,28,.25) 1.2px,transparent 1.2px);background-size:14px 14px;opacity:.5;pointer-events:none;}
+
+  /* ---------- GRIDS ---------- */
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(18px,3vw,44px);align-items:center;}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(14px,2vw,22px);}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:clamp(14px,2vw,20px);}
+  .grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,178px),1fr));gap:clamp(12px,1.6vw,18px);}
+  .rowline{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:clamp(12px,2vh,18px);flex-wrap:wrap;}
+  .flow{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;color:var(--ink-soft);}
+  .flow .arr{color:var(--acc);}
+
+  /* ---------- DO / DON'T EXAMPLES ---------- */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,18px);}
+  @media (max-width:640px){ .pair{grid-template-columns:1fr;} }
+  .say{border-radius:10px;padding:clamp(12px,1.8vw,16px);font-size:clamp(11.5px,1.6vw,13.5px);line-height:1.55;}
+  .say.no{background:#FBEFEC;border:1px solid #EBCFC8;color:#7C3A30;}
+  .say.yes{background:var(--tint);border:1px solid var(--tint-2);color:var(--acc-deep);}
+  .say .m{font-family:var(--mono);font-size:clamp(7.5px,1.2vw,9px);letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:6px;opacity:.75;}
+
+  /* ---------- PHONE MOCKUP (pure CSS) ---------- */
+  .phone{width:min(232px,62vw);border:2px solid var(--ink);border-radius:30px;background:#fff;
+    box-shadow:0 18px 44px rgba(18,33,28,.16);overflow:hidden;display:flex;flex-direction:column;margin:0 auto;position:relative;z-index:2;}
+  .phone .notch{height:20px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;flex:none;}
+  .phone .notch::before{content:"";width:72px;height:4px;border-radius:999px;background:var(--ink);opacity:.8;}
+  .phone .screen{padding:10px;display:flex;flex-direction:column;gap:8px;}
+  .post{border:1px solid var(--line);border-radius:10px;padding:8px 9px;}
+  .post .who{font-family:var(--mono);font-size:7px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:5px;}
+  .post .who i{width:12px;height:12px;border-radius:50%;background:var(--tint-2);display:inline-block;}
+  .post p{font-size:7.5px;line-height:1.5;color:var(--ink-soft);margin-top:3px;}
+  .post .img{height:38px;border-radius:6px;background:linear-gradient(135deg,var(--tint),var(--tint-2));margin-top:5px;
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:6.5px;letter-spacing:.14em;color:var(--acc-deep);}
+  .post .acts{display:flex;gap:8px;margin-top:5px;font-family:var(--mono);font-size:6.5px;color:var(--muted);}
+  .post.hot{border-color:var(--acc);}
+
+  /* ---------- CHECK LISTS ---------- */
+  .ck{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid rgba(18,33,28,.08);border-radius:10px;
+    padding:clamp(10px,1.6vw,14px) clamp(12px,1.8vw,16px);box-shadow:0 4px 14px rgba(18,33,28,.04);}
+  .ck svg{width:15px;height:15px;flex:none;margin-top:2px;stroke:var(--acc);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .ck p{font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.5;}
+  .ck b{display:block;font-size:clamp(11.5px,1.6vw,13px);}
+
+  /* ---------- TABLES ---------- */
+  .table-scroll{overflow-x:auto;border-radius:12px;box-shadow:0 8px 24px rgba(18,33,28,.06);}
+  table.grid{width:100%;min-width:520px;border-collapse:collapse;background:#fff;}
+  table.grid th{font-family:var(--mono);font-size:clamp(9px,1.4vw,11px);letter-spacing:.14em;text-transform:uppercase;text-align:left;
+    color:#fff;background:var(--ink);padding:13px 18px;font-weight:600;}
+  table.grid td{padding:12px 18px;font-size:clamp(11px,1.5vw,13.5px);color:var(--ink-soft);border-top:1px solid #E9EBE4;line-height:1.5;}
+  table.grid td.k{font-family:var(--serif);font-weight:700;font-size:clamp(12px,1.7vw,15px);color:var(--ink);white-space:nowrap;}
+
+  /* ---------- STAIR ---------- */
+  .stair{display:flex;align-items:flex-end;gap:clamp(6px,1.4vw,10px);height:clamp(130px,20vh,190px);width:100%;max-width:360px;margin:0 auto;}
+  .stair .bar{flex:1;border-radius:6px 6px 0 0;background:#4E645B;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
+  .stair .bar span{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;color:#C9F0E2;writing-mode:horizontal-tb;text-align:center;}
+
+  /* ---------- UI ---------- */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:70;transition:width .3s ease;}
+  .ui{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;
+    gap:10px;z-index:60;user-select:none;opacity:.45;transition:opacity .25s;pointer-events:none;}
+  .ui:hover,.ui:focus-within{opacity:1;}
+  .ui > *{pointer-events:auto;}
+  .ui .btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(18,33,28,.88);color:#fff;
+    font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--mono);transition:background .2s;}
+  .ui .btn:hover{background:var(--acc);}
+  .ui .counter{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#9DAFA6;background:rgba(18,33,28,.88);padding:10px 12px;border-radius:20px;}
+  .ui .counter b{color:#8FDFC9;}
+  @media (max-width:820px){ .ui .hint{display:none;} }
+  .ui .hint{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#6D7F76;background:rgba(18,33,28,.88);padding:11px 12px;border-radius:20px;}
+
+  .overview{position:fixed;inset:0;z-index:80;background:rgba(8,18,14,.97);display:none;overflow:auto;padding:clamp(20px,4vw,48px);}
+  .overview.open{display:block;}
+  .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;max-width:1240px;margin:0 auto;padding-block:16px 40px;}
+  .ov-title{color:#fff;font-family:var(--serif);font-weight:800;font-size:clamp(1.2rem,3vw,1.7rem);max-width:1240px;margin:0 auto;}
+  .ov-cap{color:#8FA79D;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin:6px auto 0;max-width:1240px;}
+  .thumb{position:relative;text-align:left;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;padding:16px 16px 14px;color:#DFEBE4;transition:background .2s,outline-color .2s;outline:2px solid transparent;}
+  .thumb:hover{background:rgba(255,255,255,.11);}
+  .thumb.cur{outline-color:var(--acc);}
+  .thumb .tn{font-family:var(--mono);font-size:10px;color:#8FDFC9;letter-spacing:.16em;}
+  .thumb .tt{font-family:var(--serif);font-weight:700;font-size:14.5px;margin-top:6px;line-height:1.35;}
+  .thumb .ts{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:#8FA79D;margin-top:8px;text-transform:uppercase;}
+
+  /* ---------- REVEAL (JS-gated so no-JS still shows everything) ---------- */
+  .js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease var(--d,0s),transform .55s ease var(--d,0s);}
+  .js .slide.vis .rv{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;} }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    html{scroll-snap-type:none;}
+    body{background:#fff;}
+    .slide{min-height:auto;border-bottom:none;padding:36px 40px;page-break-after:always;break-after:page;}
+    .ui,.progress,.overview,.ghost{display:none !important;}
+    .js .rv{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- ============ 01 · TITLE ============ -->
+<section class="slide" data-title="Title — Citizen Reporting &amp; Interview Techniques">
+  <div class="ghost">01</div>
+  <div class="wrap">
+    <div class="s-head"><span class="pill" style="background:none;color:var(--ink-soft);padding:0;">◆ DIGITAL JOURNALISM PRACTICE</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>01</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv" style="position:relative;display:flex;justify-content:center;min-height:280px;">
+          <div class="blob" style="width:min(320px,68vw);aspect-ratio:1;"></div>
+          <div class="dotgrid" style="width:110px;height:84px;right:4%;bottom:6%;"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="post hot">
+                <div class="who"><i></i>you · just now</div>
+                <p>Heavy waterlogging on Ring Road after overnight rain — traffic at a standstill near the flyover.</p>
+                <div class="img">📷 PHOTO</div>
+                <div class="acts"><span>♡ 214</span><span>↻ 88</span><span>💬 31</span></div>
+              </div>
+              <div class="post">
+                <div class="who"><i></i>city desk · 2m</div>
+                <p>Municipal crews reportedly en route. Details verified with fire &amp; civic control room.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.12s;">
+          <span class="pill">ACADEMIC LECTURE DECK</span>
+          <h1 class="display" style="margin-top:18px;">Citizen Reporting <span class="acc">&amp;</span><br>Interview Techniques</h1>
+          <p class="lede" style="margin-top:16px;">How ordinary people now break news with a smartphone — and how professionals gather, verify and question. Eyewitness media, interview craft, and the ethics that hold it all together.</p>
+          <div style="display:flex;gap:clamp(14px,2.5vw,28px);align-items:center;margin-top:24px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div><span class="uc">Report from<br>anywhere</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><span class="uc">Ask with<br>purpose</span></div>
+            <div style="width:1px;height:38px;background:var(--line);"></div>
+            <div style="display:flex;align-items:center;gap:10px;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8.5 11l2 2 4-4.5"/></svg></div><span class="uc">Verify<br>everything</span></div>
+          </div>
+          <div class="hairline" style="margin-top:22px;"></div>
+          <div class="rowline" style="border-top:none;padding-top:14px;">
+            <div><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"The audience is no longer only a consumer of news."</div><div class="uc" style="margin-top:6px;">— The citizen journalism shift</div></div>
+            <div class="uc" style="text-align:right;">Department of<br>Journalism &amp; Mass Communication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">University Keynote Series</span><span class="lbl fill"></span><span class="lbl">Witness / Question / Verify</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 · INTRODUCTION ============ -->
+<section class="slide" data-title="Introduction — The Newsroom Has Changed">
+  <div class="ghost">02</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">HCJ KEYNOTE</span><span class="pageno"><b>02</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">Introduction</div>
+          <h1 class="display">The newsroom<br>has <span class="acc">left the building</span></h1>
+          <p class="lede" style="margin-top:16px;">Journalism was once carried out mainly by professionals in newspapers, TV and radio. The internet, smartphones and social media have changed how news is <b>collected, produced and distributed</b> — and two practices now define contemporary reporting.</p>
+          <div class="note" style="margin-top:20px;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.6;">Both citizen reporting and interviewing demand <b>accuracy, ethical awareness, verification and responsible communication</b> — from professionals and the public alike.</p></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:clamp(12px,2vw,18px);" class="rv">
+          <div class="card rv" style="--d:.08s;"><div style="display:flex;gap:14px;align-items:flex-start;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div><div><b style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);">Citizen Reporting</b><p style="font-size:clamp(11.5px,1.6vw,13px);color:var(--ink-soft);margin-top:5px;line-height:1.55;">A witness to an accident, disaster, public event or social issue can record it and share with a large audience — immediately, from a smartphone.</p></div></div></div>
+          <div class="card rv" style="--d:.16s;"><div style="display:flex;gap:14px;align-items:flex-start;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-4-7.5"/><path d="M8 12l3 3 5-6"/></svg></div><div><b style="font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.3rem);">The Interview</b><p style="font-size:clamp(11.5px,1.6vw,13px);color:var(--ink-soft);margin-top:5px;line-height:1.55;">A planned conversation to collect information, opinions and experiences — used across newspapers, radio, TV, podcasts, websites and social media.</p></div></div></div>
+          <div class="flow rv" style="--d:.24s;"><span>CITIZEN MEDIA</span><span class="arr">→</span><span>VERIFICATION</span><span class="arr">→</span><span>PROFESSIONAL PUBLISHING</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Introduction</span><span class="lbl fill"></span><span class="lbl">Two practices / One standard</span></div>
+  </div>
+</section>
+
+<!-- ============ 03 · MEANING OF CITIZEN REPORTING ============ -->
+<section class="slide" data-title="Meaning of Citizen Reporting">
+  <div class="ghost">03</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">01. MEANING</span><span class="pageno"><b>03</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">01. Meaning of Citizen Reporting</div>
+        <h1 class="display">The public becomes<br>the <span class="acc">first reporter</span></h1>
+        <p class="lede" style="margin-top:12px;">The process by which <b>ordinary members of the public</b> collect, record and share information about events or issues of public interest — no press card, no newsroom required.</p>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Witness</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Be present at accidents, floods, protests, public meetings.</p></div>
+        <div class="card rv" style="--d:.06s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8 7l1.5-2.5h5L16 7"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Record</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Take photographs and video with everyday devices.</p></div>
+        <div class="card rv" style="--d:.12s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Collect</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Gather facts, names, context and first-hand accounts.</p></div>
+        <div class="card rv" style="--d:.18s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Share</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Publish via social platforms, blogs, websites, messaging.</p></div>
+      </div>
+      <div class="rowline rv" style="--d:.22s;">
+        <div class="note"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;">A witness to a <b>road accident</b> may record video and share it online; citizens likewise document <b>floods, protests, public meetings and environmental problems</b> for the wider public.</p></div>
+        <span class="uc" style="color:var(--acc);">Tool: the smartphone</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Meaning of Citizen Reporting</span><span class="lbl fill"></span><span class="lbl">Public interest / Digital tools</span></div>
+  </div>
+</section>
+
+<!-- ============ 04 · DEVELOPMENT ============ -->
+<section class="slide" data-title="Development — From Eyewitness to Contributor">
+  <div class="ghost">04</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">02. DEVELOPMENT</span><span class="pageno"><b>04</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">02. Development of Citizen Reporting</div>
+          <h1 class="display">From eyewitness<br>accounts to <span class="acc">mass participation</span></h1>
+          <p class="lede" style="margin-top:16px;">Citizen reporting existed <b>before the internet</b> — people have long offered information, photographs and eyewitness accounts to newspapers and broadcasters. Digital technology turned that trickle into a flood.</p>
+          <div class="note" style="margin-top:18px;"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">The audience is no longer only a consumer of news — it can become a contributor to the news process.</div></div>
+        </div>
+        <div class="rv" style="--d:.1s;">
+          <div class="uc" style="margin-bottom:12px;">What made it explode</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Smartphones</b> camera + connection in every pocket</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Social media</b> instant reach to large audiences</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Digital cameras</b> cheap, high-quality capture</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Blogs</b> self-publishing without gatekeepers</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Video platforms</b> global distribution of footage</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Messaging apps</b> fast, direct sharing chains</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Online news sites</b> 24/7 appetite for material</p></div>
+            <div class="ck" style="background:var(--tint);border-color:var(--tint-2);"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Live streams</b> events shared as they happen</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Development</span><span class="lbl fill"></span><span class="lbl">Speed / Reach / Participation</span></div>
+  </div>
+</section>
+
+<!-- ============ 05 · CHARACTERISTICS ============ -->
+<section class="slide" data-title="Characteristics of Citizen Reporting">
+  <div class="ghost">05</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">03. CHARACTERISTICS</span><span class="pageno"><b>05</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">03. Characteristics</div>
+        <h1 class="display">Six traits that define<br>the <span class="acc">form</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><span class="num-badge">3.1</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Immediate reporting</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Events are reported almost as they happen — photos, videos and text shared within seconds.</p></div>
+        <div class="card rv" style="--d:.05s;"><span class="num-badge">3.2</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Eyewitness perspective</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Direct accounts from scenes professional journalists have not yet reached.</p></div>
+        <div class="card rv" style="--d:.1s;"><span class="num-badge">3.3</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Digital distribution</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Published through social media, websites, blogs and messaging platforms.</p></div>
+        <div class="card rv" style="--d:.15s;"><span class="num-badge">3.4</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Public participation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Ordinary people take part in producing information, not just receiving it.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">3.5</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Multimedia content</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Text, photographs, video, audio and live streams — from a single device.</p></div>
+        <div class="card rv" style="--d:.25s;"><span class="num-badge">3.6</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Local information</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Neighbourhood issues that may receive limited attention from mainstream media.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Characteristics</span><span class="lbl fill"></span><span class="lbl">Immediate / Eyewitness / Local</span></div>
+  </div>
+</section>
+
+<!-- ============ 06 · ROLE IN JOURNALISM ============ -->
+<section class="slide" data-title="Role of Citizen Reporting in Journalism">
+  <div class="ghost">06</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">04. ROLE</span><span class="pageno"><b>06</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">04. Role in Journalism</div>
+        <h1 class="display">Where citizen content<br><span class="acc">earns its place</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Breaking news</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Early photos and videos from witnesses help newsrooms understand events as they develop.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Local issues</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Damaged roads, water shortages, pollution and infrastructure problems gain attention.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3c2 3.5 5 5 5 9a5 5 0 0 1-10 0c0-4 3-5.5 5-9z"/><path d="M8 21h8"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Disaster reporting</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">During floods, earthquakes and fires, eyewitness media is often the first record.</p></div>
+        <div class="card rv" style="--d:.15s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M4 19c.5-3 2.5-4.5 5-4.5s4.5 1.5 5 4.5M15.5 18.5c.4-1.8 1.6-2.8 3-2.8"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Public participation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Opens public communication to people outside the profession.</p></div>
+        <div class="card rv" style="--d:.2s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Alternative perspectives</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Voices and angles not immediately present in mainstream coverage.</p></div>
+        <div class="card rv" style="--d:.25s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M17 8a5 5 0 1 0-10 0c0 5-2 6-2 6h14s-2-1-2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Supporting professionals</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Verified material becomes an additional source for professional reporting.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Role in Journalism</span><span class="lbl fill"></span><span class="lbl">Breaking / Local / Disaster</span></div>
+  </div>
+</section>
+
+<!-- ============ 07 · ADVANTAGES ============ -->
+<section class="slide" data-title="Advantages of Citizen Reporting">
+  <div class="ghost">07</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">05. ADVANTAGES</span><span class="pageno"><b>07</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">05. Advantages</div>
+        <h1 class="display">What citizen reporting<br><span class="acc">does well</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv" style="border-top:3px solid var(--acc);"><span class="num-badge">5.1</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Speed</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Information shared quickly, particularly during breaking events.</p></div>
+        <div class="card rv" style="--d:.05s;border-top:3px solid var(--acc);"><span class="num-badge">5.2</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Accessibility</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">A smartphone allows anyone to record and distribute — no expensive equipment.</p></div>
+        <div class="card rv" style="--d:.1s;border-top:3px solid var(--acc);"><span class="num-badge">5.3</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Wider participation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">More people take part in public communication.</p></div>
+        <div class="card rv" style="--d:.15s;border-top:3px solid var(--acc);"><span class="num-badge">5.4</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Local coverage</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Small or local events that may otherwise receive little media attention.</p></div>
+        <div class="card rv" style="--d:.2s;border-top:3px solid var(--acc);"><span class="num-badge">5.5</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Eyewitness evidence</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">First-hand photographs and video — though they still need verification.</p></div>
+        <div class="card rv" style="--d:.25s;border-top:3px solid var(--acc);"><span class="num-badge">5.6</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Diversity of voices</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Different experiences and perspectives enter public discussion.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Advantages</span><span class="lbl fill"></span><span class="lbl">Fast / Open / Diverse</span></div>
+  </div>
+</section>
+
+<!-- ============ 08 · LIMITATIONS ============ -->
+<section class="slide" data-title="Limitations &amp; Challenges">
+  <div class="ghost">08</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">06. LIMITATIONS</span><span class="pageno"><b>08</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">06. Limitations &amp; Challenges</div>
+        <h1 class="display">The same openness<br>creates <span class="acc">serious risk</span></h1>
+      </div>
+      <div class="grid4">
+        <div class="card rv" style="border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.1</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">No professional training</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Formal grounding in verification, media law and ethics is often missing.</p></div>
+        <div class="card rv" style="--d:.05s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.2</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Misinformation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Unverified information can spread rapidly through social media.</p></div>
+        <div class="card rv" style="--d:.1s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.3</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Fake content</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Manipulated images, or old photos recycled as current events.</p></div>
+        <div class="card rv" style="--d:.15s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.4</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Lack of context</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">A photo or short video shows one moment — not the whole event.</p></div>
+        <div class="card rv" style="--d:.2s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.5</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Privacy issues</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Publishing people's faces and situations without appropriate care.</p></div>
+        <div class="card rv" style="--d:.25s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.6</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Safety</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Citizens may put themselves or others at risk filming dramatic events.</p></div>
+        <div class="card rv" style="--d:.3s;border-top:3px solid #B3403A;"><span class="num-badge" style="color:#B3403A;">6.7</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Verification burden</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">News organisations must check citizen content before publishing it as news.</p></div>
+      </div>
+      <div class="rowline rv" style="--d:.35s;">
+        <div class="note" style="border-left-color:#B3403A;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;">If it can be <b>faked, cropped or re-contextualised</b>, it can mislead — verification is not optional.</p></div>
+        <span class="uc" style="color:#B3403A;">Trust is the currency</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Limitations &amp; Challenges</span><span class="lbl fill"></span><span class="lbl">Risk / Verification / Safety</span></div>
+  </div>
+</section>
+
+<!-- ============ 09 · ETHICS OF CITIZEN REPORTING ============ -->
+<section class="slide" data-title="Ethics of Citizen Reporting">
+  <div class="ghost">09</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">07. ETHICS</span><span class="pageno"><b>09</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">07. Ethics of Citizen Reporting</div>
+        <h1 class="display">Responsible reporting<br>follows <span class="acc">journalistic principles</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Accuracy</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Information should be checked before it is shared.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Verification</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Confirm the source, location, date and context of photos and videos wherever possible.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Privacy</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Respect the privacy and dignity of the people in your frames.</p></div>
+        <div class="card rv" style="--d:.15s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13.5 3 9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 9 2.5C21 13.5 17 17 12 21z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Avoiding harm</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Never publish information that unnecessarily places people in danger.</p></div>
+        <div class="card rv" style="--d:.2s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Transparency</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Clearly identify eyewitness accounts and user-generated content as such.</p></div>
+        <div class="card rv" style="--d:.25s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5C9 8.5 10.4 8 12 8c2 0 3.5 1 3.5 2.5 0 2.8-6.7 1.7-6.9 4.5-.1 1.5 1.5 2.5 3.4 2.5 1.6 0 3-.6 3.5-1.6M12 6.5V8m0 9.5V16"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Copyright</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Respect copyright in photos, videos, music and other material created by others.</p></div>
+      </div>
+      <div class="rowline rv" style="--d:.3s;">
+        <div class="note"><div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"If you would not publish it with your name attached — after checking it — do not post it."</div></div>
+        <span class="uc" style="color:var(--acc);">Rule of thumb</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Ethics of Citizen Reporting</span><span class="lbl fill"></span><span class="lbl">Check / Respect / Disclose</span></div>
+  </div>
+</section>
+
+<!-- ============ 10 · MEANING OF INTERVIEW ============ -->
+<section class="slide" data-title="Meaning of Interview in Journalism">
+  <div class="ghost">10</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">08. THE INTERVIEW</span><span class="pageno"><b>10</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">08. Meaning of Interview</div>
+          <h1 class="display">A planned<br><span class="acc">conversation</span></h1>
+          <p class="lede" style="margin-top:16px;">An interview is a planned conversation between a journalist and a person or group, held to gather <b>information, opinions, experiences or explanations</b>. It is one of the most important methods of collecting primary information in journalism.</p>
+          <div class="flow" style="margin-top:20px;"><span style="background:var(--tint);padding:8px 14px;border-radius:4px;font-weight:700;">INTERVIEWER</span><span class="arr">→</span><span style="font-family:var(--serif);font-style:italic;">questions</span><span class="arr">⇄</span><span style="font-family:var(--serif);font-style:italic;">answers</span><span class="arr">←</span><span style="background:var(--ink);color:#fff;padding:8px 14px;border-radius:4px;font-weight:700;">INTERVIEWEE</span></div>
+        </div>
+        <div class="rv" style="--d:.1s;">
+          <div class="card">
+            <div class="uc" style="margin-bottom:12px;">An interview can be conducted through</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <span class="pill">Face-to-face</span><span class="pill">Telephone</span><span class="pill">Video call</span><span class="pill">Email</span><span class="pill">Online platforms</span><span class="pill">Radio</span><span class="pill">Television</span><span class="pill">Podcasts</span>
+            </div>
+            <div class="hairline" style="margin:16px 0;"></div>
+            <div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"The person asking is the interviewer; the person answering is the interviewee."</div>
+            <div class="uc" style="margin-top:8px;">Across every medium — the conversation is the method</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Meaning of Interview</span><span class="lbl fill"></span><span class="lbl">Primary information / All media</span></div>
+  </div>
+</section>
+
+<!-- ============ 11 · IMPORTANCE OF INTERVIEW ============ -->
+<section class="slide" data-title="Importance of Interviews in Journalism">
+  <div class="ghost">11</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">09. IMPORTANCE</span><span class="pageno"><b>11</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">09. Importance of the Interview</div>
+        <h1 class="display">Information, directly<br>from the <span class="acc">source</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><span class="num-badge">9.1</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">First-hand information</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Directly from witnesses, experts, officials or participants.</p></div>
+        <div class="card rv" style="--d:.05s;"><span class="num-badge">9.2</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Expert opinions</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Specialists explain complex subjects for the audience.</p></div>
+        <div class="card rv" style="--d:.1s;"><span class="num-badge">9.3</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Human interest</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Personal experiences and emotions enter the story.</p></div>
+        <div class="card rv" style="--d:.15s;"><span class="num-badge">9.4</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Clarification</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Questions clarify facts or statements that are unclear.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">9.5</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Different perspectives</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Interviewing several people reveals multiple viewpoints on one issue.</p></div>
+        <div class="card rv" style="--d:.25s;"><span class="num-badge">9.6</span><b style="display:block;margin-top:6px;font-size:clamp(12.5px,1.8vw,14.5px);">Accountability</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Officials, organisations and institutions answer for their decisions and actions.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Importance of Interviews</span><span class="lbl fill"></span><span class="lbl">Source / Clarity / Accountability</span></div>
+  </div>
+</section>
+
+<!-- ============ 12 · TYPES OF INTERVIEWS ============ -->
+<section class="slide" data-title="Types of Interviews — Ten Formats">
+  <div class="ghost">12</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">10. TYPES</span><span class="pageno"><b>12</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">10. Types of Interviews</div>
+        <h1 class="display">Ten formats,<br>ten <span class="acc">purposes</span></h1>
+      </div>
+      <div class="grid5">
+        <div class="card rv"><span class="num-badge">10.1</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Structured</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Predetermined questions, planned order — for specific information.</p></div>
+        <div class="card rv" style="--d:.04s;"><span class="num-badge">10.2</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Unstructured</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Conversational; questions adapt to the answers given.</p></div>
+        <div class="card rv" style="--d:.08s;"><span class="num-badge">10.3</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Semi-structured</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Key questions prepared, with room to follow up.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">10.4</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Personal</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Life, experiences, career, achievements of an individual.</p></div>
+        <div class="card rv" style="--d:.16s;"><span class="num-badge">10.5</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Expert</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">A specialist explains a particular subject or issue.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">10.6</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">News</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Information about a current event or issue.</p></div>
+        <div class="card rv" style="--d:.24s;"><span class="num-badge">10.7</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Opinion</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Understanding the interviewee's views on an issue.</p></div>
+        <div class="card rv" style="--d:.28s;"><span class="num-badge">10.8</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Investigative</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Complex, controversial subjects; deep preparation and verification.</p></div>
+        <div class="card rv" style="--d:.32s;"><span class="num-badge">10.9</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Television</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Answers plus visuals — camera, lighting, sound, body language.</p></div>
+        <div class="card rv" style="--d:.36s;"><span class="num-badge">10.10</span><b style="display:block;margin-top:5px;font-size:clamp(11.5px,1.6vw,13.5px);">Radio &amp; podcast</b><p style="font-size:clamp(9.5px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Audio quality, clarity and questioning carry everything.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Types of Interviews</span><span class="lbl fill"></span><span class="lbl">Structure / Purpose / Medium</span></div>
+  </div>
+</section>
+
+<!-- ============ 13 · TECHNIQUES I — PREPARATION ============ -->
+<section class="slide" data-title="Techniques I — Before the Interview">
+  <div class="ghost">13</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">11. TECHNIQUES · PREPARATION</span><span class="pageno"><b>13</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">11. Techniques of Interviewing</div>
+          <h1 class="display">Before you ask<br>a <span class="acc">single question</span></h1>
+          <div class="note" style="margin-top:18px;">
+            <div class="uc" style="margin-bottom:10px;">11.1 — Research covers</div>
+            <div class="flow" style="letter-spacing:.1em;">
+              <span>BACKGROUND OF THE ISSUE</span><span class="arr">·</span><span>PREVIOUS STATEMENTS</span><span class="arr">·</span><span>RELEVANT FACTS</span><span class="arr">·</span><span>IMPORTANT DEVELOPMENTS</span><span class="arr">·</span><span>POSSIBLE QUESTIONS</span>
+            </div>
+            <p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);line-height:1.55;margin-top:12px;">Good preparation prevents unnecessary or repetitive questions.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;" class="rv">
+          <div class="ck rv" style="--d:.06s;"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>11.2 · Prepare questions</b>Clear, short, relevant, specific, easy to understand — built for the purpose of the interview.</p></div>
+          <div class="ck rv" style="--d:.12s;"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>11.3 · Begin with simple questions</b>Easy openers create a comfortable environment and establish communication.</p></div>
+          <div class="ck rv" style="--d:.18s;"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>11.4 · Ask open-ended questions</b>"What are your views about the changes in digital journalism?" — invites detail instead of yes/no.</p></div>
+          <div class="ck rv" style="--d:.24s;"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>11.5 · Follow up on answers</b>Unclear reply to "What was the main reason for the decision?" → "Can you explain that reason in more detail?"</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Techniques — Preparation</span><span class="lbl fill"></span><span class="lbl">Research / Prepare / Open</span></div>
+  </div>
+</section>
+
+<!-- ============ 14 · TECHNIQUES II — QUESTION CRAFT ============ -->
+<section class="slide" data-title="Techniques II — The Craft of Questions">
+  <div class="ghost">14</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">11. TECHNIQUES · QUESTIONS</span><span class="pageno"><b>14</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">11. Techniques of Interviewing</div>
+        <h1 class="display">Question craft —<br><span class="acc">avoid vs adopt</span></h1>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:clamp(14px,2.4vw,22px);">
+        <div class="rv" style="--d:.06s;">
+          <div class="uc" style="margin-bottom:8px;">Open-ended beats closed — 11.4</div>
+          <div class="pair">
+            <div class="say no"><span class="m">✕ Closed</span>"Do you support digital journalism?"</div>
+            <div class="say yes"><span class="m">✓ Open</span>"What are your views about the changes in digital journalism?"</div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.14s;">
+          <div class="uc" style="margin-bottom:8px;">Never lead the witness — 11.6</div>
+          <div class="pair">
+            <div class="say no"><span class="m">✕ Leading</span>"Don't you think this policy has failed?"</div>
+            <div class="say yes"><span class="m">✓ Neutral</span>"How would you evaluate the impact of this policy?"</div>
+          </div>
+        </div>
+        <div class="rv" style="--d:.22s;">
+          <div class="uc" style="margin-bottom:8px;">Specific beats vague — 11.10</div>
+          <div class="pair">
+            <div class="say no"><span class="m">✕ Vague</span>"Tell me about the project."</div>
+            <div class="say yes"><span class="m">✓ Specific</span>"When did the project begin?"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Techniques — Question Craft</span><span class="lbl fill"></span><span class="lbl">Open / Neutral / Specific</span></div>
+  </div>
+</section>
+
+<!-- ============ 15 · TECHNIQUES III — IN THE ROOM ============ -->
+<section class="slide" data-title="Techniques III — In the Room">
+  <div class="ghost">15</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">11. TECHNIQUES · CONDUCT</span><span class="pageno"><b>15</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">11. Techniques of Interviewing</div>
+        <h1 class="display">In the room —<br>listening is the <span class="acc">job</span></h1>
+      </div>
+      <div class="grid4">
+        <div class="card rv"><span class="num-badge">11.7</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Active listening</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Listen for details and follow-ups — don't just wait to speak.</p></div>
+        <div class="card rv" style="--d:.05s;"><span class="num-badge">11.8</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Maintain neutrality</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Obtain information; don't impose your personal views.</p></div>
+        <div class="card rv" style="--d:.1s;"><span class="num-badge">11.9</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Ask for clarification</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Unclear answer? Ask — it reduces misunderstanding.</p></div>
+        <div class="card rv" style="--d:.15s;"><span class="num-badge">11.11</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Use silence</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">A short pause after an answer often invites more.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">11.12</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Control direction</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Steer the conversation while leaving room to explain.</p></div>
+        <div class="card rv" style="--d:.25s;"><span class="num-badge">11.13</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Professional body language</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Eye contact, posture and attention shape the exchange.</p></div>
+        <div class="card rv" style="--d:.3s;"><span class="num-badge">11.14</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);">Record carefully</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">With consent and per law &amp; policy — then check statements against the recording.</p></div>
+        <div class="card rv" style="--d:.35s;background:var(--ink);border:none;"><span class="num-badge" style="color:#8FDFC9;">REMEMBER</span><b style="display:block;margin-top:6px;font-size:clamp(12px,1.7vw,14px);color:#fff;">The interviewee talks</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:#C7D6CF;margin-top:5px;line-height:1.5;">Your share of the talking should be the questions.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Techniques — Conduct</span><span class="lbl fill"></span><span class="lbl">Listen / Neutral / Record</span></div>
+  </div>
+</section>
+
+<!-- ============ 16 · ACROSS MEDIA ============ -->
+<section class="slide" data-title="Interviewing Across Media">
+  <div class="ghost">16</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">12. MEDIA</span><span class="pageno"><b>16</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">12. Interviewing Across Media</div>
+        <h1 class="display">Same question,<br>different <span class="acc">demands</span></h1>
+      </div>
+      <div class="grid5">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Print</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Detailed information, quotations, facts and background.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Television</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Framing, lighting, sound, background, body language — and duration.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="9" y="4" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Radio</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Voice quality, clear questions and answers, recording, timing.</p></div>
+        <div class="card rv" style="--d:.15s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Online</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Text, photographs, audio, video and hyperlinks combined.</p></div>
+        <div class="card rv" style="--d:.2s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12px,1.7vw,14px);">Podcasting</b><p style="font-size:clamp(10px,1.4vw,11.5px);color:var(--ink-soft);margin-top:4px;line-height:1.45;">Longer conversations; audio quality, pacing, listener engagement.</p></div>
+      </div>
+      <div class="rowline rv" style="--d:.25s;">
+        <div class="note"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;">The interviewer must <b>adapt preparation, pacing and presence</b> to each medium — a TV answer lives on camera; a podcast answer lives in time.</p></div>
+        <span class="uc" style="color:var(--acc);">Medium shapes method</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Interviewing Across Media</span><span class="lbl fill"></span><span class="lbl">Print / TV / Radio / Online</span></div>
+  </div>
+</section>
+
+<!-- ============ 17 · QUALITIES ============ -->
+<section class="slide" data-title="Qualities of a Good Interviewer">
+  <div class="ghost">17</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">13. QUALITIES</span><span class="pageno"><b>17</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">13. Qualities of a Good Interviewer</div>
+        <h1 class="display">Nine qualities of a<br><span class="acc">successful interviewer</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">01</span>Curiosity</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Genuine interest in understanding the subject.</p></div>
+        <div class="card rv" style="--d:.04s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">02</span>Preparation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Know the basic facts before asking questions.</p></div>
+        <div class="card rv" style="--d:.08s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">03</span>Patience</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Allow the interviewee time to complete important answers.</p></div>
+        <div class="card rv" style="--d:.12s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">04</span>Listening skills</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Hear the detail that triggers the next follow-up.</p></div>
+        <div class="card rv" style="--d:.16s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">05</span>Communication</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Questions should be clearly expressed.</p></div>
+        <div class="card rv" style="--d:.2s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">06</span>Critical thinking</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Spot unclear, contradictory or unsupported claims.</p></div>
+        <div class="card rv" style="--d:.24s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">07</span>Impartiality</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Personal opinions must not interfere with gathering information.</p></div>
+        <div class="card rv" style="--d:.28s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">08</span>Confidence</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Ask difficult but relevant questions.</p></div>
+        <div class="card rv" style="--d:.32s;"><b style="display:flex;gap:8px;align-items:center;"><span style="color:var(--acc);font-family:var(--mono);font-weight:700;">09</span>Ethical awareness</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Respect privacy, dignity, accuracy and professional standards.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Qualities of a Good Interviewer</span><span class="lbl fill"></span><span class="lbl">Curious / Prepared / Fair</span></div>
+  </div>
+</section>
+
+<!-- ============ 18 · SOCIAL MEDIA LIFECYCLE ============ -->
+<section class="slide" data-title="Citizen Reporting on Social Media">
+  <div class="ghost">18</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">14. SOCIAL MEDIA</span><span class="pageno"><b>18</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">14. Citizen Reporting &amp; Social Media</div>
+          <h1 class="display">The lifecycle of an<br><span class="acc">eyewitness post</span></h1>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;">
+            <div class="card" style="padding:14px;"><span class="num-badge">01</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Witness</b> — see the event first-hand.</p></div>
+            <div class="card" style="padding:14px;"><span class="num-badge">02</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Record</b> — capture photos or video.</p></div>
+            <div class="card" style="padding:14px;"><span class="num-badge">03</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Context</b> — add relevant information.</p></div>
+            <div class="card" style="padding:14px;"><span class="num-badge">04</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Publish</b> — post the material online.</p></div>
+            <div class="card" style="padding:14px;"><span class="num-badge">05</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Respond</b> — replies from other users.</p></div>
+            <div class="card" style="padding:14px;"><span class="num-badge">06</span><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:4px;line-height:1.45;"><b>Update</b> — share additional information.</p></div>
+          </div>
+          <div class="note" style="margin-top:20px;border-left-color:#B3403A;"><p style="font-size:clamp(11.5px,1.6vw,13.5px);color:var(--ink-soft);line-height:1.55;"><b>The catch:</b> the speed of social media also increases the risk of misinformation — journalists and audiences must verify before accepting anything as fact.</p></div>
+        </div>
+        <div class="rv" style="--d:.1s;position:relative;display:flex;justify-content:center;min-height:300px;align-items:center;">
+          <div class="blob" style="width:min(280px,60vw);aspect-ratio:1;"></div>
+          <div class="dotgrid" style="width:100px;height:76px;left:6%;top:8%;"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="post hot">
+                <div class="who"><i></i>witness_01 · 1m</div>
+                <p>Fire at the old factory building near the market — evacuations underway, smoke visible from 2 km.</p>
+                <div class="img">🎥 VIDEO</div>
+                <div class="acts"><span>♡ 1.2k</span><span>↻ 640</span><span>💬 152</span></div>
+              </div>
+              <div class="post">
+                <div class="who"><i></i>factcheck · 4m</div>
+                <p>Location confirmed via landmarks; timestamps match. Fire dept on scene. ✓ Verified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Citizen Reporting &amp; Social Media</span><span class="lbl fill"></span><span class="lbl">Witness → Verify</span></div>
+  </div>
+</section>
+
+<!-- ============ 19 · CITIZEN × PROFESSIONAL ============ -->
+<section class="slide" data-title="Citizen Media × Professional Journalism">
+  <div class="ghost">19</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">15. ECOSYSTEM</span><span class="pageno"><b>19</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">15. Citizen Reporting × Professional Journalism</div>
+        <h1 class="display">Not rivals —<br>a <span class="acc">news ecosystem</span></h1>
+        <p class="lede" style="margin-top:12px;">Citizen reporting does not replace professional journalism. The two interact — each supplying what the other lacks.</p>
+      </div>
+      <div class="grid2">
+        <div class="card rv" style="--d:.06s;border-top:3px solid var(--acc);">
+          <div class="uc" style="margin-bottom:12px;">Citizen-generated content provides</div>
+          <div style="display:grid;gap:9px;">
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p>Eyewitness information</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p>Photographs and videos</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p>Local perspectives</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p>Initial information about breaking events</p></div>
+          </div>
+        </div>
+        <div class="card rv" style="--d:.14s;border-top:3px solid var(--ink);">
+          <div class="uc" style="margin-bottom:12px;">Professional journalists then</div>
+          <div style="display:grid;gap:9px;">
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Verify</b> the information</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Contact</b> additional sources</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Provide context</b> and check facts</p></div>
+            <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Investigate</b> and present to journalistic standards</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Citizen × Professional</span><span class="lbl fill"></span><span class="lbl">Contribute / Verify / Publish</span></div>
+  </div>
+</section>
+
+<!-- ============ 20 · FOR STUDENTS ============ -->
+<section class="slide" data-title="Importance for Journalism Students">
+  <div class="ghost">20</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">16. STUDENTS</span><span class="pageno"><b>20</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">16. Importance for Journalism Students</div>
+        <h1 class="display">The skillset newsrooms<br><span class="acc">now expect</span></h1>
+        <p class="lede" style="margin-top:12px;">Useful in both traditional and digital journalism — learn to do each of these well.</p>
+      </div>
+      <div class="grid2">
+        <div style="display:grid;gap:9px;" class="rv">
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Identify newsworthy events</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Collect and verify information</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Conduct interviews</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Use smartphones for reporting</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Record audio and video</b></p></div>
+        </div>
+        <div style="display:grid;gap:9px;" class="rv">
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Use social media responsibly</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Protect sources where appropriate</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Respect privacy and copyright</b></p></div>
+          <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Follow journalistic ethics</b></p></div>
+          <div class="ck" style="background:var(--tint);border-color:var(--tint-2);"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><p><b>Practise — then verify what you practised</b></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">For Journalism Students</span><span class="lbl fill"></span><span class="lbl">Skills for print &amp; digital</span></div>
+  </div>
+</section>
+
+<!-- ============ 21 · CHALLENGES ============ -->
+<section class="slide" data-title="Challenges in Modern Interviewing">
+  <div class="ghost">21</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">17. CHALLENGES</span><span class="pageno"><b>21</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">17. Challenges in Modern Interviewing</div>
+        <h1 class="display">Six pressures on the<br>modern <span class="acc">interviewer</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Time constraints</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">TV and digital news organisations may require short interviews.</p></div>
+        <div class="card rv" style="--d:.05s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Difficult interviewees</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Some avoid questions or provide incomplete answers.</p></div>
+        <div class="card rv" style="--d:.1s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 3l9 17H3z"/><path d="M12 10v4m0 3v.5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Misinformation</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Inaccurate or unsupported claims must never be presented as established facts.</p></div>
+        <div class="card rv" style="--d:.15s;"><div class="chip"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M3 12a9 9 0 0 1 18 0M8 15a4 4 0 0 1 8 0"/><circle cx="12" cy="18" r="1.5"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Online interviews</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Poor connections, background noise and audio delays.</p></div>
+        <div class="card rv" style="--d:.2s;"><div class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Privacy &amp; consent</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Consider privacy, consent and legal requirements when recording or publishing.</p></div>
+        <div class="card rv" style="--d:.25s;"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M9 9l6 6"/></svg></div><b style="display:block;margin-top:10px;font-size:clamp(12.5px,1.8vw,14.5px);">Editing</b><p style="font-size:clamp(10.5px,1.5vw,12px);color:var(--ink-soft);margin-top:5px;line-height:1.5;">Cut for length — but never distort the meaning of statements.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Challenges in Modern Interviewing</span><span class="lbl fill"></span><span class="lbl">Time / Truth / Consent</span></div>
+  </div>
+</section>
+
+<!-- ============ 22 · ETHICS IN INTERVIEWING ============ -->
+<section class="slide" data-title="Ethical Principles in Interviewing">
+  <div class="ghost">22</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">18. ETHICS</span><span class="pageno"><b>22</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv">
+        <div class="sec-tag">18. Ethical Principles in Interviewing</div>
+        <h1 class="display">Ethics build<br><span class="acc">public trust</span></h1>
+      </div>
+      <div class="grid3">
+        <div class="card rv"><span class="num-badge">01</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Be <b>truthful</b> about the purpose of the interview.</p></div>
+        <div class="card rv" style="--d:.04s;"><span class="num-badge">02</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;"><b>Never deliberately mislead</b> the interviewee.</p></div>
+        <div class="card rv" style="--d:.08s;"><span class="num-badge">03</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;"><b>Respect privacy</b> and dignity.</p></div>
+        <div class="card rv" style="--d:.12s;"><span class="num-badge">04</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;"><b>Avoid unnecessary harassment</b> or pressure.</p></div>
+        <div class="card rv" style="--d:.16s;"><span class="num-badge">05</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;"><b>Verify</b> important information.</p></div>
+        <div class="card rv" style="--d:.2s;"><span class="num-badge">06</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Provide <b>accurate quotations</b>.</p></div>
+        <div class="card rv" style="--d:.24s;"><span class="num-badge">07</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;"><b>Never take statements out of context</b>.</p></div>
+        <div class="card rv" style="--d:.28s;"><span class="num-badge">08</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Give appropriate attention to <b>vulnerable individuals</b>.</p></div>
+        <div class="card rv" style="--d:.32s;"><span class="num-badge">09</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Follow relevant <b>professional and legal standards</b>.</p></div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Ethical Principles in Interviewing</span><span class="lbl fill"></span><span class="lbl">Honest / Fair / Accountable</span></div>
+  </div>
+</section>
+
+<!-- ============ 23 · CONCLUSION ============ -->
+<section class="slide" data-title="Conclusion — Two Skills, One Standard">
+  <div class="ghost">23</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">CONCLUSION</span><span class="pageno"><b>23</b> / 24</span></div>
+    <div class="stage">
+      <div class="grid2">
+        <div class="rv">
+          <div class="sec-tag">Conclusion</div>
+          <h1 class="display">Two skills,<br><span class="acc">one standard</span></h1>
+          <div class="note" style="margin-top:20px;">
+            <div class="quote" style="font-size:clamp(.95rem,1.8vw,1.05rem);">"Citizen reporting and interviewing together demonstrate how information becomes journalism — only when it is gathered responsibly and verified honestly."</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;" class="rv">
+          <div class="card rv" style="--d:.06s;"><span class="num-badge">CITIZEN REPORTING</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Smartphones and social media let ordinary people collect and distribute information — rapid eyewitness material, local perspectives, multimedia. Misinformation, weak verification, privacy and copyright issues demand responsibility in return.</p></div>
+          <div class="card rv" style="--d:.12s;"><span class="num-badge">INTERVIEWING</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:var(--ink-soft);margin-top:6px;line-height:1.55;">Still the fundamental method of journalistic information gathering — running on preparation, clear questioning, active listening, follow-ups, neutrality, verification and ethical awareness.</p></div>
+          <div class="card rv" style="--d:.18s;background:var(--ink);border:none;"><span class="num-badge" style="color:#8FDFC9;">FOR STUDENTS</span><p style="font-size:clamp(11px,1.5vw,12.5px);color:#C7D6CF;margin-top:6px;line-height:1.55;">Modern journalists must gather, present <b style="color:#fff;">and</b> verify — across print and digital — while holding professional and ethical standards.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">Conclusion</span><span class="lbl fill"></span><span class="lbl">Gather / Question / Verify</span></div>
+  </div>
+</section>
+
+<!-- ============ 24 · CLOSE ============ -->
+<section class="slide" data-title="Key Takeaways — Thank You">
+  <div class="ghost">24</div>
+  <div class="wrap">
+    <div class="s-head"><span class="kicker">CITIZEN REPORTING &amp; INTERVIEWS</span><span class="rule"></span><span class="kicker">THANK YOU</span><span class="pageno"><b>24</b> / 24</span></div>
+    <div class="stage">
+      <div class="rv" style="text-align:center;max-width:760px;margin:0 auto;">
+        <span class="pill">KEY TAKEAWAYS</span>
+        <h1 class="display" style="margin-top:18px;">Report bravely.<br>Question <span class="acc">fairly</span>.<br>Verify always.</h1>
+      </div>
+      <div class="stair rv" style="--d:.12s;">
+        <div class="bar" style="height:38%;"><span>WITNESS</span></div>
+        <div class="bar" style="height:52%;"><span>RECORD</span></div>
+        <div class="bar" style="height:66%;"><span>QUESTION</span></div>
+        <div class="bar" style="height:82%;"><span>VERIFY</span></div>
+        <div class="bar" style="height:100%;background:var(--acc);"><span style="color:#fff;">PUBLISH RESPONSIBLY</span></div>
+      </div>
+      <div class="rowline rv" style="--d:.2s;border-top:none;">
+        <span class="uc">Deck 003 · Citizen Reporting &amp; Interview Techniques</span>
+        <span class="uc" style="color:var(--acc);">Questions &amp; Discussion</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="lbl">End of Deck</span><span class="lbl fill"></span><span class="lbl">HCJ Keynote Series</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="ui" id="hud">
+  <button class="btn" id="prevBtn" title="Previous (←)">←</button>
+  <span class="counter" id="counter"><b>01</b> / 24</span>
+  <button class="btn" id="nextBtn" title="Next (→)">→</button>
+  <button class="btn" id="ovBtn" title="Grid overview (O)">▦</button>
+  <button class="btn" id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="hint">← → NAVIGATE · O OVERVIEW · F FULLSCREEN</span>
+</div>
+<div class="overview" id="overview">
+  <div class="ov-title">Deck Overview</div>
+  <div class="ov-cap">24 slides · click a card to jump</div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const N=slides.length;
+  const counter=document.getElementById('counter');
+  const prog=document.getElementById('progress');
+  const overview=document.getElementById('overview');
+  const ovGrid=document.getElementById('ovGrid');
+  let cur=0, ovOpen=false, programmatic=false;
+
+  const pad=n=>String(n).padStart(2,'0');
+
+  /* Overview cards */
+  slides.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.className='thumb'; b.type='button';
+    b.innerHTML='<div class="tn">'+pad(i+1)+' / '+N+'</div><div class="tt">'+(s.dataset.title||'Slide '+(i+1))+'</div><div class="ts">Slide '+pad(i+1)+'</div>';
+    b.addEventListener('click',()=>{ show(i); toggleOverview(false); });
+    ovGrid.appendChild(b);
+  });
+
+  function show(i,instant){
+    cur=Math.max(0,Math.min(N-1,i));
+    programmatic=true;
+    slides[cur].scrollIntoView({behavior:instant?'auto':'smooth',block:'start'});
+    setTimeout(()=>{programmatic=false;},700);
+    sync();
+  }
+  function sync(){
+    counter.innerHTML='<b>'+pad(cur+1)+'</b> / '+N;
+    prog.style.width=((cur+1)/N*100)+'%';
+    if(history.replaceState) history.replaceState(null,'','#'+(cur+1));
+    [...ovGrid.children].forEach((t,idx)=>t.classList.toggle('cur',idx===cur));
+    slides.forEach((s,idx)=>s.classList.toggle('vis',Math.abs(idx-cur)<=1));
+  }
+  const next=()=>show(cur+1), prev=()=>show(cur-1);
+
+  /* Observe scroll position to track current slide */
+  const io=new IntersectionObserver(entries=>{
+    if(programmatic||ovOpen) return;
+    entries.forEach(en=>{
+      if(en.isIntersecting && en.intersectionRatio>=.55){
+        const i=slides.indexOf(en.target);
+        if(i!==-1 && i!==cur){ cur=i; sync(); }
+      }
+    });
+  },{threshold:[.55]});
+  slides.forEach(s=>io.observe(s));
+
+  function toggleFS(){
+    if(document.fullscreenElement) document.exitFullscreen();
+    else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  }
+  function toggleOverview(force){
+    ovOpen=(force!==undefined)?force:!ovOpen;
+    overview.classList.toggle('open',ovOpen);
+    document.body.style.overflow=ovOpen?'hidden':'';
+    if(ovOpen){ const t=ovGrid.children[cur]; t&&t.scrollIntoView({block:'center'}); }
+  }
+
+  document.getElementById('prevBtn').onclick=prev;
+  document.getElementById('nextBtn').onclick=next;
+  document.getElementById('ovBtn').onclick=()=>toggleOverview();
+  document.getElementById('fsBtn').onclick=toggleFS;
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ if(ovOpen) toggleOverview(false); return; }
+    if(ovOpen){
+      if(['ArrowRight','ArrowDown'].includes(e.key)){ e.preventDefault(); show(cur+1); }
+      else if(['ArrowLeft','ArrowUp'].includes(e.key)){ e.preventDefault(); show(cur-1); }
+      else if(['Enter',' ','o','O'].includes(e.key)){ e.preventDefault(); toggleOverview(false); }
+      return;
+    }
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace':
+        e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(N-1); break;
+      case 'f': case 'F': toggleFS(); break;
+      case 'o': case 'O': toggleOverview(); break;
+    }
+  });
+
+  const h=parseInt(location.hash.slice(1),10);
+  const start=isNaN(h)?0:Math.max(0,Math.min(N-1,h-1));
+  show(start,true);
+
+  window.addEventListener('hashchange',()=>{
+    const n=parseInt(location.hash.slice(1),10);
+    if(!isNaN(n)&&n>=1&&n<=N&&n-1!==cur) show(n-1);
+  });
+})();
+</script>
+</body>
+</html>
