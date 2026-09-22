@@ -3,58 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>HCJ Keynote Series — Presentation Hub</title>
-  <meta name="description" content="Interactive keynote presentation series covering Intellectual Property, Newspaper Layout Design, and Citizen Reporting.">
+  <title>HCJ Keynotes — Presentation Series</title>
+  <meta name="description" content="A three-part keynote presentation series covering Intellectual Property, Newspaper Layout Design, and Citizen Reporting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0F172A;
-      --bg-card: rgba(30, 41, 59, 0.7);
-      --bg-card-hover: rgba(30, 41, 59, 0.9);
-      --border: rgba(255, 255, 255, 0.1);
-      --border-accent: rgba(139, 92, 246, 0.4);
-      --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --acc-purple: #8B5CF6;
-      --acc-red: #EF4444;
-      --acc-teal: #14B8A6;
+      --paper: #F3F1EB;
+      --paper-card: #FFFFFF;
+      --ink: #151A2E;
+      --ink-soft: #3C4258;
+      --muted: #7B8093;
+      --line: #DAD5C9;
+      --line-light: #E8E4DA;
+      
+      /* Topic Accents matching the 3 presentations */
+      --acc-purple: #6D28D9;
+      --acc-purple-bg: #E7DDF8;
+      --acc-red: #B3261E;
+      --acc-red-bg: #F0DEDA;
+      --acc-teal: #0E7A67;
+      --acc-teal-bg: #D9EFE7;
+
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'Inter', system-ui, -apple-system, sans-serif;
       --mono: 'JetBrains Mono', monospace;
+      --r: 12px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(239, 68, 68, 0.1) 0px, transparent 50%);
-      color: var(--text-main);
+      background-color: var(--paper);
+      color: var(--ink);
       font-family: var(--sans);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
+    /* ---------- HEADER ---------- */
     header {
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(243, 241, 235, 0.95);
+      backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(15, 23, 42, 0.8);
     }
 
-    .nav-container {
-      max-width: 1200px;
+    .header-inner {
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 1.25rem 1.5rem;
+      padding: 18px clamp(20px, 5vw, 64px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -63,216 +68,292 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-      color: var(--text-main);
+      gap: 12px;
       text-decoration: none;
+      color: var(--ink);
     }
 
-    .brand-badge {
-      background: linear-gradient(135deg, var(--acc-purple), #6366F1);
-      color: white;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
+    .brand-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .brand-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-transform: uppercase;
     }
 
     .repo-link {
-      color: var(--text-muted);
-      text-decoration: none;
       font-family: var(--mono);
-      font-size: 0.85rem;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 6px;
       transition: color 0.2s;
     }
 
     .repo-link:hover {
-      color: var(--text-main);
+      color: var(--ink);
     }
 
+    /* ---------- MAIN WRAPPER WITH OPTIMIZED SIDE MARGINS ---------- */
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1040px;
       width: 100%;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 5rem;
+      padding: clamp(36px, 6vh, 64px) clamp(20px, 5vw, 64px);
     }
 
+    /* ---------- HERO SECTION ---------- */
     .hero {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 4rem;
+      margin-bottom: clamp(36px, 6vh, 56px);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: clamp(28px, 4vh, 44px);
     }
 
-    .hero-tag {
+    .kicker {
       font-family: var(--mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
+      font-size: clamp(10px, 1.4vw, 12px);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--acc-purple);
-      margin-bottom: 1rem;
-      font-weight: 600;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kicker .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      display: inline-block;
     }
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      background: linear-gradient(to right, #FFFFFF, #CBD5E1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--ink);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
     }
 
-    .hero p {
-      color: var(--text-muted);
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      line-height: 1.7;
+    .hero p.lede {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--ink-soft);
+      max-width: 68ch;
+      line-height: 1.65;
     }
 
-    .deck-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    /* ---------- TOPIC DECK LIST ---------- */
+    .decks-container {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 4vh, 36px);
     }
 
     .deck-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      backdrop-filter: blur(16px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: clamp(20px, 3.5vw, 32px);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: clamp(20px, 3.5vw, 36px);
+      align-items: center;
+      box-shadow: 0 4px 18px rgba(21, 26, 46, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-decoration: none;
+      color: inherit;
     }
-
-    .deck-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      transition: opacity 0.3s ease;
-      opacity: 0.7;
-    }
-
-    .deck-card.c-purple::before { background: linear-gradient(90deg, #8B5CF6, #C084FC); }
-    .deck-card.c-red::before { background: linear-gradient(90deg, #EF4444, #F87171); }
-    .deck-card.c-teal::before { background: linear-gradient(90deg, #14B8A6, #2DD4BF); }
 
     .deck-card:hover {
-      transform: translateY(-6px);
-      background: var(--bg-card-hover);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(21, 26, 46, 0.08);
+      border-color: rgba(21, 26, 46, 0.25);
     }
 
-    .card-header {
-      margin-bottom: 1.5rem;
+    @media (max-width: 768px) {
+      .deck-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
 
-    .deck-num {
+    /* Simple Image Container */
+    .img-container {
+      width: 100%;
+      height: 190px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #EAE6DC;
+      border: 1px solid var(--line-light);
+      position: relative;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .deck-card:hover .img-container img {
+      transform: scale(1.04);
+    }
+
+    .img-overlay-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      display: inline-block;
-      padding: 0.25rem 0.6rem;
+      padding: 4px 10px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(4px);
     }
 
-    .deck-card.c-purple .deck-num { color: #C084FC; }
-    .deck-card.c-red .deck-num { color: #F87171; }
-    .deck-card.c-teal .deck-num { color: #2DD4BF; }
+    /* Deck Content */
+    .deck-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-    .card-title {
-      font-family: var(--serif);
-      font-size: 1.5rem;
+    .topic-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .topic-number {
+      font-family: var(--mono);
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.3;
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+    .deck-card.t-purple .topic-number,
+    .deck-card.t-purple .img-overlay-badge {
+      color: var(--acc-purple);
+      background: var(--acc-purple-bg);
+    }
+
+    .deck-card.t-red .topic-number,
+    .deck-card.t-red .img-overlay-badge {
+      color: var(--acc-red);
+      background: var(--acc-red-bg);
+    }
+
+    .deck-card.t-teal .topic-number,
+    .deck-card.t-teal .img-overlay-badge {
+      color: var(--acc-teal);
+      background: var(--acc-teal-bg);
+    }
+
+    .deck-title {
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .deck-desc {
+      font-size: clamp(0.9rem, 1.4vw, 0.98rem);
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .deck-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line-light);
+      padding-top: 14px;
+      flex-wrap: wrap;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
+      gap: 6px;
     }
 
     .tag {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #F3F1EB;
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
     }
 
-    .card-action {
-      margin-top: auto;
-    }
-
-    .btn-launch {
+    .action-link {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0.85rem 1.25rem;
-      border-radius: 10px;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      color: white;
-      transition: all 0.2s ease;
-      gap: 0.5rem;
+      gap: 6px;
+      margin-left: auto;
+      transition: gap 0.2s ease;
     }
 
-    .deck-card.c-purple .btn-launch { background: #7C3AED; }
-    .deck-card.c-purple .btn-launch:hover { background: #6D28D9; }
+    .deck-card.t-purple .action-link { color: var(--acc-purple); }
+    .deck-card.t-red .action-link { color: var(--acc-red); }
+    .deck-card.t-teal .action-link { color: var(--acc-teal); }
 
-    .deck-card.c-red .btn-launch { background: #DC2626; }
-    .deck-card.c-red .btn-launch:hover { background: #B91C1C; }
+    .deck-card:hover .action-link {
+      gap: 10px;
+    }
 
-    .deck-card.c-teal .btn-launch { background: #0D9488; }
-    .deck-card.c-teal .btn-launch:hover { background: #0F766E; }
-
+    /* ---------- FOOTER ---------- */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--line);
+      padding: 28px clamp(20px, 5vw, 64px);
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
       font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--paper);
     }
 
     footer a {
-      color: var(--text-main);
+      color: var(--ink);
       text-decoration: none;
+      font-weight: 600;
     }
 
     footer a:hover {
@@ -282,93 +363,120 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
-    <div class="nav-container">
+    <div class="header-inner">
       <a href="./" class="brand">
-        <span class="brand-badge">HCJ</span> KEYNOTE SERIES
+        <span class="brand-tag">HCJ</span>
+        <span class="brand-title">Keynote Series</span>
       </a>
       <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer" class="repo-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub Repo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repository
       </a>
     </div>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <main>
+
+    <!-- HERO SECTION -->
     <section class="hero">
-      <div class="hero-tag">Keynote Presentation Hub</div>
-      <h1>HCJ Digital Journalism &amp; Media Keynotes</h1>
-      <p>Explore the complete interactive presentation slide decks covering intellectual property law, front-page design aesthetics, and modern citizen journalism field techniques.</p>
+      <div class="kicker">
+        <span class="dot"></span>
+        Digital Journalism &amp; Media Frameworks
+      </div>
+      <h1>Three Keynotes Across Three Core Media Domains</h1>
+      <p class="lede">A curated presentation hub exploring legal frameworks &amp; open culture, editorial front-page design aesthetics, and field investigative journalism techniques.</p>
     </section>
 
-    <div class="deck-grid">
-      <!-- Deck 01 -->
-      <article class="deck-card c-purple">
-        <div class="card-header">
-          <span class="deck-num">Keynote 01</span>
-          <h2 class="card-title">Intellectual Property, Creative Commons &amp; Free Software</h2>
-          <p class="card-desc">Comprehensive guide to IP, copyright laws, copyleft mechanisms, Creative Commons license suites, and open source software principles.</p>
-        </div>
-        <div class="tags">
-          <span class="tag">IP Law</span>
-          <span class="tag">Creative Commons</span>
-          <span class="tag">FOSS</span>
-          <span class="tag">Copyright</span>
-        </div>
-        <div class="card-action">
-          <a href="./001/index.html" class="btn-launch">
-            Launch Presentation 
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          </a>
-        </div>
-      </article>
+    <!-- 3 DISTINCT TOPIC DECKS -->
+    <div class="decks-container">
 
-      <!-- Deck 02 -->
-      <article class="deck-card c-red">
-        <div class="card-header">
-          <span class="deck-num">Keynote 02</span>
-          <h2 class="card-title">Newspaper Front Page Designing &amp; Layout Trends</h2>
-          <p class="card-desc">Visual design principles, modular grid architectures, typography choices, visual hierarchy, and modern front-page layout trends.</p>
+      <!-- TOPIC 01: LEGAL FRAMEWORKS -->
+      <a href="./001/index.html" class="deck-card t-purple">
+        <div class="img-container">
+          <img src="./001/img/10_lady_justice.jpg" alt="Intellectual Property and Legal Frameworks" loading="lazy">
+          <span class="img-overlay-badge">Legal Domain</span>
         </div>
-        <div class="tags">
-          <span class="tag">Design Trends</span>
-          <span class="tag">Typography</span>
-          <span class="tag">Editorial Grid</span>
-          <span class="tag">Visual Hierarchy</span>
+        <div class="deck-content">
+          <div class="topic-meta">
+            <span class="topic-number">Topic 01 • Legal &amp; Open Culture</span>
+          </div>
+          <h2 class="deck-title">Intellectual Property, Creative Commons &amp; Free Software</h2>
+          <p class="deck-desc">Examining copyright fundamentals, IP ownership, copyleft mechanisms, Creative Commons licensing suites, and Free/Open Source software ethics.</p>
+          <div class="deck-footer">
+            <div class="tags">
+              <span class="tag">IP Law</span>
+              <span class="tag">Creative Commons</span>
+              <span class="tag">FOSS</span>
+              <span class="tag">Copyright</span>
+            </div>
+            <span class="action-link">
+              Launch Presentation &rarr;
+            </span>
+          </div>
         </div>
-        <div class="card-action">
-          <a href="./002/index.html" class="btn-launch">
-            Launch Presentation 
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          </a>
-        </div>
-      </article>
+      </a>
 
-      <!-- Deck 03 -->
-      <article class="deck-card c-teal">
-        <div class="card-header">
-          <span class="deck-num">Keynote 03</span>
-          <h2 class="card-title">Citizen Reporting &amp; Interview Techniques</h2>
-          <p class="card-desc">Essential skills for field reporters: story discovery, source verification, interview strategy, ethical guidelines, and mobile reporting toolkits.</p>
+      <!-- TOPIC 02: PRINT & VISUAL LAYOUT DESIGN -->
+      <a href="./002/index.html" class="deck-card t-red">
+        <div class="img-container">
+          <img src="./001/img/08_newsstand.jpg" alt="Newspaper Layout Design and Front Page Aesthetics" loading="lazy">
+          <span class="img-overlay-badge">Design Domain</span>
         </div>
-        <div class="tags">
-          <span class="tag">Citizen Journalism</span>
-          <span class="tag">Interviewing</span>
-          <span class="tag">Verification</span>
-          <span class="tag">Ethics</span>
+        <div class="deck-content">
+          <div class="topic-meta">
+            <span class="topic-number">Topic 02 • Editorial &amp; Visual Design</span>
+          </div>
+          <h2 class="deck-title">Newspaper Front Page Designing &amp; Layout Trends</h2>
+          <p class="deck-desc">Exploring editorial layout hierarchy, multi-column grid architecture, typography pairing, masthead positioning, and modern front-page visual trends.</p>
+          <div class="deck-footer">
+            <div class="tags">
+              <span class="tag">Grid Layout</span>
+              <span class="tag">Typography</span>
+              <span class="tag">Front Page</span>
+              <span class="tag">Print Aesthetics</span>
+            </div>
+            <span class="action-link">
+              Launch Presentation &rarr;
+            </span>
+          </div>
         </div>
-        <div class="card-action">
-          <a href="./003/index.html" class="btn-launch">
-            Launch Presentation 
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          </a>
+      </a>
+
+      <!-- TOPIC 03: FIELD REPORTING & INTERVIEWS -->
+      <a href="./003/index.html" class="deck-card t-teal">
+        <div class="img-container">
+          <img src="./001/img/02_hand_smartphone.jpg" alt="Citizen Journalism and Field Interviewing" loading="lazy">
+          <span class="img-overlay-badge">Field Domain</span>
         </div>
-      </article>
+        <div class="deck-content">
+          <div class="topic-meta">
+            <span class="topic-number">Topic 03 • Fieldwork &amp; Journalism</span>
+          </div>
+          <h2 class="deck-title">Citizen Reporting &amp; Interview Techniques</h2>
+          <p class="deck-desc">Field techniques for ground reporting: source discovery, structured interview strategies, fact verification, ethics, and mobile journalism toolkits.</p>
+          <div class="deck-footer">
+            <div class="tags">
+              <span class="tag">Citizen Journalism</span>
+              <span class="tag">Interviewing</span>
+              <span class="tag">Verification</span>
+              <span class="tag">Ethics</span>
+            </div>
+            <span class="action-link">
+              Launch Presentation &rarr;
+            </span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    <p>Hosted with GitHub Pages • Repository: <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer">DeepakMathew04/Dinuj</a></p>
+    <p>HCJ Keynote Series • Hosted via <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer">DeepakMathew04/Dinuj</a> on GitHub Pages</p>
   </footer>
 
 </body>
