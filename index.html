@@ -46,7 +46,7 @@
       line-height: 1.6;
     }
 
-    /* ---------- HEADER ---------- */
+    /* ---------- HEADER (OPTIMIZED MARGINS) ---------- */
     header {
       border-bottom: 1px solid var(--line);
       background: rgba(243, 241, 235, 0.95);
@@ -57,9 +57,9 @@
     }
 
     .header-inner {
-      max-width: 1040px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 18px clamp(20px, 5vw, 64px);
+      padding: 12px clamp(12px, 2.5vw, 24px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,26 +68,26 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: var(--ink);
     }
 
     .brand-tag {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       background: var(--ink);
       color: var(--paper);
-      padding: 4px 8px;
+      padding: 3px 7px;
       border-radius: 4px;
     }
 
     .brand-title {
       font-family: var(--mono);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.12em;
       color: var(--ink);
@@ -96,12 +96,12 @@
 
     .repo-link {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: color 0.2s;
     }
 
@@ -109,33 +109,33 @@
       color: var(--ink);
     }
 
-    /* ---------- MAIN WRAPPER WITH OPTIMIZED SIDE MARGINS ---------- */
+    /* ---------- MAIN CONTAINER (HALVED MARGINS & EXPANDED WIDTH) ---------- */
     main {
       flex: 1;
-      max-width: 1040px;
+      max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(36px, 6vh, 64px) clamp(20px, 5vw, 64px);
+      padding: clamp(18px, 3vh, 32px) clamp(12px, 2.5vw, 24px);
     }
 
     /* ---------- HERO SECTION ---------- */
     .hero {
-      margin-bottom: clamp(36px, 6vh, 56px);
+      margin-bottom: clamp(18px, 3vh, 26px);
       border-bottom: 1px solid var(--line);
-      padding-bottom: clamp(28px, 4vh, 44px);
+      padding-bottom: clamp(14px, 2vh, 20px);
     }
 
     .kicker {
       font-family: var(--mono);
-      font-size: clamp(10px, 1.4vw, 12px);
-      letter-spacing: 0.22em;
+      font-size: clamp(10px, 1.2vw, 11px);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .kicker .dot {
@@ -148,65 +148,72 @@
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
       font-weight: 800;
       color: var(--ink);
-      line-height: 1.12;
+      line-height: 1.15;
       letter-spacing: -0.01em;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     .hero p.lede {
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      font-size: clamp(0.92rem, 1.4vw, 1.05rem);
       color: var(--ink-soft);
-      max-width: 68ch;
-      line-height: 1.65;
+      max-width: 72ch;
+      line-height: 1.55;
     }
 
-    /* ---------- TOPIC DECK LIST ---------- */
+    /* ---------- HORIZONTAL 3-COLUMN LAYOUT (STACKS VERTICALLY ON MOBILE) ---------- */
     .decks-container {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(24px, 4vh, 36px);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
+    @media (max-width: 840px) {
+      .decks-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* ---------- CARD COMPONENT ---------- */
     .deck-card {
       background: var(--paper-card);
       border: 1px solid var(--line);
       border-radius: var(--r);
-      padding: clamp(20px, 3.5vw, 32px);
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: clamp(20px, 3.5vw, 36px);
-      align-items: center;
-      box-shadow: 0 4px 18px rgba(21, 26, 46, 0.04);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 3px 14px rgba(21, 26, 46, 0.04);
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       text-decoration: none;
       color: inherit;
     }
 
     .deck-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(21, 26, 46, 0.08);
-      border-color: rgba(21, 26, 46, 0.25);
-    }
-
-    @media (max-width: 768px) {
-      .deck-card {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(21, 26, 46, 0.08);
+      border-color: rgba(21, 26, 46, 0.3);
     }
 
     /* Simple Image Container */
     .img-container {
       width: 100%;
-      height: 190px;
+      height: 170px;
       border-radius: 8px;
       overflow: hidden;
       background: #EAE6DC;
       border: 1px solid var(--line-light);
       position: relative;
+      flex: none;
+    }
+
+    @media (max-width: 840px) {
+      .img-container {
+        height: 200px;
+      }
     }
 
     .img-container img {
@@ -217,7 +224,7 @@
     }
 
     .deck-card:hover .img-container img {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .img-overlay-badge {
@@ -227,9 +234,9 @@
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 4px;
       backdrop-filter: blur(4px);
     }
@@ -238,21 +245,22 @@
     .deck-content {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      flex: 1;
+      padding-top: 14px;
     }
 
     .topic-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 6px;
     }
 
     .topic-number {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
@@ -276,42 +284,42 @@
 
     .deck-title {
       font-family: var(--serif);
-      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
       font-weight: 700;
       color: var(--ink);
-      line-height: 1.25;
-      margin-bottom: 10px;
+      line-height: 1.28;
+      margin-bottom: 8px;
     }
 
     .deck-desc {
-      font-size: clamp(0.9rem, 1.4vw, 0.98rem);
+      font-size: 0.88rem;
       color: var(--ink-soft);
-      line-height: 1.55;
-      margin-bottom: 18px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      flex: 1;
     }
 
     .deck-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      margin-top: auto;
       border-top: 1px solid var(--line-light);
-      padding-top: 14px;
-      flex-wrap: wrap;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
     }
 
     .tag {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 3px 8px;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
       border-radius: 4px;
       background: #F3F1EB;
       color: var(--ink-soft);
@@ -322,13 +330,13 @@
       font-family: var(--mono);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-left: auto;
       transition: gap 0.2s ease;
+      align-self: flex-start;
     }
 
     .deck-card.t-purple .action-link { color: var(--acc-purple); }
@@ -336,16 +344,16 @@
     .deck-card.t-teal .action-link { color: var(--acc-teal); }
 
     .deck-card:hover .action-link {
-      gap: 10px;
+      gap: 9px;
     }
 
     /* ---------- FOOTER ---------- */
     footer {
       border-top: 1px solid var(--line);
-      padding: 28px clamp(20px, 5vw, 64px);
+      padding: 20px clamp(12px, 2.5vw, 24px);
       text-align: center;
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
       background: var(--paper);
     }
@@ -371,13 +379,13 @@
         <span class="brand-title">Keynote Series</span>
       </a>
       <a href="https://github.com/DeepakMathew04/Dinuj" target="_blank" rel="noopener noreferrer" class="repo-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub Repository
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repo
       </a>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
+  <!-- MAIN CONTAINER (HALVED MARGINS) -->
   <main>
 
     <!-- HERO SECTION -->
@@ -390,7 +398,7 @@
       <p class="lede">A curated presentation hub exploring legal frameworks &amp; open culture, editorial front-page design aesthetics, and field investigative journalism techniques.</p>
     </section>
 
-    <!-- 3 DISTINCT TOPIC DECKS -->
+    <!-- HORIZONTAL LAYOUT FOR DESKTOP / VERTICAL FOR MOBILE -->
     <div class="decks-container">
 
       <!-- TOPIC 01: LEGAL FRAMEWORKS -->
@@ -404,7 +412,7 @@
             <span class="topic-number">Topic 01 • Legal &amp; Open Culture</span>
           </div>
           <h2 class="deck-title">Intellectual Property, Creative Commons &amp; Free Software</h2>
-          <p class="deck-desc">Examining copyright fundamentals, IP ownership, copyleft mechanisms, Creative Commons licensing suites, and Free/Open Source software ethics.</p>
+          <p class="deck-desc">Examining copyright fundamentals, IP ownership, copyleft mechanisms, Creative Commons licensing suites, and FOSS ethics.</p>
           <div class="deck-footer">
             <div class="tags">
               <span class="tag">IP Law</span>
@@ -430,7 +438,7 @@
             <span class="topic-number">Topic 02 • Editorial &amp; Visual Design</span>
           </div>
           <h2 class="deck-title">Newspaper Front Page Designing &amp; Layout Trends</h2>
-          <p class="deck-desc">Exploring editorial layout hierarchy, multi-column grid architecture, typography pairing, masthead positioning, and modern front-page visual trends.</p>
+          <p class="deck-desc">Exploring editorial layout hierarchy, multi-column grid architecture, typography pairing, and front-page visual trends.</p>
           <div class="deck-footer">
             <div class="tags">
               <span class="tag">Grid Layout</span>
@@ -456,7 +464,7 @@
             <span class="topic-number">Topic 03 • Fieldwork &amp; Journalism</span>
           </div>
           <h2 class="deck-title">Citizen Reporting &amp; Interview Techniques</h2>
-          <p class="deck-desc">Field techniques for ground reporting: source discovery, structured interview strategies, fact verification, ethics, and mobile journalism toolkits.</p>
+          <p class="deck-desc">Field techniques for ground reporting: source discovery, interview strategies, fact verification, and mobile journalism toolkits.</p>
           <div class="deck-footer">
             <div class="tags">
               <span class="tag">Citizen Journalism</span>
